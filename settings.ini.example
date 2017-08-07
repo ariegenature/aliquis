@@ -1,3 +1,14 @@
 [aliquis]
 DEBUG = false
 
+#[ldap]
+#LDAP_SERVER = ldap.example.org
+#LDAP_PORT = 389
+#LDAP_BINDDN = cn=admin,dc=example,dc=org
+#LDAP_SECRET = admin1234
+#LDAP_TIMEOUT = 10
+#LDAP_USE_TLS = true
+#LDAP_REQUIRE_CERT = NONE
+#LDAP_CERT_PATH = /etc/ssl/certs
+#LDAP_PEOPLE_BASEDN = ou=people,dc=example,dc=org
+#LDAP_PERSON_CLASS = inetOrgPerson
