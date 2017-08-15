@@ -5,6 +5,8 @@ import SignUpPage from '@/components/SignUpPage'
 Vue.use(Router)
 
 export default new Router({
+  name: 'router',
+  mode: 'history',
   routes: [
     {
       path: '/sign-up',
