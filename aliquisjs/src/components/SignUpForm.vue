@@ -1,11 +1,11 @@
 <template>
-  <form method="POST">
+  <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
     <div class="field is-horizontal">
       <div class="field-label">
         <label class="label is-normal">Your name</label>
       </div>
       <div class="field-body">
-        <input-bound-input-field id="first-name"
+        <input-bound-input-field id="first_name"
                                  placeholder="First name"
                                  icon="user-o"
                                  autofocus
@@ -27,7 +27,7 @@
         <label class="label">Display name</label>
       </div>
       <div class="field-body">
-        <input-bound-input-field id="display-name"
+        <input-bound-input-field id="display_name"
                                  help-message="How your name will be displayed in applications"
                                  icon="vcard-o"
                                  required
@@ -79,13 +79,15 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <button class="button is-primary" type="submit" :disabled="!formReady">
+            <button class="button is-primary" type="submit" :disabled="!formReady"
+                                              @submit.prevent="submitForm">
               Sign up
             </button>
           </div>
         </div>
       </div>
     </div>
+    <b-loading :active.sync="isWaiting"></b-loading>
   </form>
 </template>
 
@@ -98,6 +100,11 @@ export default {
   components: {
     InputBoundInputField
   },
+  data () {
+    return {
+      isWaiting: false
+    }
+  },
   computed: mapGetters({
     'firstName': 'getSignUpFirstName',
     'surname': 'getSignUpSurname',
@@ -109,13 +116,33 @@ export default {
     'usernameRegExp': 'getUsernameRegExp',
     'formReady': 'validateSignUpData'
   }),
-  methods: mapActions({
-    'updateFirstName': 'updateSignUpFirstName',
-    'updateSurname': 'updateSignUpSurname',
-    'updateDisplayName': 'updateSignUpDisplayName',
-    'updateEmail': 'updateSignUpEmail',
-    'updateUsername': 'updateSignUpUsername',
-    'updatePassword': 'updateSignUpPassword'
-  })
+  methods: {
+    submitForm (ev) {
+      this.isWaiting = true
+      var signUpData = new FormData()
+      signUpData.append('first_name', this.firstName)
+      signUpData.append('surname', this.surname)
+      signUpData.append('display_name', this.displayName)
+      signUpData.append('email', this.email)
+      signUpData.append('username', this.username)
+      signUpData.append('password', this.password)
+      this.$http.post('', signUpData).then(response => {
+        console.log(response)
+      }, response => {
+        console.log(response)
+      })
+      setTimeout(() => {
+        this.isWaiting = false
+      }, 3 * 1000)
+    },
+    ...mapActions({
+      'updateFirstName': 'updateSignUpFirstName',
+      'updateSurname': 'updateSignUpSurname',
+      'updateDisplayName': 'updateSignUpDisplayName',
+      'updateEmail': 'updateSignUpEmail',
+      'updateUsername': 'updateSignUpUsername',
+      'updatePassword': 'updateSignUpPassword'
+    })
+  }
 }
 </script>
