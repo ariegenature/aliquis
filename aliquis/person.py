@@ -16,6 +16,9 @@ else:
 # Regexp to check if a string is already hashed using system's crypt()
 CRYPT_REGEXP = re.compile(r'(\$\d\$[^$]+\$)')
 
+# Regexp to check if a string is a valid username
+USERNAME_REGEXP = re.compile(r'^[a-zA-Z][a-zA-Z0-9_.]+$')
+
 
 def person(first_name, surname, username, display_name=None, email=None, password=None):
     """Return a new instance of the Person class, built with given values."""
@@ -26,7 +29,7 @@ def person(first_name, surname, username, display_name=None, email=None, passwor
     if not surname:
         raise ValueError('Surname cannot be empty')
     username = _text_value(username)
-    if re.match(r'[a-zA-Z][a-zA-Z0-9_.]+$', username) is None:
+    if re.match(USERNAME_REGEXP) is None:
         raise ValueError(u'Invalid username: {0}'.format(username))
     email = _text_value(email, allow_empty=False)
     if (email is not None and

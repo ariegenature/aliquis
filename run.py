@@ -1,5 +1,7 @@
 import os
 
+from flask import redirect, url_for
+
 from aliquis import create_app
 
 
@@ -11,4 +13,4 @@ app = create_app(os.environ.get('ALIQUIS_CONF',
 @app.route('/')
 def home():
     """Homepage for aliquis."""
-    return 'Work in progress'
+    return redirect(url_for('sign.sign_up'))
