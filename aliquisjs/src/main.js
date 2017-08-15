@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import App from './App'
 import Buefy from 'buefy'
+import VeeValidate from 'vee-validate'
 import Vue from 'vue'
 import router from './router'
 import 'buefy/lib/buefy.css'
@@ -10,6 +11,9 @@ Vue.config.productionTip = false
 
 Vue.use(Buefy, {
   defaultIconPack: 'fa'
+})
+Vue.use(VeeValidate, {
+  events: ''
 })
 
 /* eslint-disable no-new */
