@@ -1,3 +1,11 @@
 include run.py
 include settings.ini.example
 include aliquis/VERSION
+include aliquisjs/README.md
+include aliquisjs/package.json
+include aliquisjs/.babelrc
+include aliquisjs/.editorconfig
+include aliquisjs/.eslintignore
+include aliquisjs/test/unit/.eslintrc
+include aliquisjs/static/.gitkeep
+recursive-include aliquisjs *.js *.html *.vue *.png

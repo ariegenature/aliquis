@@ -57,6 +57,9 @@ local_settings.py
 instance/
 .webassets-cache
 
+# JS stuff
+package-lock.json
+
 # Scrapy stuff:
 .scrapy
 
