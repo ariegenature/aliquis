@@ -1,0 +1,6 @@
+export const UPDATE_SIGN_UP_FIRST_NAME = 'updateSignUpFirstName'
+export const UPDATE_SIGN_UP_SURNAME = 'updateSignUpSurname'
+export const UPDATE_SIGN_UP_DISPLAY_NAME = 'updateSignUpDisplayName'
+export const UPDATE_SIGN_UP_EMAIL = 'updateSignUpEmail'
+export const UPDATE_SIGN_UP_USERNAME = 'updateSignUpUsername'
+export const UPDATE_SIGN_UP_PASSWORD = 'updateSignUpPassword'
