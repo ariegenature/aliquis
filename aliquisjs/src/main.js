@@ -4,6 +4,7 @@ import App from './App'
 import Buefy from 'buefy'
 import VeeValidate from 'vee-validate'
 import Vue from 'vue'
+import VueResource from 'vue-resource'
 import router from './router'
 import 'buefy/lib/buefy.css'
 
@@ -15,6 +16,7 @@ Vue.use(Buefy, {
 Vue.use(VeeValidate, {
   events: ''
 })
+Vue.use(VueResource)
 
 /* eslint-disable no-new */
 new Vue({
