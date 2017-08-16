@@ -44,7 +44,7 @@ setup(
     ],
     keywords='ldap directory authentication system flask wsgi web',
     packages=find_packages(exclude=['docs', 'tests']),
-    install_requires=['Flask-WTF', 'flask', 'konfig', 'ldap3', 'six'],
+    install_requires=['Flask-WTF', 'flask', 'flask-ldap3-login', 'konfig', 'ldap3', 'six'],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
     extras_require={

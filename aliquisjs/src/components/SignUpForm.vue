@@ -1,5 +1,5 @@
 <template>
-  <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
+  <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit="submitForm">
     <div class="field is-horizontal">
       <div class="field-label">
         <label class="label is-normal">Your name</label>
@@ -80,7 +80,7 @@
         <div class="field">
           <div class="control">
             <button class="button is-primary" type="submit" :disabled="!formReady"
-                                              @submit.prevent="submitForm">
+                                              @submit="submitForm">
               Sign up
             </button>
           </div>
@@ -124,22 +124,6 @@ export default {
   methods: {
     submitForm (ev) {
       this.isWaiting = true
-      var signUpData = new FormData()
-      signUpData.append('first_name', this.firstName)
-      signUpData.append('surname', this.surname)
-      signUpData.append('display_name', this.displayName)
-      signUpData.append('email', this.email)
-      signUpData.append('username', this.username)
-      signUpData.append('password', this.password)
-      this.$http.post('', signUpData,
-        {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
-          console.log(response)
-        }, response => {
-          console.log(response)
-        })
-      setTimeout(() => {
-        this.isWaiting = false
-      }, 3 * 1000)
     },
     ...mapActions({
       'updateFirstName': 'updateSignUpFirstName',
