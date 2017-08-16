@@ -38,7 +38,10 @@ def _person_from_ldap_entry(entry):
             ldap_value = getattr(entry, ldap_attr)
         except LDAPCursorError:
             continue
-        person_dict[attr] = ldap_value.value
+        if attr == 'paswword':
+            person_dict[attr] = ldap_value.value.replace('{CRYPT}', '')
+        else:
+            person_dict[attr] = ldap_value.value
     return new_person(**person_dict)
 
 
@@ -55,15 +58,16 @@ class LDAPBackend(object):
                 except KeyError:
                     raise ParsingError("Invalid value for option '{opt}' in configuration. "
                                        'Expected: {values}'.format(opt=opt,
-                                                                   values=', '.join(mapping)))
+                                                                   values=mapping))
 
-        app.config.setdefault('LDAP_SERVER', 'localhost')
+        app.config.setdefault('LDAP_HOST', 'localhost')
         app.config.setdefault('LDAP_PORT', 389)
         app.config.setdefault('LDAP_REQUIRE_CERT', ssl.CERT_REQUIRED)
-        self._people_basedn = app.config['LDAP_PEOPLE_BASEDN']
-        self._person_class = app.config['LDAP_PERSON_CLASS']
+        self._people_basedn = '{0},{1}'.format(app.config['LDAP_USER_DN'],
+                                               app.config['LDAP_BASE_DN'])
+        self._person_class = app.config['LDAP_USER_CLASS']
         srv_params = {
-            'host': self._app.config['LDAP_SERVER'],
+            'host': self._app.config['LDAP_HOST'],
             'port': self._app.config['LDAP_PORT'],
             'use_ssl': self._app.config.get('LDAP_USE_SSL', True),
         }
@@ -78,7 +82,7 @@ class LDAPBackend(object):
         """Return the Flask application instance tied to the backend."""
         return self._app
 
-    def connection(self):
+    def admin_connection(self):
         """Connect to LDAP server specified in application config and return the corresponding
         ``ldap3.Connection`` instance.
 
@@ -89,8 +93,8 @@ class LDAPBackend(object):
         conn_params = {
             'server': self.srv,
             'auto_bind': True,
-            'user': self._app.config['LDAP_BINDDN'],
-            'password': self._app.config['LDAP_SECRET'],
+            'user': self._app.config['LDAP_BIND_USER_DN'],
+            'password': self._app.config['LDAP_BIND_USER_PASSWORD'],
             'check_names': True,
         }
         if self.fake is True:
@@ -220,6 +224,8 @@ class LDAPBackend(object):
             for attr in LDAP_ATTR_MAPPING:
                 value = getattr(person, attr, None)
                 if value is not None:
+                    if attr == 'password':
+                        value = '{{CRYPT}}{0}'.format(value)
                     setattr(ldap_person, LDAP_ATTR_MAPPING[attr], value)
             ldap_person.cn = u'{0} {1}'.format(person.first_name, person.surname)
 
