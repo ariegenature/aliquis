@@ -29,7 +29,7 @@ def person(first_name, surname, username, display_name=None, email=None, passwor
     if not surname:
         raise ValueError('Surname cannot be empty')
     username = _text_value(username)
-    if re.match(USERNAME_REGEXP) is None:
+    if USERNAME_REGEXP.match(username) is None:
         raise ValueError(u'Invalid username: {0}'.format(username))
     email = _text_value(email, allow_empty=False)
     if (email is not None and
