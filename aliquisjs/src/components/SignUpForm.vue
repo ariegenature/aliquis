@@ -85,6 +85,11 @@
             </button>
           </div>
         </div>
+        <div class="field">
+          <div class="control">
+            <input type="hidden" name="csrf_token" value="«« csrf_token() »»">
+          </div>
+        </div>
       </div>
     </div>
     <b-loading :active.sync="isWaiting"></b-loading>
@@ -126,11 +131,12 @@ export default {
       signUpData.append('email', this.email)
       signUpData.append('username', this.username)
       signUpData.append('password', this.password)
-      this.$http.post('', signUpData).then(response => {
-        console.log(response)
-      }, response => {
-        console.log(response)
-      })
+      this.$http.post('', signUpData,
+        {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
+          console.log(response)
+        }, response => {
+          console.log(response)
+        })
       setTimeout(() => {
         this.isWaiting = false
       }, 3 * 1000)

@@ -1,5 +1,6 @@
 [aliquis]
 DEBUG = false
+SECRET_KEY = <RANDOM STRING FOR CSRF PROTECTION>
 
 #[ldap]
 #LDAP_SERVER = ldap.example.org
