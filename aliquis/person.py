@@ -14,7 +14,7 @@ else:
 
 
 # Regexp to check if a string is already hashed using system's crypt()
-CRYPT_REGEXP = re.compile(r'(\$\d\$[^$]+\$)')
+CRYPT_REGEXP = re.compile(r'(\$\d\$[^$]+\$)')  # XXX: Doesn't work with bcrypt
 
 # Regexp to check if a string is a valid username
 USERNAME_REGEXP = re.compile(r'^[a-zA-Z][a-zA-Z0-9_.]+$')
