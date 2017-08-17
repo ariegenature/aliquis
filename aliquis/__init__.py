@@ -1,15 +1,10 @@
 """Aliquis package."""
 
 from flask import Flask
-from flask_ldap3_login import LDAP3LoginManager
-from flask_wtf.csrf import CSRFProtect
 from konfig import Config
 
+from aliquis.extensions import csrf, ldap_manager
 from aliquis.views import blueprints
-
-
-csrf = CSRFProtect()
-ldap_manager = LDAP3LoginManager()
 
 
 class VueFlask(Flask):
