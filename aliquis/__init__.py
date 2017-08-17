@@ -3,7 +3,7 @@
 from flask import Flask
 from konfig import Config
 
-from aliquis.extensions import csrf, ldap_manager
+from aliquis.extensions import celery, csrf, ldap_manager
 from aliquis.views import blueprints
 
 
@@ -24,9 +24,11 @@ def create_app(config_fname):
     local_config = Config(config_fname)
     local_configs.append(local_config.get_map('aliquis'))
     local_configs.append(local_config.get_map('ldap'))
+    local_configs.append(local_config.get_map('celery'))
     app = VueFlask(__name__)
     for config in local_configs:
         app.config.update(config)
+    app.config['CELERY_IMPORTS'] = ('aliquis.background_tasks',)
     # XXX: Since we use ldap3 ObjectDef (which needs a LDAP class), we make this option computed
     user_ldap_filter = app.config.get('LDAP_USER_OBJECT_FILTER')
     user_ldap_class = app.config['LDAP_USER_CLASS']
@@ -43,4 +45,5 @@ def create_app(config_fname):
         app.register_blueprint(blueprint)
     csrf.init_app(app)
     ldap_manager.init_app(app)
+    celery.init_app(app)
     return app

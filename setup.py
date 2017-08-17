@@ -45,11 +45,14 @@ setup(
     keywords='ldap directory authentication system flask wsgi web',
     packages=find_packages(exclude=['docs', 'tests']),
     install_requires=[
+        'Flask-Celery-Helper',
         'Flask-WTF',
+        'celery',
         'flask',
         'flask-ldap3-login',
         'konfig',
         'ldap3',
+        'redis',  # XXX: make this configurable in optional target
         'six',
     ],
     setup_requires=['pytest-runner'],
