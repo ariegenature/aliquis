@@ -59,6 +59,7 @@ instance/
 
 # JS stuff
 package-lock.json
+aliquis/views/sign/templates/
 
 # Scrapy stuff:
 .scrapy
