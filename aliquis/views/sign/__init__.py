@@ -115,7 +115,8 @@ def sign_up():
         _save_person_to_ldap(p, current_app.ldap3_login_manager.connection)
         send_sign_up_confirm_email.delay(p.as_json())
         return jsonify({'id': p.username}), 201
-    errors = dict((field.name, ' ; '.join(field.errors)) for field in form if field.errors)
+    errors = [{'field': field.name, 'message': ' ; '.join(field.errors)} for field in form
+              if field.errors]
     if errors:
         return jsonify(errors), 409
     return render_template('sign/index.html')

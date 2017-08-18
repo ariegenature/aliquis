@@ -1,5 +1,5 @@
 <template>
-  <b-field :label="label" :type="state" :message="message" :expanded="expanded">
+  <b-field :label="label" :type="state[id]" :message="message" :expanded="expanded">
     <b-input :type="type ? type : 'text'"
       :id="id" :name="id" :placeholder="placeholder" :icon="icon" :autofocus="autofocus"
       :required="required" :value="value" @input="emitInputValue" @focus="resetState"
@@ -16,6 +16,7 @@ export default {
     name: String,
     label: String,
     placeholder: String,
+    state: Object,
     helpMessage: {
       type: String,
       default: ''
@@ -43,7 +44,6 @@ export default {
   },
   data () {
     return {
-      state: '',
       message: this.helpMessage
     }
   },
@@ -51,14 +51,14 @@ export default {
     checkValue (ev) {
       this.$validator.validate(this.id)
       var hasErrors = this.errors.has(this.id)
-      this.state = hasErrors ? 'is-danger' : 'is-success'
+      this.state[this.id] = hasErrors ? 'is-danger' : 'is-success'
       this.message = hasErrors ? this.errors.first(this.id) : this.helpMessage
     },
     emitInputValue (value) {
       this.$emit('input', value.trim())
     },
     resetState (ev) {
-      this.state = ''
+      this.state[this.id] = ''
       this.message = this.helpMessage
     }
   }

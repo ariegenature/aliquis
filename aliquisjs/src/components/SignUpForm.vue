@@ -1,11 +1,15 @@
 <template>
-  <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit="submitForm">
+  <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
+    <b-notification :type="formMessageClass" :active.sync="formMessage" v-if="formMessage">
+      {{formMessage}}
+    </b-notification>
     <div class="field is-horizontal">
       <div class="field-label">
         <label class="label is-normal">Your name</label>
       </div>
       <div class="field-body">
         <input-bound-input-field id="first_name"
+                                 :state="inputState"
                                  placeholder="First name"
                                  icon="user-o"
                                  autofocus
@@ -14,6 +18,7 @@
                                  :value="firstName"
                                  @input="updateFirstName"></input-bound-input-field>
         <input-bound-input-field id="surname"
+                                 :state="inputState"
                                  placeholder="Surname"
                                  icon="user-o"
                                  required
@@ -28,6 +33,7 @@
       </div>
       <div class="field-body">
         <input-bound-input-field id="display_name"
+                                 :state="inputState"
                                  help-message="How your name will be displayed in applications"
                                  icon="vcard-o"
                                  required
@@ -42,6 +48,7 @@
       <div class="field-body">
         <input-bound-input-field type="email"
                                  id="email"
+                                 :state="inputState"
                                  icon="envelope"
                                  required
                                  :value="email"
@@ -56,6 +63,7 @@
       </div>
       <div class="field-body">
         <input-bound-input-field id="username"
+                                 :state="inputState"
                                  help-message="Only lowercase letters and digits"
                                  placeholder="Username"
                                  icon="user"
@@ -65,6 +73,7 @@
                                  :validators="{regex: usernameRegExp}"></input-bound-input-field>
         <input-bound-input-field type="password"
                                  id="password"
+                                 :state="inputState"
                                  help-message="At least 6 characters"
                                  placeholder="Password"
                                  icon="user-secret"
@@ -80,7 +89,7 @@
         <div class="field">
           <div class="control">
             <button class="button is-primary" type="submit" :disabled="!formReady"
-                                              @submit="submitForm">
+                                              @submit.prevent="submitForm">
               Sign up
             </button>
           </div>
@@ -107,7 +116,17 @@ export default {
   },
   data () {
     return {
-      isWaiting: false
+      isWaiting: false,
+      formMessage: '',
+      formMessageClass: '',
+      inputState: {
+        'first_name': '',
+        'surname': '',
+        'display_name': '',
+        'email': '',
+        'username': '',
+        'password': ''
+      }
     }
   },
   computed: mapGetters({
@@ -124,6 +143,53 @@ export default {
   methods: {
     submitForm (ev) {
       this.isWaiting = true
+      var signUpData = new FormData()
+      signUpData.append('first_name', this.firstName)
+      signUpData.append('surname', this.surname)
+      signUpData.append('display_name', this.displayName)
+      signUpData.append('email', this.email)
+      signUpData.append('username', this.username)
+      signUpData.append('password', this.password)
+      this.$http.post('', signUpData,
+        {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
+          this.isWaiting = false
+          this.formMessage = 'Your information has been saved. You will soon receive an email to ' +
+            'confirm your registration'
+          this.formMessageClass = 'is-success'
+          for (var inputId in this.inputState) {
+            this.inputState[inputId] = 'is-success'
+          }
+        }, response => {
+          this.isWaiting = false
+          this.formMessageClass = 'is-danger'
+          if (response.status === 500 || response.status === 400) {
+            if (response.status === 500) {
+              this.formMessage = 'A technical problem occured. Please contact ' +
+                'webmaster@ariegenature.fr'
+            }
+            if (response.status === 400) {
+              this.formMessage = 'Delay expired, please refresh the page'
+            }
+            for (var inputId in this.inputState) {
+              this.inputState[inputId] = ''
+            }
+          }
+          if (response.status === 409) {
+            var errors = response.body
+            if (errors.length > 1) {
+              this.formMessage = 'After checking, we found the following problems:'
+            } else {
+              this.formMessage = 'After checking, we found the following problem:'
+            }
+            errors.forEach((err) => {
+              this.formMessage += `* ${err.message};`
+              this.inputState[err.field] = 'is-danger'
+            })
+          }
+        })
+      setTimeout(() => {
+        this.isWaiting = false
+      }, 3 * 1000)
     },
     ...mapActions({
       'updateFirstName': 'updateSignUpFirstName',
