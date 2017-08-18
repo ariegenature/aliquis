@@ -20,3 +20,7 @@ SECRET_KEY = <RANDOM STRING FOR CSRF PROTECTION>
 CELERY_BROKER_URL = redis://localhost:6379
 CELERY_RESULT_BACKEND = redis://localhost:6379
 
+#[mail-sendgrid]
+#SENDGRID_API_KEY = <YOUR SENDGRID API KEY>
+#SENDGRID_SENDER_NAME = Example Foundation
+#SENDGRID_SENDER_EMAIL = no-reply@example.org

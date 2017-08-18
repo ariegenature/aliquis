@@ -10,6 +10,7 @@ from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Regexp
 
 from aliquis.person import person as new_person, USERNAME_REGEXP
+from aliquis.background_tasks import send_sign_up_confirm_email
 
 
 LDAP_ATTR_MAPPING = {
@@ -112,6 +113,7 @@ def sign_up():
     if form.validate_on_submit():
         p = new_person(**dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING))
         _save_person_to_ldap(p, current_app.ldap3_login_manager.connection)
+        send_sign_up_confirm_email.delay(p.as_json())
         return jsonify({'id': p.username}), 201
     errors = dict((field.name, ' ; '.join(field.errors)) for field in form if field.errors)
     if errors:

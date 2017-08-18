@@ -52,7 +52,8 @@ setup(
         'flask-ldap3-login',
         'konfig',
         'ldap3',
-        'redis',  # XXX: make this configurable in optional target
+        'redis',  # XXX: make this configurable in optional 'redis' target
+        'requests',  # XXX: make this configurable in optional 'sendgrid' target
         'six',
     ],
     setup_requires=['pytest-runner'],
