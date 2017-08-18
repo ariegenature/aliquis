@@ -123,7 +123,6 @@ def sign_up():
 
 @sign.route('/sign/static/<path:fpath>', methods=['GET'])
 def sign_static(fpath):
-    print('static/{0}'.format(fpath))
     resp = make_response(render_template('static/{0}'.format(fpath)))
     resp.headers['Content-Type'], resp.headers['Content-Encoding'] = mimetypes.guess_type(fpath)
     return resp
