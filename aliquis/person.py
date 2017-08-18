@@ -99,6 +99,10 @@ class Person(object):
             salt = CRYPT_REGEXP.match(self._password.decode('utf-8')).group(1)
             return compare_hash(self._password, binary_type(crypt(value, salt).encode('utf-8')))
 
+    def as_json(self):
+        return dict((k, getattr(self, k, None)) for k in ('first_name', 'surname', 'display_name',
+                                                          'email', 'username', 'password'))
+
     def __str__(self):
         return self.display_name
 
