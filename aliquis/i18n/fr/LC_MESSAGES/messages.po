@@ -1,0 +1,107 @@
+# French translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-08-20 15:24+0200\n"
+"PO-Revision-Date: 2017-08-19 20:41+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: aliquis/background_tasks.py:16
+msgid "Please confirm your ANA account creation"
+msgstr "Merci de confirmer la création de votre compte ANA"
+
+#: aliquis/views/sign/__init__.py:94
+msgid "First name"
+msgstr "Prénom"
+
+#: aliquis/views/sign/__init__.py:95
+msgid "Surname"
+msgstr "Nom"
+
+#: aliquis/views/sign/__init__.py:96
+msgid "Display name"
+msgstr "Nom affiché"
+
+#: aliquis/views/sign/__init__.py:97
+msgid "How your name will be displayed in applications"
+msgstr "Le nom qui sera affiché dans les applications"
+
+#: aliquis/views/sign/__init__.py:99
+msgid "Email"
+msgstr "Courriel"
+
+#: aliquis/views/sign/__init__.py:100
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: aliquis/views/sign/__init__.py:101
+msgid "Only lowercase unaccented letters and digits"
+msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
+
+#: aliquis/views/sign/__init__.py:103
+msgid "Password"
+msgstr "Mot de passe"
+
+#: aliquis/views/sign/__init__.py:104
+msgid "At least 6 characters"
+msgstr "Au moins 6 caractères"
+
+#: aliquis/views/sign/__init__.py:110
+msgid "Username already exists"
+msgstr "Le nom d'utilisateur existe déjà"
+
+#: aliquis/views/sign/__init__.py:113
+msgid "Email address already exists"
+msgstr "L'adresse électronique existe déjà"
+
+#: aliquis/views/sign/__init__.py:134
+msgid "After checking, we found the following problem:"
+msgid_plural "After checking, we found the following problems:"
+msgstr[0] "Après vérification, nous avons trouvé le problème suivant :"
+msgstr[1] "Après vérification, nous avons trouvé les problèmes suivants :"
+
+#: aliquis/views/sign/templates/sign/index.html:1
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid "Your ANA account"
+msgstr "Votre compte ANA"
+
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid ""
+"A technical problem occured. Please contact helpdesk@ariegenature.fr for "
+"assistance"
+msgstr ""
+"Un problème technique est survenu. Veuillez contacter "
+"helpdesk@ariegenature.fr pour obtenir de l'aide"
+
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid "Create Your ANA Account"
+msgstr "Créez votre compte ANA"
+
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid "Go!"
+msgstr "C'est parti!"
+
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid "Your name"
+msgstr "Votre nom"
+
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid "Your email address"
+msgstr "Votre adresse électronique"
+
+#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+msgid "Your credentials"
+msgstr "Vos identifiants"
+

@@ -45,6 +45,7 @@ setup(
     keywords='ldap directory authentication system flask wsgi web',
     packages=find_packages(exclude=['docs', 'tests']),
     install_requires=[
+        'Flask-Babel',
         'Flask-Celery-Helper',
         'Flask-WTF',
         'celery',

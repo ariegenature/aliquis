@@ -3,7 +3,7 @@
 from flask import Flask
 from konfig import Config
 
-from aliquis.extensions import celery, csrf, ldap_manager
+from aliquis.extensions import babel, celery, csrf, ldap_manager
 from aliquis.views import blueprints
 
 
@@ -26,10 +26,14 @@ def create_app(config_fname):
     local_configs.append(local_config.get_map('ldap'))
     local_configs.append(local_config.get_map('celery'))
     local_configs.append(local_config.get_map('mail-sendgrid'))
+    local_configs.append(local_config.get_map('babel'))
     app = VueFlask(__name__)
     for config in local_configs:
         app.config.update(config)
     app.config['CELERY_IMPORTS'] = ('aliquis.background_tasks',)
+    langs = app.config.get('BABEL_LANGUAGES', 'fr')
+    app.config['BABEL_LANGUAGES'] = list(map(lambda s: s.strip(), langs.split(',')))
+    app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'i18n'
     # XXX: Since we use ldap3 ObjectDef (which needs a LDAP class), we make this option computed
     user_ldap_filter = app.config.get('LDAP_USER_OBJECT_FILTER')
     user_ldap_class = app.config['LDAP_USER_CLASS']
@@ -44,6 +48,7 @@ def create_app(config_fname):
                                                      'LDAP_USER_CLASS')
     for blueprint in blueprints:
         app.register_blueprint(blueprint)
+    babel.init_app(app)
     csrf.init_app(app)
     ldap_manager.init_app(app)
     celery.init_app(app)

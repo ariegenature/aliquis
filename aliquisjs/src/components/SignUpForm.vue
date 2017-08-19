@@ -5,12 +5,12 @@
     </b-notification>
     <div class="field is-horizontal">
       <div class="field-label">
-        <label class="label is-normal">Your name</label>
+        <label class="label is-normal">«« _('Your name') »»</label>
       </div>
       <div class="field-body">
         <input-bound-input-field id="first_name"
                                  :state="inputState"
-                                 placeholder="First name"
+                                 placeholder="«« form.first_name.label.text »»"
                                  icon="user-o"
                                  autofocus
                                  required
@@ -19,7 +19,7 @@
                                  @input="updateFirstName"></input-bound-input-field>
         <input-bound-input-field id="surname"
                                  :state="inputState"
-                                 placeholder="Surname"
+                                 placeholder="«« form.surname.label.text »»"
                                  icon="user-o"
                                  required
                                  expanded
@@ -29,12 +29,12 @@
     </div>
     <div class="field is-horizontal">
       <div class="field-label">
-        <label class="label">Display name</label>
+        <label class="label">«« form.display_name.label.text »»</label>
       </div>
       <div class="field-body">
         <input-bound-input-field id="display_name"
                                  :state="inputState"
-                                 help-message="How your name will be displayed in applications"
+                                 help-message="«« form.display_name.description »»"
                                  icon="vcard-o"
                                  required
                                  :value="displayName"
@@ -43,7 +43,7 @@
     </div>
     <div class="field is-horizontal">
       <div class="field-label">
-        <label class="label">Your email address</label>
+        <label class="label">«« _('Your email address') »»</label>
       </div>
       <div class="field-body">
         <input-bound-input-field type="email"
@@ -59,13 +59,13 @@
     </div>
     <div class="field is-horizontal">
       <div class="field-label">
-        <label class="label">Your credentials</label>
+        <label class="label">«« _('Your credentials') »»</label>
       </div>
       <div class="field-body">
         <input-bound-input-field id="username"
                                  :state="inputState"
-                                 help-message="Only lowercase letters and digits"
-                                 placeholder="Username"
+                                 placeholder="«« form.username.label.text »»"
+                                 help-message="«« form.username.description »»"
                                  icon="user"
                                  required
                                  :value="username"
@@ -74,8 +74,8 @@
         <input-bound-input-field type="password"
                                  id="password"
                                  :state="inputState"
-                                 help-message="At least 6 characters"
-                                 placeholder="Password"
+                                 placeholder="«« form.password.label.text »»"
+                                 help-message="«« form.password.description »»"
                                  icon="user-secret"
                                  required
                                  :value="password"
@@ -90,7 +90,7 @@
           <div class="control">
             <button class="button is-primary" type="submit" :disabled="!formReady"
                                               @submit.prevent="submitForm">
-              Sign up
+              «« _('Go!') »»
             </button>
           </div>
         </div>
@@ -164,8 +164,7 @@ export default {
           this.formMessageClass = 'is-danger'
           if (response.status === 500 || response.status === 400) {
             if (response.status === 500) {
-              this.formMessage = 'A technical problem occured. Please contact ' +
-                'webmaster@ariegenature.fr'
+              this.formMessage = "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»"
             }
             if (response.status === 400) {
               this.formMessage = 'Delay expired, please refresh the page'
@@ -175,14 +174,9 @@ export default {
             }
           }
           if (response.status === 409) {
-            var errors = response.body
-            if (errors.length > 1) {
-              this.formMessage = 'After checking, we found the following problems:'
-            } else {
-              this.formMessage = 'After checking, we found the following problem:'
-            }
-            errors.forEach((err) => {
-              this.formMessage += `* ${err.message};`
+            var errorJson = response.body
+            this.formMessage = errorJson.message
+            errorJson.errors.forEach((err) => {
               this.inputState[err.field] = 'is-danger'
             })
           }

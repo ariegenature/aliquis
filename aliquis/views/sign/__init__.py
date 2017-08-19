@@ -4,8 +4,10 @@ from contextlib import contextmanager
 import mimetypes
 
 from flask import Blueprint, current_app, jsonify, make_response, render_template
+from flask_babel import lazy_gettext as _t, ngettext, get_locale
 from flask_wtf import FlaskForm
 from ldap3 import ObjectDef, Reader, Writer
+from six import text_type
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Regexp
 
@@ -89,41 +91,55 @@ def _save_person_to_ldap(person, ldap_conn):
 class SignUpForm(FlaskForm):
     """Sign up form for ANA."""
 
-    first_name = StringField('First name', validators=[DataRequired()])
-    surname = StringField('Surname', validators=[DataRequired()])
-    display_name = StringField('Display name', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    username = StringField('Username', validators=[DataRequired(), Regexp(USERNAME_REGEXP)])
-    password = PasswordField('Password', validators=[DataRequired()])
+    first_name = StringField(_t('First name'), validators=[DataRequired()])
+    surname = StringField(_t('Surname'), validators=[DataRequired()])
+    display_name = StringField(_t('Display name'),
+                               description=_t('How your name will be displayed in applications'),
+                               validators=[DataRequired()])
+    email = StringField(_t('Email'), validators=[DataRequired(), Email()])
+    username = StringField(_t('Username'),
+                           description=_t('Only lowercase unaccented letters and digits'),
+                           validators=[DataRequired(), Regexp(USERNAME_REGEXP)])
+    password = PasswordField(_t('Password'),
+                             description=_t('At least 6 characters'),
+                             validators=[DataRequired()])
 
     def validate(self):
         result = super(SignUpForm, self).validate()
         if _username_exists(self.username.data):
-            self.username.errors.append('Username already exists')
+            self.username.errors.append(_t('Username already exists'))
             result = False
         if _email_exists(self.email.data):
-            self.email.errors.append('Email address already exists')
+            self.email.errors.append(_t('Email address already exists'))
             result = False
         return result
 
 
 @sign.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
-    form = SignUpForm()
+    form = SignUpForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         p = new_person(**dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING))
         _save_person_to_ldap(p, current_app.ldap3_login_manager.connection)
         send_sign_up_confirm_email.delay(p.as_json())
         return jsonify({'id': p.username}), 201
-    errors = [{'field': field.name, 'message': ' ; '.join(field.errors)} for field in form
-              if field.errors]
+    errors = [{
+        'field': field.name,
+        'message': ', '.join(map(lambda err: text_type(err), field.errors))
+    } for field in form if field.errors]
     if errors:
-        return jsonify(errors), 409
+        msg = u'{0} {1}.'.format(
+            ngettext('After checking, we found the following problem:',
+                     'After checking, we found the following problems:',
+                     len(errors)),
+            u'; '.join('({i}) {m}'.format(i=i, m=err['message']) for i, err in enumerate(errors, 1))
+        )
+        return jsonify({'message': msg, 'errors': errors}), 409
     return render_template('sign/index.html')
 
 
 @sign.route('/sign/static/<path:fpath>', methods=['GET'])
 def sign_static(fpath):
-    resp = make_response(render_template('static/{0}'.format(fpath)))
+    resp = make_response(render_template('static/{0}'.format(fpath), form=SignUpForm()))
     resp.headers['Content-Type'], resp.headers['Content-Encoding'] = mimetypes.guess_type(fpath)
     return resp

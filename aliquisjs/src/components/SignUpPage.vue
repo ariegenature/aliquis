@@ -1,6 +1,6 @@
 <template>
   <section>
-      <h2 class="title">Sign Up</h2>
+      <h2 class="title">«« _('Create Your ANA Account') »»</h2>
       <div class="columns is-centered">
         <div class="column">
           <sign-up-form></sign-up-form>
