@@ -6,6 +6,8 @@ You are just one step away from joining a vibrant community sharing a passion fo
 especially in the Pyrénées mountains: to confirm your e-mail address by clicking on the following
 link. Then your account will be activated.
 
+«« token_url »»
+
 If you can't click on the link, please copy and paste it into your web browser.
 
 If you did not intend to sign up, you can simply ignore this email. The above link is only valid 24

@@ -51,6 +51,7 @@ setup(
         'celery',
         'flask',
         'flask-ldap3-login',
+        'itsdangerous',
         'konfig',
         'ldap3',
         'redis',  # XXX: make this configurable in optional 'redis' target

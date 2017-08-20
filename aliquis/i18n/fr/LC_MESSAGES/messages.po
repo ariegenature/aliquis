@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-20 15:24+0200\n"
+"POT-Creation-Date: 2017-08-20 20:52+0200\n"
 "PO-Revision-Date: 2017-08-19 20:41+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -18,59 +18,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: aliquis/background_tasks.py:16
+#: aliquis/background_tasks.py:15
 msgid "Please confirm your ANA account creation"
 msgstr "Merci de confirmer la création de votre compte ANA"
 
-#: aliquis/views/sign/__init__.py:94
+#: aliquis/views/sign/__init__.py:113
 msgid "First name"
 msgstr "Prénom"
 
-#: aliquis/views/sign/__init__.py:95
+#: aliquis/views/sign/__init__.py:114
 msgid "Surname"
 msgstr "Nom"
 
-#: aliquis/views/sign/__init__.py:96
+#: aliquis/views/sign/__init__.py:115
 msgid "Display name"
 msgstr "Nom affiché"
 
-#: aliquis/views/sign/__init__.py:97
+#: aliquis/views/sign/__init__.py:116
 msgid "How your name will be displayed in applications"
 msgstr "Le nom qui sera affiché dans les applications"
 
-#: aliquis/views/sign/__init__.py:99
+#: aliquis/views/sign/__init__.py:118
 msgid "Email"
 msgstr "Courriel"
 
-#: aliquis/views/sign/__init__.py:100
+#: aliquis/views/sign/__init__.py:119
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: aliquis/views/sign/__init__.py:101
+#: aliquis/views/sign/__init__.py:120
 msgid "Only lowercase unaccented letters and digits"
 msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
 
-#: aliquis/views/sign/__init__.py:103
+#: aliquis/views/sign/__init__.py:122
 msgid "Password"
 msgstr "Mot de passe"
 
-#: aliquis/views/sign/__init__.py:104
+#: aliquis/views/sign/__init__.py:123
 msgid "At least 6 characters"
 msgstr "Au moins 6 caractères"
 
-#: aliquis/views/sign/__init__.py:110
+#: aliquis/views/sign/__init__.py:129
 msgid "Username already exists"
 msgstr "Le nom d'utilisateur existe déjà"
 
-#: aliquis/views/sign/__init__.py:113
+#: aliquis/views/sign/__init__.py:132
 msgid "Email address already exists"
 msgstr "L'adresse électronique existe déjà"
 
-#: aliquis/views/sign/__init__.py:134
+#: aliquis/views/sign/__init__.py:158
 msgid "After checking, we found the following problem:"
 msgid_plural "After checking, we found the following problems:"
 msgstr[0] "Après vérification, nous avons trouvé le problème suivant :"
 msgstr[1] "Après vérification, nous avons trouvé les problèmes suivants :"
+
+#: aliquis/views/sign/__init__.py:170
+msgid ""
+"Thank you for confirming. Your account is now activated and you may now "
+"log in."
+msgstr ""
+"Merci pour la confirmation. Votre compte est désormais activé et vous "
+"pouvez vous connecter."
+
+#: aliquis/views/sign/__init__.py:175
+msgid "The confirmation link has expired. Please create your account again."
+msgstr "Le lien de confirmation a expiré. Merci de créer votre compte à nouveau"
+
+#: aliquis/views/sign/__init__.py:178
+msgid "The confirmation link is invalid."
+msgstr "Le lien de confirmation n'est pas valide."
+
+#: aliquis/views/sign/__init__.py:185
+msgid "This account is already activated. You can log in."
+msgstr "Ce compte est déjà activé. Vous pouvez vous connecter."
 
 #: aliquis/views/sign/templates/sign/index.html:1
 #: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1

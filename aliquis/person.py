@@ -4,6 +4,7 @@ from crypt import crypt
 from hmac import compare_digest as compare_hash
 import re
 
+from flask import current_app
 from six import PY3, text_type, binary_type
 
 if PY3:
@@ -98,6 +99,22 @@ class Person(object):
         else:  # value is clear text
             salt = CRYPT_REGEXP.match(self._password.decode('utf-8')).group(1)
             return compare_hash(self._password, binary_type(crypt(value, salt).encode('utf-8')))
+
+    @property
+    def is_active(self):
+        """Return ``True`` if account for this person has been activated."""
+        config = current_app.config
+        user_info = current_app.ldap3_login_manager.get_user_info_for_username(self.username)
+        active_perm = current_app.ldap3_login_manager.get_object(
+            '{0},{1}'.format(config['LDAP_PERMISSION_DN'], config['LDAP_BASE_DN']),
+            '(&(objectClass={0})(cn={1}))'.format(config['LDAP_PERMISSION_CLASS'],
+                                                  config['LDAP_ACTIVE_PERM_NAME']),
+            [config['LDAP_PERMISSION_ATTRIBUTE']]
+        )
+        if user_info['dn'] in active_perm[config['LDAP_PERMISSION_ATTRIBUTE']]:
+            return True
+        else:
+            return False
 
     def as_json(self):
         return dict((k, getattr(self, k, None)) for k in ('first_name', 'surname', 'display_name',

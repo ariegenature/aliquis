@@ -3,9 +3,10 @@
 from contextlib import contextmanager
 import mimetypes
 
-from flask import Blueprint, current_app, jsonify, make_response, render_template
-from flask_babel import lazy_gettext as _t, ngettext, get_locale
+from flask import Blueprint, current_app, jsonify, make_response, render_template, url_for
+from flask_babel import _, lazy_gettext as _t, ngettext, get_locale
 from flask_wtf import FlaskForm
+from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from ldap3 import ObjectDef, Reader, Writer
 from six import text_type
 from wtforms import StringField, PasswordField
@@ -24,10 +25,28 @@ LDAP_ATTR_MAPPING = {
     'password': 'userPassword',
 }
 
+LDAP_ATTR_REV_MAPPING = dict((v, k) for k, v in LDAP_ATTR_MAPPING.items())
+
 
 sign = Blueprint('sign', __name__,
                  static_folder='templates/static',
                  template_folder='templates')
+
+
+def _person_from_ldap_entry(ldap_dict):
+    """Return a ``Person`` instance from the given LDAP entry."""
+    person_dict = dict()
+    for ldap_attr, attr in LDAP_ATTR_REV_MAPPING.items():
+        try:
+            ldap_value = ldap_dict[ldap_attr]
+        except KeyError:
+            continue
+        ldap_value = ldap_value[0] if isinstance(ldap_value, list) else ldap_value
+        if attr == 'paswword':
+            person_dict[attr] = ldap_value.replace('{CRYPT}', '')
+        else:
+            person_dict[attr] = ldap_value
+    return new_person(**person_dict)
 
 
 def _username_exists(username):
@@ -121,7 +140,12 @@ def sign_up():
     if form.validate_on_submit():
         p = new_person(**dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING))
         _save_person_to_ldap(p, current_app.ldap3_login_manager.connection)
-        send_sign_up_confirm_email.delay(p.as_json())
+        token_serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        send_sign_up_confirm_email.delay(
+            person_dict=p.as_json(),
+            token_url=url_for('sign.confirm_new_account', token=token_serializer.dumps(p.username),
+                              _external=True)
+        )
         return jsonify({'id': p.username}), 201
     errors = [{
         'field': field.name,
@@ -136,6 +160,31 @@ def sign_up():
         )
         return jsonify({'message': msg, 'errors': errors}), 409
     return render_template('sign/index.html')
+
+
+@sign.route('/confirm/<token>', methods=['GET'])
+def confirm_new_account(token):
+    """View for confirming account creation token."""
+    config = current_app.config
+    token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
+    msg = _('Thank you for confirming. Your account is now activated and you may now log in.')
+    msg_cls = 'is-success'
+    try:
+        username = token_serializer.loads(token, max_age=3600)
+    except SignatureExpired:
+        msg = _('The confirmation link has expired. Please create your account again.')
+        msg_cls = 'is-danger'
+    except BadSignature:
+        msg = _('The confirmation link is invalid.')
+        msg_cls = 'is-danger'
+    else:
+        p = _person_from_ldap_entry(
+            current_app.ldap3_login_manager.get_user_info_for_username(username)
+        )
+        if p.is_active:
+            msg = _('This account is already activated. You can log in.')
+            msg_cls = 'is-info'
+    return render_template('sign/index.html', msg=msg, msg_cls=msg_cls)
 
 
 @sign.route('/sign/static/<path:fpath>', methods=['GET'])

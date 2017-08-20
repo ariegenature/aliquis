@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-20 15:24+0200\n"
+"POT-Creation-Date: 2017-08-20 20:52+0200\n"
 "PO-Revision-Date: 2017-08-19 20:41+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,59 +18,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: aliquis/background_tasks.py:16
+#: aliquis/background_tasks.py:15
 msgid "Please confirm your ANA account creation"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:94
+#: aliquis/views/sign/__init__.py:113
 msgid "First name"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:95
+#: aliquis/views/sign/__init__.py:114
 msgid "Surname"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:96
+#: aliquis/views/sign/__init__.py:115
 msgid "Display name"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:97
+#: aliquis/views/sign/__init__.py:116
 msgid "How your name will be displayed in applications"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:99
+#: aliquis/views/sign/__init__.py:118
 msgid "Email"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:100
+#: aliquis/views/sign/__init__.py:119
 msgid "Username"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:101
+#: aliquis/views/sign/__init__.py:120
 msgid "Only lowercase unaccented letters and digits"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:103
+#: aliquis/views/sign/__init__.py:122
 msgid "Password"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:104
+#: aliquis/views/sign/__init__.py:123
 msgid "At least 6 characters"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:110
+#: aliquis/views/sign/__init__.py:129
 msgid "Username already exists"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:113
+#: aliquis/views/sign/__init__.py:132
 msgid "Email address already exists"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:134
+#: aliquis/views/sign/__init__.py:158
 msgid "After checking, we found the following problem:"
 msgid_plural "After checking, we found the following problems:"
 msgstr[0] ""
 msgstr[1] ""
+
+#: aliquis/views/sign/__init__.py:170
+msgid ""
+"Thank you for confirming. Your account is now activated and you may now "
+"log in."
+msgstr ""
+
+#: aliquis/views/sign/__init__.py:175
+msgid "The confirmation link has expired. Please create your account again."
+msgstr ""
+
+#: aliquis/views/sign/__init__.py:178
+msgid "The confirmation link is invalid."
+msgstr ""
+
+#: aliquis/views/sign/__init__.py:185
+msgid "This account is already activated. You can log in."
+msgstr ""
 
 #: aliquis/views/sign/templates/sign/index.html:1
 #: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
@@ -102,4 +120,3 @@ msgstr ""
 #: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
 msgid "Your credentials"
 msgstr ""
-
