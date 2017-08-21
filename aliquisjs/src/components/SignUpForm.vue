@@ -78,6 +78,15 @@
                                  :value="password"
                                  @input="updatePassword"
                                  :validators="{min: 6}"></input-bound-input-field>
+        <b-field :type="passwordConfirm === password ? 'is-success' : 'is-danger'"
+                                 :message="passwordConfirmHelp">
+          <b-input id="password_confirm"
+                   placeholder="«« _('Password confirm') »»"
+                   type="password"
+                   icon="user-secret"
+                   required="true"
+                   v-model="passwordConfirm"></b-input>
+        </b-field>
       </div>
     </div>
     <div class="field is-horizontal">
@@ -113,6 +122,7 @@ export default {
   },
   data () {
     return {
+      passwordConfirm: '',
       inputState: {
         'first_name': '',
         'surname': '',
@@ -123,18 +133,26 @@ export default {
       }
     }
   },
-  computed: mapGetters({
-    'firstName': 'getSignUpFirstName',
-    'surname': 'getSignUpSurname',
-    'displayName': 'getSignUpDisplayName',
-    'email': 'getSignUpEmail',
-    'username': 'getSignUpUsername',
-    'password': 'getSignUpPassword',
-    'isLoading': 'getIsLoading',
-    'emailRegExp': 'getEmailRegExp',
-    'usernameRegExp': 'getUsernameRegExp',
-    'formReady': 'validateSignUpData'
-  }),
+  computed: {
+    passwordConfirmHelp () {
+      return this.passwordConfirm === this.password ? '' : "«« _('Passwords do not match') »»"
+    },
+    formReady () {
+      return this.validateSignUpData && this.passwordConfirm === this.password
+    },
+    ...mapGetters({
+      'firstName': 'getSignUpFirstName',
+      'surname': 'getSignUpSurname',
+      'displayName': 'getSignUpDisplayName',
+      'email': 'getSignUpEmail',
+      'username': 'getSignUpUsername',
+      'password': 'getSignUpPassword',
+      'isLoading': 'getIsLoading',
+      'emailRegExp': 'getEmailRegExp',
+      'usernameRegExp': 'getUsernameRegExp',
+      'validateSignUpData': 'validateSignUpData'
+    })
+  },
   methods: {
     submitForm (ev) {
       this.setPageLoading()

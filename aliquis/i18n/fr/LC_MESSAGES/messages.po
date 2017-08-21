@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-21 17:05+0200\n"
+"POT-Creation-Date: 2017-08-21 17:38+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -69,6 +69,12 @@ msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
 
 msgid "Password"
 msgstr "Mot de passe"
+
+msgid "Password confirm"
+msgstr "Confirmation du mot de passe"
+
+msgid "Passwords do not match"
+msgstr "Les mots de passe ne correspondent pas"
 
 msgid "Please check your username and password."
 msgstr "Veuillez vérifier votre nom d'utilisateur et votre mot de passe."
