@@ -84,7 +84,7 @@ export default {
           this.inputState = 'is-danger'
           if (response.status === 500) {
             this.updateStatusMessage({
-              msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»",
+              msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance.') »»",
               cls: this.inputState
             })
           }

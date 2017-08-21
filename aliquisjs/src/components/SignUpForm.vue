@@ -150,8 +150,7 @@ export default {
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
           this.setPageNotLoading()
           this.updateStatusMessage({
-            msg: 'Your information has been saved. You will soon receive an email to confirm ' +
-            'your registration',
+            msg: "«« _('Your information has been saved. You will soon receive an email to confirm your registration.') »»",
             cls: statusClass
           })
           for (var inputId in this.inputState) {
@@ -165,13 +164,13 @@ export default {
           if (response.status === 500 || response.status === 400) {
             if (response.status === 500) {
               this.updateStatusMessage({
-                msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»",
+                msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance.') »»",
                 cls: statusClass
               })
             }
             if (response.status === 400) {
               this.updateStatusMessage({
-                msg: 'Delay expired, please refresh the page',
+                msg: "«« _('Delay expired, please refresh the page.') »»",
                 cls: statusClass
               })
             }

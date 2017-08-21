@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-21 11:16+0200\n"
+"POT-Creation-Date: 2017-08-21 17:05+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 msgid ""
 "A technical problem occured. Please contact helpdesk@ariegenature.fr for "
-"assistance"
+"assistance."
 msgstr ""
 
 msgid "After checking, we found the following problem:"
@@ -32,6 +32,9 @@ msgid "At least 6 characters"
 msgstr ""
 
 msgid "Create Your ANA Account"
+msgstr ""
+
+msgid "Delay expired, please refresh the page."
 msgstr ""
 
 msgid "Display name"
@@ -109,6 +112,11 @@ msgid "Your credentials"
 msgstr ""
 
 msgid "Your email address"
+msgstr ""
+
+msgid ""
+"Your information has been saved. You will soon receive an email to "
+"confirm your registration."
 msgstr ""
 
 msgid "Your name"
