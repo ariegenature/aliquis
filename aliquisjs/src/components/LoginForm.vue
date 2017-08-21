@@ -1,8 +1,5 @@
 <template>
   <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
-    <b-notification :type="formMessageClass" :active.sync="formMessage" v-if="formMessage">
-      {{formMessage}}
-    </b-notification>
     <div class="field is-horizontal">
       <div class="field-label">
         <label class="label is-normal">«« form.username.label.text »»</label>
@@ -43,12 +40,13 @@
         </div>
       </div>
     </div>
-    <b-loading :active.sync="isWaiting"></b-loading>
+    <b-loading :active.sync="isLoading"></b-loading>
   </form>
 </template>
 
 <script>
 import InputBoundInputField from './InputBoundInputField'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'login-form',
@@ -59,44 +57,54 @@ export default {
     return {
       username: '',
       password: '',
-      isWaiting: false,
-      formMessage: '',
-      formMessageClass: '',
       inputState: ''
     }
   },
   computed: {
     formReady () {
       return Boolean(this.username) && Boolean(this.password)
-    }
+    },
+    ...mapGetters({
+      'isLoading': 'getIsLoading'
+    })
   },
   methods: {
     submitForm (ev) {
-      this.isWaiting = true
+      this.setPageLoading()
       var loginData = new FormData()
       loginData.append('username', this.username)
       loginData.append('password', this.password)
       this.$http.post('', loginData,
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
-          this.isWaiting = false
+          this.setPageNotLoading()
           this.inputState = 'is-success'
-          this.formMessage = ''
-          this.formMessageClas = ''
+          this.clearStatusMessage()
         }, response => {
-          this.isWaiting = false
-          this.formMessageClass = 'is-danger'
+          this.setPageNotLoading()
           this.inputState = 'is-danger'
           if (response.status === 500) {
-            this.formMessage = "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»"
+            this.updateStatusMessage({
+              msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»",
+              cls: this.inputState
+            })
           }
           if (response.status === 401) {
-            this.formMessage = response.body.message
+            this.updateStatusMessage({
+              msg: response.body.message,
+              cls: this.inputState
+            })
           }
         })
       setTimeout(() => {
-        this.isWaiting = false
+        this.setPageNotLoading()
       }, 3 * 1000)
-    }
+    },
+    ...mapActions({
+      'updateStatusMessage': 'updateStatusMessage',
+      'clearStatusMessage': 'clearStatusMessage',
+      'setPageLoading': 'setPageLoading',
+      'setPageNotLoading': 'setPageNotLoading'
+    })
   }
 }
 </script>

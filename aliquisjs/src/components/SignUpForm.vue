@@ -1,8 +1,5 @@
 <template>
   <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
-    <b-notification :type="formMessageClass" :active.sync="formMessage" v-if="formMessage">
-      {{formMessage}}
-    </b-notification>
     <div class="field is-horizontal">
       <div class="field-label">
         <label class="label is-normal">«« _('Your name') »»</label>
@@ -101,7 +98,7 @@
         </div>
       </div>
     </div>
-    <b-loading :active.sync="isWaiting"></b-loading>
+    <b-loading :active.sync="isLoading"></b-loading>
   </form>
 </template>
 
@@ -116,9 +113,6 @@ export default {
   },
   data () {
     return {
-      isWaiting: false,
-      formMessage: '',
-      formMessageClass: '',
       inputState: {
         'first_name': '',
         'surname': '',
@@ -136,13 +130,15 @@ export default {
     'email': 'getSignUpEmail',
     'username': 'getSignUpUsername',
     'password': 'getSignUpPassword',
+    'isLoading': 'getIsLoading',
     'emailRegExp': 'getEmailRegExp',
     'usernameRegExp': 'getUsernameRegExp',
     'formReady': 'validateSignUpData'
   }),
   methods: {
     submitForm (ev) {
-      this.isWaiting = true
+      this.setPageLoading()
+      var statusClass = 'is-success'
       var signUpData = new FormData()
       signUpData.append('first_name', this.firstName)
       signUpData.append('surname', this.surname)
@@ -152,23 +148,32 @@ export default {
       signUpData.append('password', this.password)
       this.$http.post('', signUpData,
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
-          this.isWaiting = false
-          this.formMessage = 'Your information has been saved. You will soon receive an email to ' +
-            'confirm your registration'
-          this.formMessageClass = 'is-success'
+          this.setPageNotLoading()
+          this.updateStatusMessage({
+            msg: 'Your information has been saved. You will soon receive an email to confirm ' +
+            'your registration',
+            cls: statusClass
+          })
           for (var inputId in this.inputState) {
-            this.inputState[inputId] = 'is-success'
+            this.inputState[inputId] = statusClass
           }
+          this.clearSignUpData()
           this.$router.push({ name: 'login' })
         }, response => {
-          this.isWaiting = false
-          this.formMessageClass = 'is-danger'
+          this.setPageNotLoading()
+          statusClass = 'is-danger'
           if (response.status === 500 || response.status === 400) {
             if (response.status === 500) {
-              this.formMessage = "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»"
+              this.updateStatusMessage({
+                msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance') »»",
+                cls: statusClass
+              })
             }
             if (response.status === 400) {
-              this.formMessage = 'Delay expired, please refresh the page'
+              this.updateStatusMessage({
+                msg: 'Delay expired, please refresh the page',
+                cls: statusClass
+              })
             }
             for (var inputId in this.inputState) {
               this.inputState[inputId] = ''
@@ -176,14 +181,17 @@ export default {
           }
           if (response.status === 409) {
             var errorJson = response.body
-            this.formMessage = errorJson.message
+            this.updateStatusMessage({
+              msg: errorJson.message,
+              cls: statusClass
+            })
             errorJson.errors.forEach((err) => {
-              this.inputState[err.field] = 'is-danger'
+              this.inputState[err.field] = statusClass
             })
           }
         })
       setTimeout(() => {
-        this.isWaiting = false
+        this.setPageNotLoading()
       }, 3 * 1000)
     },
     ...mapActions({
@@ -192,7 +200,11 @@ export default {
       'updateDisplayName': 'updateSignUpDisplayName',
       'updateEmail': 'updateSignUpEmail',
       'updateUsername': 'updateSignUpUsername',
-      'updatePassword': 'updateSignUpPassword'
+      'updatePassword': 'updateSignUpPassword',
+      'clearSignUpData': 'clearSignUpData',
+      'updateStatusMessage': 'updateStatusMessage',
+      'setPageLoading': 'setPageLoading',
+      'setPageNotLoading': 'setPageNotLoading'
     })
   }
 }

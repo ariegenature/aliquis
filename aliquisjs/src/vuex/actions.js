@@ -18,5 +18,20 @@ export default {
   },
   [types.UPDATE_SIGN_UP_PASSWORD] ({ commit }, value) {
     commit(types.UPDATE_SIGN_UP_PASSWORD, value)
+  },
+  [types.CLEAR_SIGN_UP_DATA] ({ commit }) {
+    commit(types.CLEAR_SIGN_UP_DATA)
+  },
+  [types.UPDATE_STATUS_MESSAGE] ({ commit }, value) {
+    commit(types.UPDATE_STATUS_MESSAGE, value)
+  },
+  [types.CLEAR_STATUS_MESSAGE] ({ commit }) {
+    commit(types.UPDATE_STATUS_MESSAGE)
+  },
+  [types.SET_PAGE_LOADING] ({ commit }) {
+    commit(types.SET_PAGE_LOADING)
+  },
+  [types.SET_PAGE_NOT_LOADING] ({ commit }) {
+    commit(types.SET_PAGE_NOT_LOADING)
   }
 }

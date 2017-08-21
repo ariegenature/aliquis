@@ -13,6 +13,9 @@ const state = {
   signUpEmail: '',
   signUpUsername: '',
   signUpPassword: '',
+  statusMessage: '',
+  statusMessageClass: '',
+  isLoading: false,
   emailRegExp: /^([a-zA-Z0-9.+-]+@[a-zA-Z\d-]+(\.[a-zA-Z\d-]+)+)$/,
   usernameRegExp: /^[a-z][a-z0-9_.]+$/
 }

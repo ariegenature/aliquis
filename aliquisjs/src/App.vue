@@ -11,6 +11,10 @@
     <div class="container">
       <div class="columns is-centered">
         <div class="column">
+          <b-notification :type="statusMessageClass" :active.sync="statusMessage"
+             v-if="statusMessage">
+            {{statusMessage}}
+          </b-notification>
           <div class="box">
             <router-view name="tabbar"></router-view>
             <router-view></router-view>
@@ -24,9 +28,14 @@
 
 <script>
 import store from './vuex/store'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'app',
-  store
+  store,
+  computed: mapGetters({
+    'statusMessage': 'getStatusMessage',
+    'statusMessageClass': 'getStatusMessageClass'
+  })
 }
 </script>

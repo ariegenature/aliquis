@@ -36,6 +36,9 @@ export default {
     return username.replace(/[^\w]/g, '').toLowerCase()
   },
   getSignUpPassword: state => state.signUpPassword,
+  getStatusMessage: state => state.statusMessage,
+  getStatusMessageClass: state => state.statusMessageClass,
+  getIsLoading: state => state.isLoading,
   getEmailRegExp: state => state.emailRegExp,
   getUsernameRegExp: state => state.usernameRegExp,
   validateSignUpData: (state, getters) => (Boolean(
