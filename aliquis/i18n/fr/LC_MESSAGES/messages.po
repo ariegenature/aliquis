@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-21 10:34+0200\n"
-"PO-Revision-Date: 2017-08-19 20:41+0200\n"
+"POT-Creation-Date: 2017-08-21 11:16+0200\n"
+"PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
 "Language-Team: fr <LL@li.org>\n"
@@ -18,100 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: aliquis/background_tasks.py:15
-msgid "Please confirm your ANA account creation"
-msgstr "Merci de confirmer la création de votre compte ANA"
-
-#: aliquis/views/sign/__init__.py:115
-msgid "First name"
-msgstr "Prénom"
-
-#: aliquis/views/sign/__init__.py:116
-msgid "Surname"
-msgstr "Nom"
-
-#: aliquis/views/sign/__init__.py:117
-msgid "Display name"
-msgstr "Nom affiché"
-
-#: aliquis/views/sign/__init__.py:118
-msgid "How your name will be displayed in applications"
-msgstr "Le nom qui sera affiché dans les applications"
-
-#: aliquis/views/sign/__init__.py:120
-msgid "Email"
-msgstr "Courriel"
-
-#: aliquis/views/sign/__init__.py:121 aliquis/views/sign/__init__.py:142
-msgid "Username"
-msgstr "Nom d'utilisateur"
-
-#: aliquis/views/sign/__init__.py:122
-msgid "Only lowercase unaccented letters and digits"
-msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
-
-#: aliquis/views/sign/__init__.py:124 aliquis/views/sign/__init__.py:143
-msgid "Password"
-msgstr "Mot de passe"
-
-#: aliquis/views/sign/__init__.py:125
-msgid "At least 6 characters"
-msgstr "Au moins 6 caractères"
-
-#: aliquis/views/sign/__init__.py:131
-msgid "Username already exists"
-msgstr "Le nom d'utilisateur existe déjà"
-
-#: aliquis/views/sign/__init__.py:134
-msgid "Email address already exists"
-msgstr "L'adresse électronique existe déjà"
-
-#: aliquis/views/sign/__init__.py:155
-msgid "You cannot log in until you activate your account."
-msgstr ""
-"Vous ne pouvez pas vous identifier tant que vous n'avez pas activé votre "
-"compte."
-
-#: aliquis/views/sign/__init__.py:185
-msgid "After checking, we found the following problem:"
-msgid_plural "After checking, we found the following problems:"
-msgstr[0] "Après vérification, nous avons trouvé le problème suivant :"
-msgstr[1] "Après vérification, nous avons trouvé les problèmes suivants :"
-
-#: aliquis/views/sign/__init__.py:198
-msgid "Login failed"
-msgstr "L'identification a echouée"
-
-#: aliquis/views/sign/__init__.py:200
-msgid "Please check your username and password."
-msgstr "Veuillez vérifier votre nom d'utilisateur et votre mot de passe."
-
-#: aliquis/views/sign/__init__.py:212
-msgid ""
-"Thank you for confirming. Your account is now activated and you may now "
-"log in."
-msgstr ""
-"Merci pour la confirmation. Votre compte est désormais activé et vous "
-"pouvez vous connecter."
-
-#: aliquis/views/sign/__init__.py:217
-msgid "The confirmation link has expired. Please create your account again."
-msgstr "Le lien de confirmation a expiré. Merci de créer votre compte à nouveau"
-
-#: aliquis/views/sign/__init__.py:220
-msgid "The confirmation link is invalid."
-msgstr "Le lien de confirmation n'est pas valide."
-
-#: aliquis/views/sign/__init__.py:227
-msgid "This account is already activated. You can log in."
-msgstr "Ce compte est déjà activé. Vous pouvez vous connecter."
-
-#: aliquis/views/sign/templates/sign/index.html:1
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Your ANA account"
-msgstr "Votre compte ANA"
-
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid ""
 "A technical problem occured. Please contact helpdesk@ariegenature.fr for "
 "assistance"
@@ -119,35 +25,98 @@ msgstr ""
 "Un problème technique est survenu. Veuillez contacter "
 "helpdesk@ariegenature.fr pour obtenir de l'aide"
 
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Go!"
-msgstr "C'est parti!"
+msgid "After checking, we found the following problem:"
+msgid_plural "After checking, we found the following problems:"
+msgstr[0] "Après vérifications, nous avons trouvé le problème suivant :"
+msgstr[1] "Après vérifications, nous avons trouvé les problèmes suivants :"
 
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Log in"
-msgstr "Identifiez-vous"
+msgid "At least 6 characters"
+msgstr "Au moins 6 caractères"
 
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Sign In"
-msgstr "Connexion"
-
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Sign Up"
-msgstr "Inscription"
-
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid "Create Your ANA Account"
 msgstr "Créez votre compte ANA"
 
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Your name"
-msgstr "Votre nom"
+msgid "Display name"
+msgstr "Nom affiché"
 
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
+msgid "Email"
+msgstr "Courriel"
+
+msgid "Email address already exists"
+msgstr "L'adresse électronique existe déjà"
+
+msgid "First name"
+msgstr "Prénom"
+
+msgid "Go!"
+msgstr "C'est parti !"
+
+msgid "How your name will be displayed in applications"
+msgstr "Le nom qui sera affiché dans les applications"
+
+msgid "Log in"
+msgstr "Identifiez-vous"
+
+msgid "Login failed"
+msgstr "L'identification a échoué"
+
+msgid "Only lowercase unaccented letters and digits"
+msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
+
+msgid "Password"
+msgstr "Mot de passe"
+
+msgid "Please check your username and password."
+msgstr "Veuillez vérifier votre nom d'utilisateur et votre mot de passe."
+
+msgid "Please confirm your ANA account creation"
+msgstr "Merci de confirmer la création de votre compte ANA"
+
+msgid "Sign In"
+msgstr "Connexion"
+
+msgid "Sign Up"
+msgstr "Inscription"
+
+msgid "Surname"
+msgstr "Nom de famille"
+
+msgid ""
+"Thank you for confirming. Your account is now activated and you may now "
+"log in."
+msgstr ""
+"Merci pour la confirmation. Votre compte est maintenant activé et vous "
+"pouvez vous connecter."
+
+msgid "The confirmation link has expired. Please create your account again."
+msgstr "Le lien de confirmation a expiré. Merci de créer votre compte à nouveau."
+
+msgid "The confirmation link is invalid."
+msgstr "Le lien de confirmation est invalide."
+
+msgid "This account is already activated. You can log in."
+msgstr "Ce compte est déjà activé. Vous pouvez vous connecter."
+
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+msgid "Username already exists"
+msgstr "Le nom d'utilisateur existe déjà"
+
+msgid "You cannot log in until you activate your account."
+msgstr ""
+"Vous ne pouvez pas vous connecter tant que vous n'avez pas activé votre "
+"compte"
+
+msgid "Your ANA account"
+msgstr "Votre compte ANA"
+
+msgid "Your credentials"
+msgstr "Vos identifiants"
+
 msgid "Your email address"
 msgstr "Votre adresse électronique"
 
-#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
-msgid "Your credentials"
-msgstr "Vos identifiants"
+msgid "Your name"
+msgstr "Votre nom"
 

@@ -14,13 +14,14 @@ app = create_app(os.environ.get('ALIQUIS_CONF',
 
 def _extract_18n_messages():
     """Extract messages to translate from application files."""
-    BabelCLI().run(['', 'extract', '-F', 'babel.cfg', '-k', '_t', '-o',
-                    'aliquis/i18n/messages.pot', 'aliquis'])
+    BabelCLI().run(['', 'extract', '-F', 'babel.cfg', '-k', '_t', '--no-location', '--sort-output',
+                    '--omit-header', '-o', 'aliquis/i18n/messages.pot', 'aliquis'])
 
 
 def _write_message_files(lang, command='update'):
     """Extract messages to translate from application files."""
-    BabelCLI().run(['', command, '-i', 'aliquis/i18n/messages.pot', '-d', 'aliquis/i18n/', '-l', lang])
+    BabelCLI().run(['', command, '-i', 'aliquis/i18n/messages.pot', '-d', 'aliquis/i18n/',
+                    '-l', lang])
 
 
 @app.route('/')
