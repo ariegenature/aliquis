@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-20 20:52+0200\n"
+"POT-Creation-Date: 2017-08-21 10:34+0200\n"
 "PO-Revision-Date: 2017-08-19 20:41+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -22,101 +22,126 @@ msgstr ""
 msgid "Please confirm your ANA account creation"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:113
+#: aliquis/views/sign/__init__.py:115
 msgid "First name"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:114
+#: aliquis/views/sign/__init__.py:116
 msgid "Surname"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:115
+#: aliquis/views/sign/__init__.py:117
 msgid "Display name"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:116
+#: aliquis/views/sign/__init__.py:118
 msgid "How your name will be displayed in applications"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:118
+#: aliquis/views/sign/__init__.py:120
 msgid "Email"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:119
+#: aliquis/views/sign/__init__.py:121 aliquis/views/sign/__init__.py:142
 msgid "Username"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:120
+#: aliquis/views/sign/__init__.py:122
 msgid "Only lowercase unaccented letters and digits"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:122
+#: aliquis/views/sign/__init__.py:124 aliquis/views/sign/__init__.py:143
 msgid "Password"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:123
+#: aliquis/views/sign/__init__.py:125
 msgid "At least 6 characters"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:129
+#: aliquis/views/sign/__init__.py:131
 msgid "Username already exists"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:132
+#: aliquis/views/sign/__init__.py:134
 msgid "Email address already exists"
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:158
+#: aliquis/views/sign/__init__.py:155
+msgid "You cannot log in until you activate your account."
+msgstr ""
+
+#: aliquis/views/sign/__init__.py:185
 msgid "After checking, we found the following problem:"
 msgid_plural "After checking, we found the following problems:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: aliquis/views/sign/__init__.py:170
+#: aliquis/views/sign/__init__.py:198
+msgid "Login failed"
+msgstr ""
+
+#: aliquis/views/sign/__init__.py:200
+msgid "Please check your username and password."
+msgstr ""
+
+#: aliquis/views/sign/__init__.py:212
 msgid ""
 "Thank you for confirming. Your account is now activated and you may now "
 "log in."
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:175
+#: aliquis/views/sign/__init__.py:217
 msgid "The confirmation link has expired. Please create your account again."
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:178
+#: aliquis/views/sign/__init__.py:220
 msgid "The confirmation link is invalid."
 msgstr ""
 
-#: aliquis/views/sign/__init__.py:185
+#: aliquis/views/sign/__init__.py:227
 msgid "This account is already activated. You can log in."
 msgstr ""
 
 #: aliquis/views/sign/templates/sign/index.html:1
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid "Your ANA account"
 msgstr ""
 
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid ""
 "A technical problem occured. Please contact helpdesk@ariegenature.fr for "
 "assistance"
 msgstr ""
 
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
-msgid "Create Your ANA Account"
-msgstr ""
-
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid "Go!"
 msgstr ""
 
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
+msgid "Log in"
+msgstr ""
+
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
+msgid "Sign In"
+msgstr ""
+
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
+msgid "Sign Up"
+msgstr ""
+
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
+msgid "Create Your ANA Account"
+msgstr ""
+
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid "Your name"
 msgstr ""
 
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid "Your email address"
 msgstr ""
 
-#: aliquis/views/sign/templates/static/vue/js/app.022516d6a9d919d33ba4.js:1
+#: aliquis/views/sign/templates/static/vue/js/app.b54c0935eee7853a9ac8.js:1
 msgid "Your credentials"
 msgstr ""
+

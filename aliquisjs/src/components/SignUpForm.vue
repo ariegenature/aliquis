@@ -159,6 +159,7 @@ export default {
           for (var inputId in this.inputState) {
             this.inputState[inputId] = 'is-success'
           }
+          this.$router.push({ name: 'login' })
         }, response => {
           this.isWaiting = false
           this.formMessageClass = 'is-danger'

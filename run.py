@@ -26,7 +26,7 @@ def _write_message_files(lang, command='update'):
 @app.route('/')
 def home():
     """Homepage for aliquis."""
-    return redirect(url_for('sign.sign_up'))
+    return redirect(url_for('sign.login'))
 
 
 @app.cli.command()

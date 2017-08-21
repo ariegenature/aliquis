@@ -5,6 +5,7 @@ import mimetypes
 
 from flask import Blueprint, current_app, jsonify, make_response, render_template, url_for
 from flask_babel import _, lazy_gettext as _t, ngettext, get_locale
+from flask_ldap3_login.forms import LDAPLoginForm
 from flask_wtf import FlaskForm
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from ldap3 import ObjectDef, Reader, Writer
@@ -12,6 +13,7 @@ from six import text_type
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Regexp
 
+from aliquis.extensions import ldap_manager
 from aliquis.person import person as new_person, USERNAME_REGEXP
 from aliquis.background_tasks import send_sign_up_confirm_email
 
@@ -134,6 +136,31 @@ class SignUpForm(FlaskForm):
         return result
 
 
+class LoginForm(LDAPLoginForm):
+    """Login form for ANA."""
+
+    username = StringField(_t('Username'), validators=[DataRequired()])
+    password = PasswordField(_t('Password'), validators=[DataRequired()])
+
+    def validate(self):
+        valid = super(LoginForm, self).validate()
+        if not valid:
+            return False
+        p = _person_from_ldap_entry(
+            current_app.ldap3_login_manager.get_user_info_for_username(self.username.data)
+        )
+        if p.is_active:
+            return True
+        else:
+            self.username.errors.append(_t('You cannot log in until you activate your account.'))
+            return False
+
+
+@ldap_manager.save_user
+def save_user(dn, username, ldap_dict, memberships):
+    return _person_from_ldap_entry(ldap_dict)
+
+
 @sign.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     form = SignUpForm(meta={'locales': [get_locale()]})
@@ -159,6 +186,21 @@ def sign_up():
             u'; '.join('({i}) {m}'.format(i=i, m=err['message']) for i, err in enumerate(errors, 1))
         )
         return jsonify({'message': msg, 'errors': errors}), 409
+    return render_template('sign/index.html')
+
+
+@sign.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm(meta={'locales': [get_locale()]})
+    if form.validate_on_submit():
+        return jsonify({'id': form.username}), 200
+    if form.username.errors:
+        msg = u'{0}. '.format(_('Login failed'))
+        if 'Invalid Username/Password.' in form.username.errors:
+            msg += _('Please check your username and password.')
+        else:
+            msg += u', '.join(map(lambda err: text_type(err), form.username.errors))
+        return jsonify({'message': msg}), 401
     return render_template('sign/index.html')
 
 

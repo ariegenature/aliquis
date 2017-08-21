@@ -12,6 +12,7 @@
       <div class="columns is-centered">
         <div class="column">
           <div class="box">
+            <router-view name="tabbar"></router-view>
             <router-view></router-view>
           </div>
         </div>
