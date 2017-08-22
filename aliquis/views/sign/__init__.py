@@ -1,12 +1,15 @@
 """Aliquis blueprint allowing a user to sign up."""
 
 from contextlib import contextmanager
+from functools import wraps
 import mimetypes
 
-from flask import Blueprint, current_app, jsonify, make_response, render_template, url_for
+from flask import (Blueprint, current_app, jsonify, make_response, render_template, redirect,
+                   request, url_for)
 from flask_babel import _, lazy_gettext as _t, ngettext, get_locale
 from flask_ldap3_login.forms import LDAPLoginForm
-from flask_login import login_user
+from flask_login import current_user, login_required, login_user, logout_user
+from flask_login.config import EXEMPT_METHODS as LOGIN_EXEMPT_METHODS
 from flask_wtf import FlaskForm
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from ldap3 import ObjectDef, Reader, Writer
@@ -157,6 +160,21 @@ class LoginForm(LDAPLoginForm):
             return False
 
 
+def same_user_id_required(func):
+    """Decorator toward view functions. The decorated view function must take a ``user_id`` as its
+    first parameter. Then this decorator will ensure that the currently logged in user has the same
+    user id (as returned by the ``get_id`` method) than the user id passed when calling the view.
+    """
+    @wraps(func)
+    def decorated_view(user_id, *args, **kwargs):
+        if (request.method in LOGIN_EXEMPT_METHODS or current_app.login_manager._login_disabled):
+            return func(user_id, *args, **kwargs)
+        if current_user.is_authenticated and current_user.get_id() == user_id:
+            return func(user_id, *args, **kwargs)
+        return current_app.login_manager.unauthorized()
+    return decorated_view
+
+
 @ldap_manager.save_user
 def save_user(dn, username, ldap_dict, memberships):
     return _person_from_ldap_entry(ldap_dict)
@@ -170,6 +188,21 @@ def load_user(username):
         )
     except Exception:
         return None
+
+
+@sign.route('/user/<user_id>', methods=['GET'])
+@same_user_id_required
+def user(user_id):
+    """View showing and updating a person's data."""
+    return render_template('sign/index.html')
+
+@sign.route('/api/user/<user_id>', methods=['GET'])
+@same_user_id_required
+def api_user(user_id):
+    """View showing and updating a person's data."""
+    return jsonify(dict((k, v) for k, v in _person_from_ldap_entry(
+        current_app.ldap3_login_manager.get_user_info_for_username(user_id)
+    ).as_json().items() if k in('first_name', 'surname', 'display_name', 'email', 'username')))
 
 
 @sign.route('/sign-up', methods=['GET', 'POST'])
@@ -217,6 +250,13 @@ def login():
             msg += u', '.join(map(lambda err: text_type(err), form.username.errors))
         return jsonify({'message': msg}), 401
     return render_template('sign/index.html')
+
+
+@sign.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('.login'))
 
 
 @sign.route('/confirm/<token>', methods=['GET'])
