@@ -45,7 +45,7 @@
 
 <script>
 import InputBoundInputField from './InputBoundInputField'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'login-form',
