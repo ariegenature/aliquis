@@ -89,17 +89,6 @@ class Person(object):
         else:  # value is clear text
             self._password = binary_type(crypt(value, _sha512_salt()).encode('utf-8'))
 
-    def check_password(self, value):
-        """Check if the given password matches the person's password."""
-        if isinstance(value, binary_type):
-            value = value.decode('utf-8')
-        value = _text_value(value)
-        if CRYPT_REGEXP.match(value):  # value is already hashed
-            return self._password.decode('utf-8') == value
-        else:  # value is clear text
-            salt = CRYPT_REGEXP.match(self._password.decode('utf-8')).group(1)
-            return compare_hash(self._password, binary_type(crypt(value, salt).encode('utf-8')))
-
     @property
     def is_active(self):
         """Return ``True`` if account for this person has been activated."""
@@ -115,6 +104,17 @@ class Person(object):
             return True
         else:
             return False
+
+    def check_password(self, value):
+        """Check if the given password matches the person's password."""
+        if isinstance(value, binary_type):
+            value = value.decode('utf-8')
+        value = _text_value(value)
+        if CRYPT_REGEXP.match(value):  # value is already hashed
+            return self._password.decode('utf-8') == value
+        else:  # value is clear text
+            salt = CRYPT_REGEXP.match(self._password.decode('utf-8')).group(1)
+            return compare_hash(self._password, binary_type(crypt(value, salt).encode('utf-8')))
 
     def as_json(self):
         return dict((k, getattr(self, k, None)) for k in ('first_name', 'surname', 'display_name',
