@@ -3,7 +3,7 @@
 from flask import Flask
 from konfig import Config
 
-from aliquis.extensions import babel, celery, csrf, ldap_manager
+from aliquis.extensions import babel, celery, csrf, ldap_manager, login_manager
 from aliquis.views import blueprints
 
 
@@ -51,5 +51,6 @@ def create_app(config_fname):
     babel.init_app(app)
     csrf.init_app(app)
     ldap_manager.init_app(app)
+    login_manager.init_app(app)
     celery.init_app(app)
     return app

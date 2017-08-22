@@ -6,6 +6,7 @@ import mimetypes
 from flask import Blueprint, current_app, jsonify, make_response, render_template, url_for
 from flask_babel import _, lazy_gettext as _t, ngettext, get_locale
 from flask_ldap3_login.forms import LDAPLoginForm
+from flask_login import login_user
 from flask_wtf import FlaskForm
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from ldap3 import ObjectDef, Reader, Writer
@@ -13,7 +14,7 @@ from six import text_type
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Regexp
 
-from aliquis.extensions import ldap_manager
+from aliquis.extensions import ldap_manager, login_manager
 from aliquis.person import person as new_person, USERNAME_REGEXP
 from aliquis.background_tasks import send_sign_up_confirm_email
 
@@ -161,6 +162,16 @@ def save_user(dn, username, ldap_dict, memberships):
     return _person_from_ldap_entry(ldap_dict)
 
 
+@login_manager.user_loader
+def load_user(username):
+    try:
+        return _person_from_ldap_entry(
+            current_app.ldap3_login_manager.get_user_info_for_username(username)
+        )
+    except Exception:
+        return None
+
+
 @sign.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     form = SignUpForm(meta={'locales': [get_locale()]})
@@ -193,6 +204,10 @@ def sign_up():
 def login():
     form = LoginForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
+        p = _person_from_ldap_entry(
+            current_app.ldap3_login_manager.get_user_info_for_username(form.username)
+        )
+        login_user(p)
         return jsonify({'id': form.username}), 200
     if form.username.errors:
         msg = u'{0}. '.format(_('Login failed'))

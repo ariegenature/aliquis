@@ -5,6 +5,7 @@ from hmac import compare_digest as compare_hash
 import re
 
 from flask import current_app
+from flask_login import AnonymousUserMixin
 from six import PY3, text_type, binary_type
 
 if PY3:
@@ -104,6 +105,20 @@ class Person(object):
             return True
         else:
             return False
+
+    @property
+    def is_authenticated(self):
+        """Return ``True`` if this person is authenticated."""
+        return not isinstance(self, AnonymousUserMixin)
+
+    @property
+    def is_anonymous(self):
+        """Return ``True`` if this person is anonymous."""
+        return isinstance(self, AnonymousUserMixin)
+
+    def get_id(self):
+        """Return the username of the person."""
+        return self._username
 
     def check_password(self, value):
         """Check if the given password matches the person's password."""

@@ -4,12 +4,14 @@ from flask import current_app, request
 from flask_babel import Babel
 from flask_celery import Celery
 from flask_ldap3_login import LDAP3LoginManager
+from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
 
 babel = Babel()
 celery = Celery()
 csrf = CSRFProtect()
 ldap_manager = LDAP3LoginManager()
+login_manager = LoginManager()
 
 
 @babel.localeselector

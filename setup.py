@@ -47,6 +47,7 @@ setup(
     install_requires=[
         'Flask-Babel',
         'Flask-Celery-Helper',
+        'Flask-Login',
         'Flask-WTF',
         'celery',
         'flask',
