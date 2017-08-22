@@ -26,7 +26,7 @@ export default {
     commit(types.UPDATE_STATUS_MESSAGE, value)
   },
   [types.CLEAR_STATUS_MESSAGE] ({ commit }) {
-    commit(types.UPDATE_STATUS_MESSAGE)
+    commit(types.CLEAR_STATUS_MESSAGE)
   },
   [types.SET_PAGE_LOADING] ({ commit }) {
     commit(types.SET_PAGE_LOADING)
