@@ -75,6 +75,7 @@ export default {
           this.setPageNotLoading()
           this.inputState = 'is-success'
           this.clearStatusMessage()
+          this.$router.push({ name: 'user', params: { username: this.username } })
         }, response => {
           this.setPageNotLoading()
           this.inputState = 'is-danger'

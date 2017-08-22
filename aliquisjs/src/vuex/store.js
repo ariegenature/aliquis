@@ -7,6 +7,11 @@ import actions from './actions'
 Vue.use(Vuex)
 
 const state = {
+  firstName: '',
+  surname: '',
+  displayName: '',
+  email: '',
+  username: '',
   signUpFirstName: '',
   signUpSurname: '',
   signUpDisplayName: '',

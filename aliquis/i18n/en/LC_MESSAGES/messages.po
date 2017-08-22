@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-21 17:38+0200\n"
+"POT-Creation-Date: 2017-08-22 19:08+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -53,6 +53,9 @@ msgid "Go!"
 msgstr ""
 
 msgid "How your name will be displayed in applications"
+msgstr ""
+
+msgid "Log Out"
 msgstr ""
 
 msgid "Log in"
@@ -102,10 +105,16 @@ msgstr ""
 msgid "This account is already activated. You can log in."
 msgstr ""
 
+msgid "Update"
+msgstr ""
+
 msgid "Username"
 msgstr ""
 
 msgid "Username already exists"
+msgstr ""
+
+msgid "Welcome"
 msgstr ""
 
 msgid "You cannot log in until you activate your account."
@@ -123,6 +132,9 @@ msgstr ""
 msgid ""
 "Your information has been saved. You will soon receive an email to "
 "confirm your registration."
+msgstr ""
+
+msgid "Your modifications have been saved."
 msgstr ""
 
 msgid "Your name"

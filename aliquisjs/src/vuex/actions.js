@@ -1,6 +1,26 @@
+import api from '../api'
 import * as types from './mutation_types'
 
 export default {
+  fetchAndInitUser ({ commit }, value) {
+    commit(types.SET_PAGE_LOADING)
+    api.fetchUser(value).then(response => {
+      commit(types.INIT_USER, response.data)
+      commit(types.SET_PAGE_NOT_LOADING)
+    })
+  },
+  [types.UPDATE_FIRST_NAME] ({ commit }, value) {
+    commit(types.UPDATE_FIRST_NAME, value)
+  },
+  [types.UPDATE_SURNAME] ({ commit }, value) {
+    commit(types.UPDATE_SURNAME, value)
+  },
+  [types.UPDATE_DISPLAY_NAME] ({ commit }, value) {
+    commit(types.UPDATE_DISPLAY_NAME, value)
+  },
+  [types.UPDATE_EMAIL] ({ commit }, value) {
+    commit(types.UPDATE_EMAIL, value)
+  },
   [types.UPDATE_SIGN_UP_FIRST_NAME] ({ commit }, value) {
     commit(types.UPDATE_SIGN_UP_FIRST_NAME, value)
   },

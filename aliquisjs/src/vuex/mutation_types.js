@@ -1,3 +1,8 @@
+export const INIT_USER = 'initUser'
+export const UPDATE_FIRST_NAME = 'updateFirstName'
+export const UPDATE_SURNAME = 'updateSurname'
+export const UPDATE_DISPLAY_NAME = 'updateDisplayName'
+export const UPDATE_EMAIL = 'updateEmail'
 export const UPDATE_SIGN_UP_FIRST_NAME = 'updateSignUpFirstName'
 export const UPDATE_SIGN_UP_SURNAME = 'updateSignUpSurname'
 export const UPDATE_SIGN_UP_DISPLAY_NAME = 'updateSignUpDisplayName'

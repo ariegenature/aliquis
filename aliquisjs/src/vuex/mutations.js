@@ -8,6 +8,28 @@ function lowerCaseLettersExceptFirst (value) {
 const classes = ['', 'is-primary', 'is-info', 'is-success', 'is-warning', 'is-danger']
 
 export default {
+  [types.INIT_USER] (state, data) {
+    var firstName = lowerCaseLettersExceptFirst(data['first_name'])
+    var surname = lowerCaseLettersExceptFirst(data['surname'])
+    state.firstName = firstName
+    state.surname = surname
+    var displayName = data['display_name']
+    state.displayName = displayName === `${firstName} ${surname}` ? '' : displayName
+    state.email = data['email']
+    state.username = data['username']
+  },
+  [types.UPDATE_FIRST_NAME] (state, value) {
+    state.firstName = lowerCaseLettersExceptFirst(value.trim())
+  },
+  [types.UPDATE_SURNAME] (state, value) {
+    state.surname = lowerCaseLettersExceptFirst(value.trim())
+  },
+  [types.UPDATE_DISPLAY_NAME] (state, value) {
+    state.displayName = value.trim()
+  },
+  [types.UPDATE_EMAIL] (state, value) {
+    state.email = value.trim()
+  },
   [types.UPDATE_SIGN_UP_FIRST_NAME] (state, value) {
     state.signUpFirstName = lowerCaseLettersExceptFirst(value.trim())
   },

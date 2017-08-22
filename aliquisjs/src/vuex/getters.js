@@ -1,22 +1,31 @@
+function displayNameValue (displayName, firstName, surname) {
+  if (displayName) {
+    return displayName
+  }
+  if (firstName && surname) {
+    return `${firstName} ${surname}`
+  }
+  if (firstName) {
+    return firstName
+  }
+  if (surname) {
+    return surname
+  }
+  return ''
+}
+
 export default {
+  getFirstName: state => state.firstName,
+  getSurname: state => state.surname,
+  getDisplayName: state => {
+    return displayNameValue(state.displayName, state.firstName, state.surname)
+  },
+  getEmail: state => state.email,
+  getUsername: state => state.username,
   getSignUpFirstName: state => state.signUpFirstName,
   getSignUpSurname: state => state.signUpSurname,
   getSignUpDisplayName: state => {
-    if (state.signUpDisplayName) {
-      return state.signUpDisplayName
-    }
-    var firstName = state.signUpFirstName
-    var surname = state.signUpSurname
-    if (firstName && surname) {
-      return `${firstName} ${surname}`
-    }
-    if (firstName) {
-      return `${firstName}`
-    }
-    if (surname) {
-      return `${surname}`
-    }
-    return ''
+    return displayNameValue(state.signUpDisplayName, state.signUpFirstName, state.signUpSurname)
   },
   getSignUpEmail: state => state.signUpEmail,
   getSignUpUsername: state => {
@@ -41,6 +50,12 @@ export default {
   getIsLoading: state => state.isLoading,
   getEmailRegExp: state => state.emailRegExp,
   getUsernameRegExp: state => state.usernameRegExp,
+  validateUserData: (state, getters) => (Boolean(
+    state.firstName &&
+    state.surname &&
+    getters.getDisplayName &&
+    state.email.match(state.emailRegExp)
+  )),
   validateSignUpData: (state, getters) => (Boolean(
     state.signUpFirstName &&
     state.signUpSurname &&
