@@ -94,15 +94,20 @@
       <div class="field-body">
         <div class="field">
           <div class="control">
-            <button class="button is-primary" type="submit" :disabled="!formReady"
-                                              @submit.prevent="submitForm">
-              «« _('Go!') »»
-            </button>
+            <input type="hidden" name="csrf_token" value="«« csrf_token() »»">
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <input type="hidden" name="csrf_token" value="«« csrf_token() »»">
+            <input type="hidden" id="age" name="age" v-model="age">
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary" type="submit" :disabled="!formReady"
+                                              @submit.prevent="submitForm">
+              «« _('Go!') »»
+            </button>
           </div>
         </div>
       </div>
@@ -123,6 +128,7 @@ export default {
   data () {
     return {
       passwordConfirm: '',
+      age: '',
       inputState: {
         'first_name': '',
         'surname': '',
@@ -138,7 +144,7 @@ export default {
       return this.passwordConfirm === this.password ? '' : "«« _('Passwords do not match') »»"
     },
     formReady () {
-      return this.validateSignUpData && this.passwordConfirm === this.password
+      return this.validateSignUpData && this.passwordConfirm === this.password && !this.age
     },
     ...mapGetters({
       'firstName': 'getSignUpFirstName',
