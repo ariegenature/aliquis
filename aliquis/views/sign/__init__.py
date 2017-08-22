@@ -205,7 +205,7 @@ def login():
     form = LoginForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         p = _person_from_ldap_entry(
-            current_app.ldap3_login_manager.get_user_info_for_username(form.username)
+            current_app.ldap3_login_manager.get_user_info_for_username(form.username.data)
         )
         login_user(p)
         return jsonify({'id': form.username}), 200
