@@ -40,7 +40,6 @@
         </div>
       </div>
     </div>
-    <b-loading :active.sync="isLoading"></b-loading>
   </form>
 </template>
 
@@ -63,10 +62,7 @@ export default {
   computed: {
     formReady () {
       return Boolean(this.username) && Boolean(this.password)
-    },
-    ...mapGetters({
-      'isLoading': 'getIsLoading'
-    })
+    }
   },
   methods: {
     submitForm (ev) {

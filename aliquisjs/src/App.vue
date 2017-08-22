@@ -23,6 +23,7 @@
       </div>
     </div>
     </main>
+    <b-loading :active.sync="isLoading"></b-loading>
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
   store,
   computed: mapGetters({
     'statusMessage': 'getStatusMessage',
-    'statusMessageClass': 'getStatusMessageClass'
+    'statusMessageClass': 'getStatusMessageClass',
+    'isLoading': 'getIsLoading'
   })
 }
 </script>

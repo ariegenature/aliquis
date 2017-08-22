@@ -112,7 +112,6 @@
         </div>
       </div>
     </div>
-    <b-loading :active.sync="isLoading"></b-loading>
   </form>
 </template>
 
@@ -153,7 +152,6 @@ export default {
       'email': 'getSignUpEmail',
       'username': 'getSignUpUsername',
       'password': 'getSignUpPassword',
-      'isLoading': 'getIsLoading',
       'emailRegExp': 'getEmailRegExp',
       'usernameRegExp': 'getUsernameRegExp',
       'validateSignUpData': 'validateSignUpData'
