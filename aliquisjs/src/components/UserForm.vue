@@ -69,7 +69,6 @@ export default {
   },
   data () {
     return {
-      passwordConfirm: '',
       inputState: {
         'first_name': '',
         'surname': '',
@@ -78,9 +77,6 @@ export default {
     }
   },
   computed: {
-    passwordConfirmHelp () {
-      return this.passwordConfirm === this.password ? '' : "«« _('Passwords do not match') »»"
-    },
     formReady () {
       return this.validateUserData
     },
