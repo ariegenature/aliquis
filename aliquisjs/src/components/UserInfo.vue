@@ -1,0 +1,45 @@
+<template>
+  <div class="card">
+    <header class="card-header">
+      <h3 class="card-header-title">«« _('Other information') »»</h3>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <dl>
+          <dt>
+          <b-icon icon="user"></b-icon>&thinsp;<span>«« _('Your username:') »»</span>
+          </dt>
+          <b-tooltip label="«« _('Cannot be changed') »»" position="is-right" class="is-info">
+            <dd><kbd class="has-text-info">{{ username }}</kbd></dd>
+          </b-tooltip>
+          <dt>
+          <b-icon icon="envelope"></b-icon>&thinsp;<span>«« _('Your email address:') »»</span>
+          </dt>
+          <dd><kbd class="has-text-info">{{ email }}</kbd></dd>
+        </dl>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="card-footer-item is-size-7" href="#">
+        <b-icon icon="envelope" size="is-small"></b-icon>&thinsp;
+        <span>«« _('Change your email address') »»</span>
+      </a>
+      <a class="card-footer-item is-size-7" href="#">
+        <b-icon icon="user-secret" size="is-small"></b-icon>&thinsp;
+        <span>«« _('Change your password') »»</span>
+      </a>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  name: 'user-info',
+  computed: mapGetters({
+    'username': 'getUsername',
+    'email': 'getEmail'
+  })
+}
+</script>

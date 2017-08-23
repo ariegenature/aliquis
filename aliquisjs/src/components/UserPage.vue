@@ -5,18 +5,23 @@
       <div class="column">
         <user-form></user-form>
       </div>
+      <div class="column">
+        <user-info></user-info>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import UserForm from './UserForm'
+import UserInfo from './UserInfo'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'user-page',
   components: {
-    UserForm
+    UserForm,
+    UserInfo
   },
   computed: mapGetters({
     'firstName': 'getFirstName'
