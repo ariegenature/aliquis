@@ -5,6 +5,9 @@
         active-class="is-active">
         <a><b-icon icon="address-card" size="is-small"></b-icon><span>{{ displayName }}</span></a>
       </router-link>
+      <router-link :to="{ name: 'change-email' }" tag="li" active-class="is-active">
+        <a><b-icon icon="envelope" size="is-small"></b-icon><span>«« _('Email') »»</span></a>
+      </router-link>
       <li>
         <a href="«« url_for('sign.logout') »»">
           <b-icon icon="sign-out" size="is-small"></b-icon><span>«« _('Log Out') »»</span>

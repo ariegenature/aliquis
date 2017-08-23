@@ -21,6 +21,12 @@ export default {
   [types.UPDATE_EMAIL] ({ commit }, value) {
     commit(types.UPDATE_EMAIL, value)
   },
+  [types.UPDATE_NEW_EMAIL] ({ commit }, value) {
+    commit(types.UPDATE_NEW_EMAIL, value)
+  },
+  [types.CLEAR_NEW_EMAIL] ({ commit }) {
+    commit(types.CLEAR_NEW_EMAIL)
+  },
   [types.UPDATE_SIGN_UP_FIRST_NAME] ({ commit }, value) {
     commit(types.UPDATE_SIGN_UP_FIRST_NAME, value)
   },

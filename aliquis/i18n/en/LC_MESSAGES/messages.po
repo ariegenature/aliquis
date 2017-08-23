@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-23 15:47+0200\n"
+"POT-Creation-Date: 2017-08-23 18:01+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -27,6 +27,11 @@ msgid "After checking, we found the following problem:"
 msgid_plural "After checking, we found the following problems:"
 msgstr[0] ""
 msgstr[1] ""
+
+msgid ""
+"After updating your email address with the opposite form, you will "
+"receive an e-mail at the new address. This email contains a link."
+msgstr ""
 
 msgid "At least 6 characters"
 msgstr ""
@@ -61,7 +66,13 @@ msgstr ""
 msgid "Go!"
 msgstr ""
 
+msgid "How to change your email address ?"
+msgstr ""
+
 msgid "How your name will be displayed in applications"
+msgstr ""
+
+msgid "Just click on the link to confirm that this address belongs to you."
 msgstr ""
 
 msgid "Log Out"
@@ -71,6 +82,9 @@ msgid "Log in"
 msgstr ""
 
 msgid "Login failed"
+msgstr ""
+
+msgid "New email address"
 msgstr ""
 
 msgid "Only lowercase unaccented letters and digits"
@@ -130,6 +144,9 @@ msgid "Welcome"
 msgstr ""
 
 msgid "You cannot log in until you activate your account."
+msgstr ""
+
+msgid "You will soon receive an email to confirm your new address."
 msgstr ""
 
 msgid "Your ANA account"

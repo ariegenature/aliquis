@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import ChangeEmailPage from '@/components/ChangeEmailPage'
 import LoginPage from '@/components/LoginPage'
 import SignTabBar from '@/components/SignTabBar'
 import SignUpPage from '@/components/SignUpPage'
@@ -34,6 +35,14 @@ export default new Router({
       components: {
         tabbar: UserTabBar,
         default: UserPage
+      }
+    },
+    {
+      path: '/change-email',
+      name: 'change-email',
+      components: {
+        tabbar: UserTabBar,
+        default: ChangeEmailPage
       }
     },
     {

@@ -30,6 +30,12 @@ export default {
   [types.UPDATE_EMAIL] (state, value) {
     state.email = value.trim()
   },
+  [types.UPDATE_NEW_EMAIL] (state, value) {
+    state.newEmail = value.trim()
+  },
+  [types.CLEAR_NEW_EMAIL] (state) {
+    state.newEmail = ''
+  },
   [types.UPDATE_SIGN_UP_FIRST_NAME] (state, value) {
     state.signUpFirstName = lowerCaseLettersExceptFirst(value.trim())
   },

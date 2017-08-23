@@ -20,10 +20,10 @@
       </div>
     </div>
     <div class="card-footer">
-      <a class="card-footer-item is-size-7" href="#">
+      <router-link :to="{ name: 'change-email' }" class="card-footer-item is-size-7">
         <b-icon icon="envelope" size="is-small"></b-icon>&thinsp;
         <span>«« _('Change your email address') »»</span>
-      </a>
+      </router-link>
       <a class="card-footer-item is-size-7" href="#">
         <b-icon icon="user-secret" size="is-small"></b-icon>&thinsp;
         <span>«« _('Change your password') »»</span>
