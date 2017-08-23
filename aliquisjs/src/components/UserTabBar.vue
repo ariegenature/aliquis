@@ -3,9 +3,13 @@
     <ul>
       <router-link :to="{ name: 'user', params: { username: username } }" tag="li"
         active-class="is-active">
-        <a>{{ displayName }}</a>
+        <a><b-icon icon="address-card" size="is-small"></b-icon><span>{{ displayName }}</span></a>
       </router-link>
-      <li><a href="«« url_for('sign.logout') »»">«« _('Log Out') »»</a></li>
+      <li>
+        <a href="«« url_for('sign.logout') »»">
+          <b-icon icon="sign-out" size="is-small"></b-icon><span>«« _('Log Out') »»</span>
+        </a>
+      </li>
     </ul>
   </div>
 </template>
