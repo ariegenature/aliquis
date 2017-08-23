@@ -1,5 +1,5 @@
 <template>
-  <form id="sign-up-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
+  <form id="user-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
     <div class="field is-horizontal">
       <div class="field-label">
         <label class="label is-normal">«« _('Your name') »»</label>
