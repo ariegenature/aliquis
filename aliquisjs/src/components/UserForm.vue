@@ -76,19 +76,14 @@ export default {
       }
     }
   },
-  computed: {
-    formReady () {
-      return this.validateUserData
-    },
-    ...mapGetters({
-      'firstName': 'getFirstName',
-      'surname': 'getSurname',
-      'displayName': 'getDisplayName',
-      'username': 'getUsername',
-      'isLoading': 'getIsLoading',
-      'validateUserData': 'validateUserData'
-    })
-  },
+  computed: mapGetters({
+    'firstName': 'getFirstName',
+    'surname': 'getSurname',
+    'displayName': 'getDisplayName',
+    'username': 'getUsername',
+    'isLoading': 'getIsLoading',
+    'formReady': 'validateUserData'
+  }),
   methods: {
     submitForm (ev) {
       this.setPageLoading()
