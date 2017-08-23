@@ -24,9 +24,10 @@
         <b-icon icon="envelope" size="is-small"></b-icon>&thinsp;
         <span>«« _('Change your email address') »»</span>
       </router-link>
-      <a class="card-footer-item is-size-7" href="#">
+      <router-link :to="{ name: 'change-password' }" class="card-footer-item is-size-7">
         <b-icon icon="user-secret" size="is-small"></b-icon>&thinsp;
         <span>«« _('Change your password') »»</span>
+      </router-link>
       </a>
     </div>
   </div>

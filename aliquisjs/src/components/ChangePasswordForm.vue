@@ -1,30 +1,42 @@
 <template>
-  <form id="change-email-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
+  <form id="change-password-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
+    <input-bound-input-field id="current_password"
+                             type="password"
+                             placeholder="«« _('Current password') »»"
+                             :state="inputState"
+                             icon="user-secret"
+                             autofocus
+                             required
+                             v-model="currentPassword"></input-bound-input-field>
+    <input-bound-input-field id="new_password"
+                             type="password"
+                             :state="inputState"
+                             placeholder="«« _('New password') »»"
+                             help-message="«« _('At least 6 characters') »»"
+                             icon="user-secret"
+                             required
+                             v-model="newPassword"
+                             :validators="{min: 6}"></input-bound-input-field>
+    <b-field :type="passwordConfirm === newPassword ? 'is-success' : 'is-danger'"
+                             :message="passwordConfirmHelp">
+      <b-input id="password_confirm"
+               placeholder="«« _('New password confirm') »»"
+               type="password"
+               icon="user-secret"
+               required="true"
+               v-model="passwordConfirm"></b-input>
+    </b-field>
     <div class="field">
       <div class="control">
         <input type="hidden" name="csrf_token" value="«« csrf_token() »»">
       </div>
     </div>
-    <div class="field is-horizontal">
-      <div class="field-body">
-        <input-bound-input-field id="email"
-                                 type="email"
-                                 placeholder="«« _('New email address') »»"
-                                 :state="inputState"
-                                 icon="envelope"
-                                 autofocus
-                                 required
-                                 :value="newEmail"
-                                 @input="updateNewEmail"
-                                 :validators="{regex: emailRegExp}"></input-bound-input-field>
-        <div class="field">
-          <div class="control">
-            <button class="button is-primary" type="submit" :disabled="!formReady"
-                                              @submit.prevent="submitForm">
-              «« _('Update') »»
-            </button>
-          </div>
-        </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-primary" type="submit" :disabled="!formReady"
+                                          @submit.prevent="submitForm">
+          «« _('Update') »»
+        </button>
       </div>
     </div>
   </form>
@@ -32,28 +44,31 @@
 
 <script>
 import InputBoundInputField from './InputBoundInputField'
-import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  name: 'change-email-form',
+  name: 'change-password-form',
   components: {
     InputBoundInputField
   },
   data () {
     return {
+      currentPassword: '',
+      newPassword: '',
+      passwordConfirm: '',
       inputState: {
-        'email': ''
+        'current_password': '',
+        'new_password': ''
       }
     }
   },
   computed: {
-    formReady () {
-      return this.newEmail.match(this.emailRegExp)
+    passwordConfirmHelp () {
+      return this.passwordConfirm === this.newPassword ? '' : "«« _('Passwords do not match') »»"
     },
-    ...mapGetters({
-      'newEmail': 'getNewEmail',
-      'emailRegExp': 'getEmailRegExp'
-    })
+    formReady () {
+      return this.currentPassword && this.newPassword.length >= 6 &&
+        this.passwordConfirm === this.newPassword
+    }
   },
   methods: {
     submitForm (ev) {
@@ -65,7 +80,7 @@ export default {
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
           this.setPageNotLoading()
           this.updateStatusMessage({
-            msg: "«« _('You will soon receive an email to confirm your new address.') »»",
+            msg: "«« _('Your password has been changed successfully.') »»",
             cls: statusClass
           })
           for (var inputId in this.inputState) {
@@ -107,10 +122,7 @@ export default {
       setTimeout(() => {
         this.setPageNotLoading()
       }, 3 * 1000)
-    },
-    ...mapActions({
-      'updateNewEmail': 'updateNewEmail'
-    })
+    }
   }
 }
 </script>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-23 18:01+0200\n"
+"POT-Creation-Date: 2017-08-23 19:19+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -17,6 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+
+msgid ""
+"A simple way to have a secure and easy to remember password is to choose "
+"four words."
+msgstr ""
 
 msgid ""
 "A technical problem occured. Please contact helpdesk@ariegenature.fr for "
@@ -31,6 +36,11 @@ msgstr[1] ""
 msgid ""
 "After updating your email address with the opposite form, you will "
 "receive an e-mail at the new address. This email contains a link."
+msgstr ""
+
+msgid ""
+"Also, please remember that the longer the password is, the better "
+"security it does provide."
 msgstr ""
 
 msgid "At least 6 characters"
@@ -48,6 +58,9 @@ msgstr ""
 msgid "Create Your ANA Account"
 msgstr ""
 
+msgid "Current password"
+msgstr ""
+
 msgid "Delay expired, please refresh the page."
 msgstr ""
 
@@ -63,6 +76,12 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
+msgid "For example:"
+msgstr ""
+
+msgid "For security reasons, we ask your current password again."
+msgstr ""
+
 msgid "Go!"
 msgstr ""
 
@@ -70,6 +89,9 @@ msgid "How to change your email address ?"
 msgstr ""
 
 msgid "How your name will be displayed in applications"
+msgstr ""
+
+msgid "How_husband_determine_country"
 msgstr ""
 
 msgid "Just click on the link to confirm that this address belongs to you."
@@ -85,6 +107,12 @@ msgid "Login failed"
 msgstr ""
 
 msgid "New email address"
+msgstr ""
+
+msgid "New password"
+msgstr ""
+
+msgid "New password confirm"
 msgstr ""
 
 msgid "Only lowercase unaccented letters and digits"
@@ -106,6 +134,9 @@ msgid "Please check your username and password."
 msgstr ""
 
 msgid "Please confirm your ANA account creation"
+msgstr ""
+
+msgid "Security"
 msgstr ""
 
 msgid "Sign In"
@@ -170,6 +201,9 @@ msgid "Your modifications have been saved."
 msgstr ""
 
 msgid "Your name"
+msgstr ""
+
+msgid "Your password has been changed successfully."
 msgstr ""
 
 msgid "Your username:"

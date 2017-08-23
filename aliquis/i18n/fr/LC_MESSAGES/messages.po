@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-23 18:01+0200\n"
+"POT-Creation-Date: 2017-08-23 19:19+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -17,6 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
+
+msgid ""
+"A simple way to have a secure and easy to remember password is to choose "
+"four words."
+msgstr ""
+"Un moyen simple pour avoir un mot de passe sécurisé et facile à retenir "
+"est de choisir quatre mots."
 
 msgid ""
 "A technical problem occured. Please contact helpdesk@ariegenature.fr for "
@@ -37,6 +44,13 @@ msgstr ""
 "Après avoir mis à jour votre adresse électronique ci-contre, vous "
 "recevrez, à la nouvelle adresse, un courriel contenant un lien."
 
+msgid ""
+"Also, please remember that the longer the password is, the better "
+"security it does provide."
+msgstr ""
+"Il faut aussi se rappeler que plus le mot de passe est long, meilleure "
+"est la sécurité."
+
 msgid "At least 6 characters"
 msgstr "Au moins 6 caractères"
 
@@ -51,6 +65,9 @@ msgstr "Modifier votre mot de passe"
 
 msgid "Create Your ANA Account"
 msgstr "Créez votre compte ANA"
+
+msgid "Current password"
+msgstr "Mot de passe actuel"
 
 msgid "Delay expired, please refresh the page."
 msgstr "Le délai a expiré, veuillez rafraichir la page."
@@ -67,6 +84,14 @@ msgstr "L'adresse électronique existe déjà"
 msgid "First name"
 msgstr "Prénom"
 
+msgid "For example:"
+msgstr "Par exemple :"
+
+msgid "For security reasons, we ask your current password again."
+msgstr ""
+"Par sécurité, nous vous demandons votre mot de passe actuel une nouvelle "
+"fois."
+
 msgid "Go!"
 msgstr "C'est parti !"
 
@@ -75,6 +100,9 @@ msgstr "Comment modifier votre adresse électronique ?"
 
 msgid "How your name will be displayed in applications"
 msgstr "Le nom qui sera affiché dans les applications"
+
+msgid "How_husband_determine_country"
+msgstr "Comment_mari_determine_pays"
 
 msgid "Just click on the link to confirm that this address belongs to you."
 msgstr ""
@@ -92,6 +120,12 @@ msgstr "L'identification a échoué"
 
 msgid "New email address"
 msgstr "Nouvelle adresse électronique"
+
+msgid "New password"
+msgstr "Nouveau mot de passe"
+
+msgid "New password confirm"
+msgstr "Confirmation du nouveau mot de passe"
 
 msgid "Only lowercase unaccented letters and digits"
 msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
@@ -113,6 +147,9 @@ msgstr "Veuillez vérifier votre nom d'utilisateur et votre mot de passe."
 
 msgid "Please confirm your ANA account creation"
 msgstr "Merci de confirmer la création de votre compte ANA"
+
+msgid "Security"
+msgstr "Sécurité"
 
 msgid "Sign In"
 msgstr "Connexion"
@@ -183,6 +220,9 @@ msgstr "Vos modifications ont été enregistrées."
 
 msgid "Your name"
 msgstr "Votre nom"
+
+msgid "Your password has been changed successfully."
+msgstr "Votre mot de passe a été modifié avec succès."
 
 msgid "Your username:"
 msgstr "Votre nom d'utilisateur :"

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ChangeEmailPage from '@/components/ChangeEmailPage'
+import ChangePasswordPage from '@/components/ChangePasswordPage'
 import LoginPage from '@/components/LoginPage'
 import SignTabBar from '@/components/SignTabBar'
 import SignUpPage from '@/components/SignUpPage'
@@ -43,6 +44,14 @@ export default new Router({
       components: {
         tabbar: UserTabBar,
         default: ChangeEmailPage
+      }
+    },
+    {
+      path: '/change-password',
+      name: 'change-password',
+      components: {
+        tabbar: UserTabBar,
+        default: ChangePasswordPage
       }
     },
     {

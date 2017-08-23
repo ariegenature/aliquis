@@ -8,6 +8,9 @@
       <router-link :to="{ name: 'change-email' }" tag="li" active-class="is-active">
         <a><b-icon icon="envelope" size="is-small"></b-icon><span>«« _('Email') »»</span></a>
       </router-link>
+      <router-link :to="{ name: 'change-password' }" tag="li" active-class="is-active">
+        <a><b-icon icon="user-secret" size="is-small"></b-icon><span>«« _('Password') »»</span></a>
+      </router-link>
       <li>
         <a href="«« url_for('sign.logout') »»">
           <b-icon icon="sign-out" size="is-small"></b-icon><span>«« _('Log Out') »»</span>
