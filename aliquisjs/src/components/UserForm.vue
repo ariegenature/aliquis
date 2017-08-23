@@ -38,22 +38,6 @@
       </div>
     </div>
     <div class="field is-horizontal">
-      <div class="field-label">
-        <label class="label">«« _('Your email address') »»</label>
-      </div>
-      <div class="field-body">
-        <input-bound-input-field type="email"
-                                 id="email"
-                                 :state="inputState"
-                                 icon="envelope"
-                                 required
-                                 :value="email"
-                                 @input="updateEmail"
-                                 :validators="{regex: emailRegExp}"></input-bound-input-field>
-
-      </div>
-    </div>
-    <div class="field is-horizontal">
       <div class="field-label"></div>
       <div class="field-body">
         <div class="field">
@@ -89,8 +73,7 @@ export default {
       inputState: {
         'first_name': '',
         'surname': '',
-        'display_name': '',
-        'email': ''
+        'display_name': ''
       }
     }
   },
@@ -105,10 +88,8 @@ export default {
       'firstName': 'getFirstName',
       'surname': 'getSurname',
       'displayName': 'getDisplayName',
-      'email': 'getEmail',
       'username': 'getUsername',
       'isLoading': 'getIsLoading',
-      'emailRegExp': 'getEmailRegExp',
       'validateUserData': 'validateUserData'
     })
   },
@@ -120,7 +101,6 @@ export default {
       signUpData.append('first_name', this.firstName)
       signUpData.append('surname', this.surname)
       signUpData.append('display_name', this.displayName)
-      signUpData.append('email', this.email)
       this.$http.post('', signUpData,
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
           this.setPageNotLoading()
@@ -173,7 +153,6 @@ export default {
       'updateFirstName': 'updateFirstName',
       'updateSurname': 'updateSurname',
       'updateDisplayName': 'updateDisplayName',
-      'updateEmail': 'updateEmail',
       'updateStatusMessage': 'updateStatusMessage',
       'setPageLoading': 'setPageLoading',
       'setPageNotLoading': 'setPageNotLoading'
