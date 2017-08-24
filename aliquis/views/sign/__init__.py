@@ -315,15 +315,15 @@ def user(user_id):
     return render_template('sign/index.html')
 
 
-@sign.route('/change-email', methods=['GET', 'POST'])
-@login_required
-def change_email():
+@sign.route('/email/<user_id>', methods=['GET', 'POST'])
+@same_user_id_required
+def change_email(user_id):
     """View allowing to change the person's email."""
     form = ChangeEmailForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         current_user.email = form.new_email.data
         _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection)
-        return jsonify({'id': current_user.username}), 200
+        return jsonify({'id': user_id}), 200
     errors = [{
         'field': field.name,
         'message': ', '.join(map(lambda err: text_type(err), field.errors))
@@ -339,16 +339,16 @@ def change_email():
     return render_template('sign/index.html')
 
 
-@sign.route('/change-password', methods=['GET', 'POST'])
-@login_required
-def change_password():
+@sign.route('/password/<user_id>', methods=['GET', 'POST'])
+@same_user_id_required
+def change_password(user_id):
     """View allowing to change the person's password."""
     form = ChangePasswordForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         current_user.password = form.new_password.data
         _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection,
                                update_password=True)
-        return jsonify({'id': current_user.username}), 200
+        return jsonify({'id': user_id}), 200
     errors = [{
         'field': field.name,
         'message': ', '.join(map(lambda err: text_type(err), field.errors))

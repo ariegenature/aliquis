@@ -5,10 +5,12 @@
         active-class="is-active">
         <a><b-icon icon="address-card" size="is-small"></b-icon><span>{{ displayName }}</span></a>
       </router-link>
-      <router-link :to="{ name: 'change-email' }" tag="li" active-class="is-active">
+      <router-link :to="{ name: 'email', params: { username: username } }" tag="li"
+        active-class="is-active">
         <a><b-icon icon="envelope" size="is-small"></b-icon><span>«« _('Email') »»</span></a>
       </router-link>
-      <router-link :to="{ name: 'change-password' }" tag="li" active-class="is-active">
+      <router-link :to="{ name: 'password', params: { username: username } }" tag="li"
+        active-class="is-active">
         <a><b-icon icon="user-secret" size="is-small"></b-icon><span>«« _('Password') »»</span></a>
       </router-link>
       <li>

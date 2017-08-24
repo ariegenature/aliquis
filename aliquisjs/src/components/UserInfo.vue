@@ -20,11 +20,13 @@
       </div>
     </div>
     <div class="card-footer">
-      <router-link :to="{ name: 'change-email' }" class="card-footer-item is-size-7">
+      <router-link :to="{ name: 'email', params: { username: username } }"
+        class="card-footer-item is-size-7">
         <b-icon icon="envelope" size="is-small"></b-icon>&thinsp;
         <span>«« _('Change your email address') »»</span>
       </router-link>
-      <router-link :to="{ name: 'change-password' }" class="card-footer-item is-size-7">
+      <router-link :to="{ name: 'password', params: { username: username} }"
+        class="card-footer-item is-size-7">
         <b-icon icon="user-secret" size="is-small"></b-icon>&thinsp;
         <span>«« _('Change your password') »»</span>
       </router-link>

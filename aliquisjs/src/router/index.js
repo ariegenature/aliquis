@@ -39,16 +39,16 @@ export default new Router({
       }
     },
     {
-      path: '/change-email',
-      name: 'change-email',
+      path: '/email/:username',
+      name: 'email',
       components: {
         tabbar: UserTabBar,
         default: ChangeEmailPage
       }
     },
     {
-      path: '/change-password',
-      name: 'change-password',
+      path: '/password/:username',
+      name: 'password',
       components: {
         tabbar: UserTabBar,
         default: ChangePasswordPage
