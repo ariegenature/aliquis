@@ -34,6 +34,7 @@ def create_app(config_fname):
     langs = app.config.get('BABEL_LANGUAGES', 'fr')
     app.config['BABEL_LANGUAGES'] = list(map(lambda s: s.strip(), langs.split(',')))
     app.config['BABEL_TRANSLATION_DIRECTORIES'] = 'i18n'
+    app.config['LDAP_READONLY'] = False
     # XXX: Since we use ldap3 ObjectDef (which needs a LDAP class), we make this option computed
     user_ldap_filter = app.config.get('LDAP_USER_OBJECT_FILTER')
     user_ldap_class = app.config['LDAP_USER_CLASS']

@@ -107,31 +107,20 @@ export default {
         }, response => {
           this.setPageNotLoading()
           statusClass = 'is-danger'
-          if (response.status === 500 || response.status === 400) {
-            if (response.status === 500) {
-              this.updateStatusMessage({
-                msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance.') »»",
-                cls: statusClass
-              })
-            }
-            if (response.status === 400) {
-              this.updateStatusMessage({
-                msg: "«« _('Delay expired, please refresh the page.') »»",
-                cls: statusClass
-              })
-            }
+          if (response.status === 500) {
+            this.updateStatusMessage({
+              msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance.') »»",
+              cls: statusClass
+            })
             for (var inputId in this.inputState) {
               this.inputState[inputId] = ''
             }
           }
           if (response.status === 401) {
-            var errorJson = response.body
+            var errorMsg = response.body
             this.updateStatusMessage({
-              msg: errorJson.message,
+              msg: errorMsg,
               cls: statusClass
-            })
-            errorJson.errors.forEach((err) => {
-              this.inputState[err.field] = statusClass
             })
           }
         })

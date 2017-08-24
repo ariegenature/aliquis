@@ -13,6 +13,7 @@ from flask_login.config import EXEMPT_METHODS as LOGIN_EXEMPT_METHODS
 from flask_wtf import FlaskForm
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from ldap3 import ObjectDef, Reader, Writer
+from ldap3.core.exceptions import LDAPCursorError, LDAPNoSuchObjectResult
 from six import text_type
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, Regexp
@@ -95,6 +96,37 @@ def _add_cursor(ldap_conn, search_class, base_dn, ldap_filter=None):
     wcur.commit()
 
 
+@contextmanager
+def _update_cursor(read_cursor):
+    """Return a new ``ldap3.Writer`` cursor for updating entries in the LDAP directory.
+
+    The given read cursor must contains entries to be updated.
+
+    This can be used as a context manager.
+    """
+    wcur = Writer.from_cursor(read_cursor)
+    yield wcur
+    wcur.commit()
+
+
+@contextmanager
+def _read_cursor(ldap_conn, search_class, base_dn, ldap_filter=None):
+    """Return a new ``ldap3.Reader`` cursor for browsing an LDAP tree described by the given
+    parameters.
+
+    This can be used as a context manager.
+    """
+    object_def = ObjectDef(search_class, ldap_conn)
+    cur_params = {
+        'connection': ldap_conn,
+        'object_def': object_def,
+        'base': base_dn,
+    }
+    if ldap_filter is not None:
+        cur_params['query'] = ldap_filter
+    yield Reader(**cur_params)
+
+
 def _save_person_to_ldap(person, ldap_conn):
     """Add the given person in the LDAP directory."""
     config = current_app.config
@@ -111,6 +143,35 @@ def _save_person_to_ldap(person, ldap_conn):
                     value = '{{CRYPT}}{0}'.format(value)
                 setattr(ldap_person, LDAP_ATTR_MAPPING[attr], value)
         ldap_person.cn = u'{0} {1}'.format(person.first_name, person.surname)
+
+
+def _update_person_in_ldap(person, ldap_conn):
+    """Update the given person in the LDAP directory."""
+    config = current_app.config
+    ldap_manager = current_app.ldap3_login_manager
+    user_search_dn = ldap_manager.full_user_search_dn
+    # Find the person by its ursername or email
+    with _read_cursor(ldap_conn, config['LDAP_USER_CLASS'], user_search_dn,
+                      'uid:={username}'.format(username=person.username)) as cur:
+        cur.search()
+        assert len(cur) <= 1, ('Problem in your database: more than one user with username '
+                               "'{1}'".format(person.username))
+        if len(cur) == 0:
+            raise LDAPNoSuchObjectResult("No person with username '{0}' in "
+                                         'database'.format(person.username))
+        with _update_cursor(cur) as wcur:
+            entry = wcur[0]
+            for attr, ldap_attr in LDAP_ATTR_MAPPING.items():
+                value = getattr(person, attr, None)
+                if value is None:
+                    continue
+                try:
+                    ldap_value = getattr(entry, ldap_attr)
+                except LDAPCursorError:
+                    setattr(entry, ldap_attr, value)
+                else:
+                    if ldap_value.value != value:
+                        setattr(entry, ldap_attr, value)
 
 
 class SignUpForm(FlaskForm):
@@ -160,6 +221,14 @@ class LoginForm(LDAPLoginForm):
             return False
 
 
+class UserForm(FlaskForm):
+    """Update user data form."""
+
+    first_name = StringField(_t('First name'), validators=[DataRequired()])
+    surname = StringField(_t('Surname'), validators=[DataRequired()])
+    display_name = StringField(_t('Display name'), validators=[DataRequired()])
+
+
 def same_user_id_required(func):
     """Decorator toward view functions. The decorated view function must take a ``user_id`` as its
     first parameter. Then this decorator will ensure that the currently logged in user has the same
@@ -190,11 +259,19 @@ def load_user(username):
         return None
 
 
-@sign.route('/user/<user_id>', methods=['GET'])
+@sign.route('/user/<user_id>', methods=['GET', 'POST'])
 @same_user_id_required
 def user(user_id):
     """View showing and updating a person's data."""
+    form = UserForm(meta={'locales': [get_locale()]})
+    if form.validate_on_submit():
+        person_dict = dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING)
+        person_dict['username'] = current_user.username
+        p = new_person(**person_dict)
+        _update_person_in_ldap(p, current_app.ldap3_login_manager.connection)
+        return jsonify({'id': p.username}), 200
     return render_template('sign/index.html')
+
 
 @sign.route('/api/user/<user_id>', methods=['GET'])
 @same_user_id_required
