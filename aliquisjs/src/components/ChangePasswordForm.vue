@@ -44,6 +44,7 @@
 
 <script>
 import InputBoundInputField from './InputBoundInputField'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'change-password-form',
@@ -71,11 +72,17 @@ export default {
     }
   },
   methods: {
+    clearFormData () {
+      this.currentPassword = ''
+      this.newPassword = ''
+      this.passwordConfirm = ''
+    }
     submitForm (ev) {
       this.setPageLoading()
       var statusClass = 'is-success'
       var formData = new FormData()
-      formData.append('new_email', this.newEmail)
+      formData.append('current_password', this.currentPassword)
+      formData.append('new_password', this.newPassword)
       this.$http.post('', formData,
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
           this.setPageNotLoading()
@@ -86,24 +93,16 @@ export default {
           for (var inputId in this.inputState) {
             this.inputState[inputId] = statusClass
           }
-          this.clearSignUpData()
+          this.clearFormData()
           this.$router.push({ name: 'login' })
         }, response => {
           this.setPageNotLoading()
           statusClass = 'is-danger'
-          if (response.status === 500 || response.status === 400) {
-            if (response.status === 500) {
-              this.updateStatusMessage({
-                msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance.') »»",
-                cls: statusClass
-              })
-            }
-            if (response.status === 400) {
-              this.updateStatusMessage({
-                msg: "«« _('Delay expired, please refresh the page.') »»",
-                cls: statusClass
-              })
-            }
+          if (response.status === 500) {
+            this.updateStatusMessage({
+              msg: "«« _('A technical problem occured. Please contact helpdesk@ariegenature.fr for assistance.') »»",
+              cls: statusClass
+            })
             for (var inputId in this.inputState) {
               this.inputState[inputId] = ''
             }
@@ -122,7 +121,12 @@ export default {
       setTimeout(() => {
         this.setPageNotLoading()
       }, 3 * 1000)
-    }
+    },
+    ...mapActions({
+      'setPageLoading': 'setPageLoading',
+      'setPageNotLoading': 'setPageNotLoading',
+      'updateStatusMessage': 'updateStatusMessage'
+    })
   }
 }
 </script>

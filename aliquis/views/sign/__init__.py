@@ -17,7 +17,7 @@ from ldap3 import ObjectDef, Reader, Writer
 from ldap3.core.exceptions import LDAPCursorError, LDAPNoSuchObjectResult
 from six import text_type
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Email, Regexp
+from wtforms.validators import DataRequired, Email, Length, Regexp
 
 from aliquis.extensions import ldap_manager, login_manager
 from aliquis.person import person as new_person, USERNAME_REGEXP
@@ -251,6 +251,24 @@ class ChangeEmailForm(FlaskForm):
         return True
 
 
+class ChangePasswordForm(FlaskForm):
+    """Update user password form."""
+
+    current_password = PasswordField(_t('Current password'), validators=[DataRequired()])
+    new_password = PasswordField(_t('New password'), validators=[DataRequired(), Length(min=6)])
+
+    def validate(self):
+        valid = super(ChangePasswordForm, self).validate()
+        if not valid:
+            return False
+        auth_result = current_app.ldap3_login_manager.authenticate(current_user.username,
+                                                                   self.current_password.data)
+        if auth_result.status != AuthenticationResponseStatus.success:
+            self.current_password.errors.append(_t('Wrong password'))
+            return False
+        return True
+
+
 def same_user_id_required(func):
     """Decorator toward view functions. The decorated view function must take a ``user_id`` as its
     first parameter. Then this decorator will ensure that the currently logged in user has the same
@@ -307,6 +325,30 @@ def change_email():
         p = new_person(**person_dict)
         _update_person_in_ldap(p, current_app.ldap3_login_manager.connection)
         return jsonify({'id': p.username}), 200
+    errors = [{
+        'field': field.name,
+        'message': ', '.join(map(lambda err: text_type(err), field.errors))
+    } for field in form if field.errors]
+    if errors:
+        msg = u'{0} {1}.'.format(
+            ngettext('After checking, we found the following problem:',
+                     'After checking, we found the following problems:',
+                     len(errors)),
+            u'; '.join('({i}) {m}'.format(i=i, m=err['message']) for i, err in enumerate(errors, 1))
+        )
+        return jsonify({'message': msg, 'errors': errors}), 401
+    return render_template('sign/index.html')
+
+
+@sign.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    """View allowing to change the person's password."""
+    form = ChangePasswordForm(meta={'locales': [get_locale()]})
+    if form.validate_on_submit():
+        current_user.password = form.new_password.data
+        _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection)
+        return jsonify({'id': current_user.username}), 200
     errors = [{
         'field': field.name,
         'message': ', '.join(map(lambda err: text_type(err), field.errors))
