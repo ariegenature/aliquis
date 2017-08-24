@@ -146,7 +146,7 @@ def _save_person_to_ldap(person, ldap_conn):
         ldap_person.cn = u'{0} {1}'.format(person.first_name, person.surname)
 
 
-def _update_person_in_ldap(person, ldap_conn):
+def _update_person_in_ldap(person, ldap_conn, update_password=False):
     """Update the given person in the LDAP directory."""
     config = current_app.config
     ldap_manager = current_app.ldap3_login_manager
@@ -164,7 +164,7 @@ def _update_person_in_ldap(person, ldap_conn):
             entry = wcur[0]
             for attr, ldap_attr in LDAP_ATTR_MAPPING.items():
                 value = getattr(person, attr, None)
-                if value is None:
+                if value is None or (attr == 'password' and not update_password):
                     continue
                 if attr == 'password':
                     value = '{{CRYPT}}{0}'.format(value)
@@ -346,7 +346,8 @@ def change_password():
     form = ChangePasswordForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         current_user.password = form.new_password.data
-        _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection)
+        _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection,
+                               update_password=True)
         return jsonify({'id': current_user.username}), 200
     errors = [{
         'field': field.name,
