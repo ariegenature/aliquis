@@ -166,6 +166,8 @@ def _update_person_in_ldap(person, ldap_conn):
                 value = getattr(person, attr, None)
                 if value is None:
                     continue
+                if attr == 'password':
+                    value = '{{CRYPT}}{0}'.format(value)
                 try:
                     ldap_value = getattr(entry, ldap_attr)
                 except LDAPCursorError:
