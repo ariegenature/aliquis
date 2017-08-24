@@ -75,6 +75,7 @@ export default {
           this.setPageNotLoading()
           this.inputState = 'is-success'
           this.clearStatusMessage()
+          this.fetchAndInitUser(this.username)
           this.$router.push({ name: 'user', params: { username: this.username } })
         }, response => {
           this.setPageNotLoading()
@@ -97,6 +98,7 @@ export default {
       }, 3 * 1000)
     },
     ...mapActions({
+      'fetchAndInitUser': 'fetchAndInitUser',
       'updateStatusMessage': 'updateStatusMessage',
       'clearStatusMessage': 'clearStatusMessage',
       'setPageLoading': 'setPageLoading',

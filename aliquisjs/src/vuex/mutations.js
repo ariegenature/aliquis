@@ -18,6 +18,13 @@ export default {
     state.email = data['email']
     state.username = data['username']
   },
+  [types.CLEAR_USER] (state) {
+    state.firstName = ''
+    state.surname = ''
+    state.displayName = ''
+    state.email = ''
+    state.username = ''
+  },
   [types.UPDATE_FIRST_NAME] (state, value) {
     state.firstName = lowerCaseLettersExceptFirst(value.trim())
   },

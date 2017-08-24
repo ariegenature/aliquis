@@ -1,4 +1,5 @@
 export const INIT_USER = 'initUser'
+export const CLEAR_USER = 'clearUser'
 export const UPDATE_FIRST_NAME = 'updateFirstName'
 export const UPDATE_SURNAME = 'updateSurname'
 export const UPDATE_DISPLAY_NAME = 'updateDisplayName'

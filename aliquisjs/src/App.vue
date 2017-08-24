@@ -29,7 +29,7 @@
 
 <script>
 import store from './vuex/store'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'app',
@@ -38,6 +38,12 @@ export default {
     'statusMessage': 'getStatusMessage',
     'statusMessageClass': 'getStatusMessageClass',
     'isLoading': 'getIsLoading'
-  })
+  }),
+  methods: mapActions({
+    'fetchAndInitUser': 'fetchAndInitUser'
+  }),
+  mounted () {
+    this.fetchAndInitUser(this.$route.params.username)
+  }
 }
 </script>

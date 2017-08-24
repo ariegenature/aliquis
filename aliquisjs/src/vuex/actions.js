@@ -7,6 +7,9 @@ export default {
     api.fetchUser(value).then(response => {
       commit(types.INIT_USER, response.data)
       commit(types.SET_PAGE_NOT_LOADING)
+    }, response => {
+      commit(types.CLEAR_USER)
+      commit(types.SET_PAGE_NOT_LOADING)
     })
   },
   [types.UPDATE_FIRST_NAME] ({ commit }, value) {

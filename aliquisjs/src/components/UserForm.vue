@@ -129,7 +129,6 @@ export default {
       }, 3 * 1000)
     },
     ...mapActions({
-      'fetchAndInitUser': 'fetchAndInitUser',
       'updateFirstName': 'updateFirstName',
       'updateSurname': 'updateSurname',
       'updateDisplayName': 'updateDisplayName',
@@ -137,9 +136,6 @@ export default {
       'setPageLoading': 'setPageLoading',
       'setPageNotLoading': 'setPageNotLoading'
     })
-  },
-  mounted () {
-    this.fetchAndInitUser(this.$route.params.username)
   }
 }
 </script>
