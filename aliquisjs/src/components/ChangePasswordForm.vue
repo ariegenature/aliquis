@@ -94,7 +94,7 @@ export default {
             this.inputState[inputId] = statusClass
           }
           this.clearFormData()
-          this.$router.push({ name: 'user', params: {username: this.username} })
+          this.$router.push({ name: 'user', params: {username: this.$route.params.username} })
         }, response => {
           this.setPageNotLoading()
           statusClass = 'is-danger'
