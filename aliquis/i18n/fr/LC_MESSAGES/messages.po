@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-23 19:19+0200\n"
+"POT-Creation-Date: 2017-08-24 15:02+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -104,6 +104,9 @@ msgstr "Le nom qui sera affiché dans les applications"
 msgid "How_husband_determine_country"
 msgstr "Comment_mari_determine_pays"
 
+msgid "Important:"
+msgstr "Important :"
+
 msgid "Just click on the link to confirm that this address belongs to you."
 msgstr ""
 "Il vous suffit de cliquer sur le lien pour confirmer que cette adresse "
@@ -179,6 +182,13 @@ msgstr "Ce compte est déjà activé. Vous pouvez vous connecter."
 msgid "Update"
 msgstr "Mettre à jour"
 
+msgid ""
+"Updating your email address will deactivate your account until you "
+"activate it again."
+msgstr ""
+"Mettre à jour votre adresse électronique désactivera votre compte "
+"jusqu'à ce que vous l'activiez à nouveau."
+
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
@@ -187,6 +197,9 @@ msgstr "Le nom d'utilisateur existe déjà"
 
 msgid "Welcome"
 msgstr "Bienvenue"
+
+msgid "Wrong password"
+msgstr "Mot de passe incorrect"
 
 msgid "You cannot log in until you activate your account."
 msgstr ""

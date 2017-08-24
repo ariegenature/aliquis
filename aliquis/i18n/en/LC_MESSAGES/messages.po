@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-23 19:19+0200\n"
+"POT-Creation-Date: 2017-08-24 15:02+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -94,6 +94,9 @@ msgstr ""
 msgid "How_husband_determine_country"
 msgstr ""
 
+msgid "Important:"
+msgstr ""
+
 msgid "Just click on the link to confirm that this address belongs to you."
 msgstr ""
 
@@ -165,6 +168,11 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+msgid ""
+"Updating your email address will deactivate your account until you "
+"activate it again."
+msgstr ""
+
 msgid "Username"
 msgstr ""
 
@@ -172,6 +180,9 @@ msgid "Username already exists"
 msgstr ""
 
 msgid "Welcome"
+msgstr ""
+
+msgid "Wrong password"
 msgstr ""
 
 msgid "You cannot log in until you activate your account."
