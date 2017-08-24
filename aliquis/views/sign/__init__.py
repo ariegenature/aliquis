@@ -321,12 +321,9 @@ def change_email():
     """View allowing to change the person's email."""
     form = ChangeEmailForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
-        person_dict = dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING)
-        for attr in ('first_name', 'surname', 'username'):
-            person_dict[attr] = getattr(current_user, attr)
-        p = new_person(**person_dict)
-        _update_person_in_ldap(p, current_app.ldap3_login_manager.connection)
-        return jsonify({'id': p.username}), 200
+        current_user.email = form.new_email.data
+        _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection)
+        return jsonify({'id': current_user.username}), 200
     errors = [{
         'field': field.name,
         'message': ', '.join(map(lambda err: text_type(err), field.errors))

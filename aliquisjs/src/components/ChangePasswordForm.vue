@@ -76,7 +76,7 @@ export default {
       this.currentPassword = ''
       this.newPassword = ''
       this.passwordConfirm = ''
-    }
+    },
     submitForm (ev) {
       this.setPageLoading()
       var statusClass = 'is-success'
