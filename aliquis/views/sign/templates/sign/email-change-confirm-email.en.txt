@@ -1,0 +1,22 @@
+Dea «« first_name »»,
+
+You have reported to us this new email address. To confirm that it is working, you just need to
+click on the following link. This will also reactivate your account.
+
+«« token_url »»
+
+If you can't click on the link, please copy and paste it into your web browser.
+
+Best regards,
+
+---
+This email was generated and sent automatically, please do not reply to it.
+
+Association des Naturalistes de l'Ariège
+
+(Agréée Conservatoire d'Espaces Naturels d'Ariège, labellisée CPIE de l'Ariège, membre du réseau
+Éducation Pyrénées Vivantes
+
+Vidallac - 09240 Alzen
+Tél : 05 61 65 80 54
+Site web : http://www.ariegenature.fr

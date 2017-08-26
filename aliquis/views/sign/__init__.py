@@ -177,6 +177,44 @@ def _update_person_in_ldap(person, ldap_conn, update_password=False):
                         setattr(entry, ldap_attr, value)
 
 
+def _activate_ldap_person(person, ldap_conn):
+    """Activate the given LDAP person."""
+    config = current_app.config
+    ldap_manager = current_app.ldap3_login_manager
+    user_dn = ldap_manager.get_user_info_for_username(person.username)['dn']
+    # Find the avtive role
+    with _read_cursor(ldap_conn, config['LDAP_PERMISSION_CLASS'],
+                      ldap_manager.compiled_sub_dn(config['LDAP_PERMISSION_DN']),
+                      'cn:={name}'.format(name=config['LDAP_ACTIVE_PERM_NAME'])) as cur:
+        cur.search()
+        assert len(cur) <= 1, 'Problem in your database: more than one active role'
+        if len(cur) == 0:
+            raise LDAPNoSuchObjectResult('No active role')
+        with _update_cursor(cur) as wcur:
+            active_dns = wcur[0][config['LDAP_PERMISSION_ATTRIBUTE']]
+            if user_dn in active_dns:
+                active_dns += user_dn
+
+
+def _deactivate_ldap_person(person, ldap_conn):
+    """Deactivate the given LDAP person."""
+    config = current_app.config
+    ldap_manager = current_app.ldap3_login_manager
+    user_dn = ldap_manager.get_user_info_for_username(person.username)['dn']
+    # Find the avtive role
+    with _read_cursor(ldap_conn, config['LDAP_PERMISSION_CLASS'],
+                      ldap_manager.compiled_sub_dn(config['LDAP_PERMISSION_DN']),
+                      'cn:={name}'.format(name=config['LDAP_ACTIVE_PERM_NAME'])) as cur:
+        cur.search()
+        assert len(cur) <= 1, 'Problem in your database: more than one active role'
+        if len(cur) == 0:
+            raise LDAPNoSuchObjectResult('No active role')
+        with _update_cursor(cur) as wcur:
+            active_dns = wcur[0][config['LDAP_PERMISSION_ATTRIBUTE']]
+            if user_dn in active_dns:
+                active_dns -= user_dn
+
+
 class SignUpForm(FlaskForm):
     """Sign up form for ANA."""
 
@@ -319,10 +357,20 @@ def user(user_id):
 @same_user_id_required
 def change_email(user_id):
     """View allowing to change the person's email."""
+    ldap_manager = current_app.ldap3_login_manager
     form = ChangeEmailForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         current_user.email = form.new_email.data
-        _update_person_in_ldap(current_user, current_app.ldap3_login_manager.connection)
+        _update_person_in_ldap(current_user, ldap_manager.connection)
+        _deactivate_ldap_person(current_user, ldap_manager.connection)
+        token_serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        send_email_confirm_email.delay(
+            person_dict=current_user.as_json(),
+            token_url=url_for('sign.confirm',
+                              token=token_serializer.dumps(p.username),
+                              _external=True),
+            when='email-change'
+        )
         return jsonify({'id': user_id}), 200
     errors = [{
         'field': field.name,
@@ -449,6 +497,10 @@ def confirm(token):
         if p.is_active:
             msg = _('This account is already activated. You can log in.')
             msg_cls = 'is-info'
+        else:
+            _activate_ldap_person(p, ldap_manager.connection)
+            msg = _('Account activated. You can log in.')
+            msg_cls = 'is-success'
     return render_template('sign/index.html', msg=msg, msg_cls=msg_cls)
 
 
