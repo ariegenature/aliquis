@@ -4,10 +4,10 @@ import ChangeEmailPage from '@/components/ChangeEmailPage'
 import ChangePasswordPage from '@/components/ChangePasswordPage'
 import ConfirmPage from '@/components/ConfirmPage'
 import LoginPage from '@/components/LoginPage'
-import SignTabBar from '@/components/SignTabBar'
+import SignNqvBar from '@/components/SignNavBar'
 import SignUpPage from '@/components/SignUpPage'
 import UserPage from '@/components/UserPage'
-import UserTabBar from '@/components/UserTabBar'
+import UserNavBar from '@/components/UserNavBar'
 
 Vue.use(Router)
 
@@ -19,7 +19,7 @@ export default new Router({
       path: '/sign-up',
       name: 'sign-up',
       components: {
-        tabbar: SignTabBar,
+        navbar: SignNavBar,
         default: SignUpPage
       }
     },
@@ -27,7 +27,7 @@ export default new Router({
       path: '/login',
       name: 'login',
       components: {
-        tabbar: SignTabBar,
+        navbar: SignNavBar,
         default: LoginPage
       }
     },
@@ -35,7 +35,7 @@ export default new Router({
       path: '/user/:username',
       name: 'user',
       components: {
-        tabbar: UserTabBar,
+        navbar: UserNavBar,
         default: UserPage
       }
     },
@@ -43,7 +43,7 @@ export default new Router({
       path: '/email/:username',
       name: 'email',
       components: {
-        tabbar: UserTabBar,
+        navbar: UserNavBar,
         default: ChangeEmailPage
       }
     },
@@ -51,7 +51,7 @@ export default new Router({
       path: '/password/:username',
       name: 'password',
       components: {
-        tabbar: UserTabBar,
+        navbar: UserNavBar,
         default: ChangePasswordPage
       }
     },
