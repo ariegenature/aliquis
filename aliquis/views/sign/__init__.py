@@ -472,10 +472,8 @@ def confirm(token):
 def api_confirm(token):
     """API view for confirming email address."""
     config = current_app.config
+    ldap_manager = current_app.ldap3_login_manager
     token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
-    msg = _('Thank you for confirming. Your account is now activated and you may now log in.')
-    msg_cls = 'is-success'
-    http_code = 201
     try:
         username = token_serializer.loads(token, max_age=3600)
     except SignatureExpired:
@@ -488,12 +486,18 @@ def api_confirm(token):
         http_code = 403
     else:
         p = _person_from_ldap_entry(
-            current_app.ldap3_login_manager.get_user_info_for_username(username)
+            ldap_manager.get_user_info_for_username(username)
         )
         if p.is_active:
             msg = _('This account is already activated. You can log in.')
             msg_cls = 'is-info'
             http_code = 200
+        else:
+            _activate_ldap_person(p, ldap_manager.connection)
+            msg = _('Thank you for confirming. Your account is now activated and you may now log '
+                    'in.')
+            msg_cls = 'is-success'
+            http_code = 201
     return jsonify({'msg': msg, 'cls': msg_cls}), http_code
 
 
