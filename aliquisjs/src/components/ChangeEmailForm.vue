@@ -86,7 +86,7 @@ export default {
           for (var inputId in this.inputState) {
             this.inputState[inputId] = statusClass
           }
-          this.updateEmail(this.newEmail)
+          this.fetchAndInitUser(this.$route.params.username)
           this.clearChangeEmailData()
           this.$router.push({ name: 'user', params: {username: this.username} })
         }, response => {
@@ -117,6 +117,7 @@ export default {
       }, 3 * 1000)
     },
     ...mapActions({
+      'fetchAndInitUser': 'fetchAndInitUser',
       'updateNewEmail': 'updateNewEmail',
       'updateEmail': 'updateEmail',
       'setPageLoading': 'setPageLoading',
