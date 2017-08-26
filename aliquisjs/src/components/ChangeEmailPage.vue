@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div class="section">
     <h2 class="title">«« _('Change your email address') »»</h2>
     <div class="columns is-centered">
       <div class="column">

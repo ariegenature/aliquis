@@ -1,23 +1,13 @@
 <template>
   <div id="app">
-    <header class="hero is-fullheight">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns is-centered">
-            <div class="column">
-              <b-notification :type="statusMessageClass" :active.sync="statusMessage"
-                 v-if="statusMessage">
-                {{statusMessage}}
-              </b-notification>
-              <div class="box">
-                <router-view name="tabbar"></router-view>
-                <router-view></router-view>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
+    <router-view name="navbar"></router-view>
+    <div class="container">
+      <b-notification :type="statusMessageClass" :active.sync="statusMessage"
+         v-if="statusMessage">
+        {{statusMessage}}
+      </b-notification>
+      <router-view></router-view>
+    </div>
     <b-loading :active.sync="isLoading"></b-loading>
   </div>
 </template>

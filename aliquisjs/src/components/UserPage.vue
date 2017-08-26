@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h2 class="title">«« _('Welcome') »» {{ firstName }}</h2>
+  <div class="content">
+    <h1 class="title">«« _('Welcome') »» {{ firstName }}</h2>
     <div class="columns is-centered">
       <div class="column">
         <user-form></user-form>
@@ -9,7 +9,7 @@
         <user-info></user-info>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>

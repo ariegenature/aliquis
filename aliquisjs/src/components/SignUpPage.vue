@@ -1,12 +1,12 @@
 <template>
-  <section>
-      <h2 class="title">«« _('Create Your ANA Account') »»</h2>
+  <div class="box">
+      <h1 class="title">«« _('Create Your ANA Account') »»</h2>
       <div class="columns is-centered">
         <div class="column">
           <sign-up-form></sign-up-form>
         </div>
       </div>
-  </section>
+  </div>
 </template>
 
 <script>
