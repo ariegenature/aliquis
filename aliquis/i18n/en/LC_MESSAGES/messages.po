@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-24 15:38+0200\n"
+"POT-Creation-Date: 2017-08-26 20:34+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -26,6 +26,9 @@ msgstr ""
 msgid ""
 "A technical problem occured. Please contact helpdesk@ariegenature.fr for "
 "assistance."
+msgstr ""
+
+msgid "Account:"
 msgstr ""
 
 msgid "After checking, we found the following problem:"
@@ -80,6 +83,9 @@ msgid "For example:"
 msgstr ""
 
 msgid "For security reasons, we ask your current password again."
+msgstr ""
+
+msgid "Go back to"
 msgstr ""
 
 msgid "Go!"
@@ -139,6 +145,9 @@ msgstr ""
 msgid "Please confirm your ANA account creation"
 msgstr ""
 
+msgid "Please confirm your email address"
+msgstr ""
+
 msgid "Security"
 msgstr ""
 
@@ -156,7 +165,9 @@ msgid ""
 "log in."
 msgstr ""
 
-msgid "The confirmation link has expired. Please create your account again."
+msgid ""
+"The confirmation link has expired. Please generate a new confirmation "
+"link."
 msgstr ""
 
 msgid "The confirmation link is invalid."
@@ -183,9 +194,6 @@ msgid "Welcome"
 msgstr ""
 
 msgid "Wrong password"
-msgstr ""
-
-msgid "You cannot log in until you activate your account."
 msgstr ""
 
 msgid "You will soon receive an email to confirm your new address."
@@ -218,5 +226,14 @@ msgid "Your password has been changed successfully."
 msgstr ""
 
 msgid "Your username:"
+msgstr ""
+
+msgid "active"
+msgstr ""
+
+msgid "homepage"
+msgstr ""
+
+msgid "inactive"
 msgstr ""
 

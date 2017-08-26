@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-24 15:38+0200\n"
+"POT-Creation-Date: 2017-08-26 20:34+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -31,6 +31,9 @@ msgid ""
 msgstr ""
 "Un problème technique est survenu. Veuillez contacter "
 "helpdesk@ariegenature.fr pour obtenir de l'aide."
+
+msgid "Account:"
+msgstr "Compte :"
 
 msgid "After checking, we found the following problem:"
 msgid_plural "After checking, we found the following problems:"
@@ -92,6 +95,9 @@ msgstr ""
 "Par sécurité, nous vous demandons votre mot de passe actuel une nouvelle "
 "fois."
 
+msgid "Go back to"
+msgstr "Retour à"
+
 msgid "Go!"
 msgstr "C'est parti !"
 
@@ -151,6 +157,9 @@ msgstr "Veuillez vérifier votre nom d'utilisateur et votre mot de passe."
 msgid "Please confirm your ANA account creation"
 msgstr "Merci de confirmer la création de votre compte ANA"
 
+msgid "Please confirm your email address"
+msgstr "Merci de confirmer votre addresse électronique"
+
 msgid "Security"
 msgstr "Sécurité"
 
@@ -170,8 +179,12 @@ msgstr ""
 "Merci pour la confirmation. Votre compte est maintenant activé et vous "
 "pouvez vous connecter."
 
-msgid "The confirmation link has expired. Please create your account again."
-msgstr "Le lien de confirmation a expiré. Merci de créer votre compte à nouveau."
+msgid ""
+"The confirmation link has expired. Please generate a new confirmation "
+"link."
+msgstr ""
+"Le lien de confirmation a expiré. Merci de générer un nouveau lien de "
+"confirmation. "
 
 msgid "The confirmation link is invalid."
 msgstr "Le lien de confirmation est invalide."
@@ -200,11 +213,6 @@ msgstr "Bienvenue"
 
 msgid "Wrong password"
 msgstr "Mot de passe incorrect"
-
-msgid "You cannot log in until you activate your account."
-msgstr ""
-"Vous ne pouvez pas vous connecter tant que vous n'avez pas activé votre "
-"compte"
 
 msgid "You will soon receive an email to confirm your new address."
 msgstr "Vous allez recevoir un courriel pour confirmer votre nouvelle adresse."
@@ -239,4 +247,13 @@ msgstr "Votre mot de passe a été modifié avec succès."
 
 msgid "Your username:"
 msgstr "Votre nom d'utilisateur :"
+
+msgid "active"
+msgstr "actif"
+
+msgid "homepage"
+msgstr "la page d'accueil"
+
+msgid "inactive"
+msgstr "inactif"
 
