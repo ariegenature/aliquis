@@ -15,9 +15,13 @@ def send_email_confirm_email(person_dict, token_url, when='sign-up'):
          'sign/{when}-confirm-email.{lang}.{ftype}'.format(when=when, lang=lang, ftype=ftype))
         for ftype in ('html', 'txt')
     )
+    if when == 'sign-up':
+        subject = _("Please confirm your ANA account creation"),
+    elif when == 'email-change':
+        subject = _("Please confirm your email address"),
     send_sendgrid_email(
         recipient=Contact(person_dict['display_name'], person_dict['email']),
-        subject=_("Please confirm your ANA account creation"),
+        subject=subject,
         html_content=render_template(templates['html'], token_url=token_url, **person_dict),
         txt_content=render_template(templates['txt'], token_url=token_url, **person_dict)
     )
