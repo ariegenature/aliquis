@@ -132,8 +132,10 @@ class Person(object):
             return compare_hash(self._password, binary_type(crypt(value, salt).encode('utf-8')))
 
     def as_json(self):
-        return dict((k, getattr(self, k, None)) for k in ('first_name', 'surname', 'display_name',
-                                                          'email', 'username', 'password'))
+        res = dict((k, getattr(self, k, None)) for k in ('first_name', 'surname', 'display_name',
+                                                         'email', 'username', 'password'))
+        res['is_active'] = self.is_active
+        return res
 
     def __str__(self):
         return self.display_name
