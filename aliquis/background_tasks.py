@@ -8,13 +8,16 @@ from aliquis.views.mail import Contact, send_sendgrid_email
 
 
 @celery.task
-def send_sign_up_confirm_email(person_dict, token_url):
+def send_email_confirm_email(person_dict, token_url, when='sign-up'):
     lang = str(get_locale() or 'fr')[:2]
+    templates = dict(
+        (ftype,
+         'sign/{when}-confirm-email.{lang}.{ftype}'.format(when=when, lang=lang, ftype=ftype))
+        for ftype in ('html', 'txt')
+    )
     send_sendgrid_email(
         recipient=Contact(person_dict['display_name'], person_dict['email']),
         subject=_("Please confirm your ANA account creation"),
-        html_content=render_template('sign/sign-up-confirm-email.{lang}.html'.format(lang=lang),
-                                     token_url=token_url, **person_dict),
-        txt_content=render_template('sign/sign-up-confirm-email.{lang}.txt'.format(lang=lang),
-                                    token_url=token_url, **person_dict)
+        html_content=render_template(templates['html'], token_url=token_url, **person_dict),
+        txt_content=render_template(templates['txt'], token_url=token_url, **person_dict)
     )

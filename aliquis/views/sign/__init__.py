@@ -21,7 +21,7 @@ from wtforms.validators import DataRequired, Email, Length, Regexp
 
 from aliquis.extensions import ldap_manager, login_manager
 from aliquis.person import person as new_person, USERNAME_REGEXP
-from aliquis.background_tasks import send_sign_up_confirm_email
+from aliquis.background_tasks import send_email_confirm_email
 
 
 LDAP_ATTR_MAPPING = {
@@ -380,7 +380,7 @@ def sign_up():
         p = new_person(**dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING))
         _save_person_to_ldap(p, current_app.ldap3_login_manager.connection)
         token_serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-        send_sign_up_confirm_email.delay(
+        send_email_confirm_email.delay(
             person_dict=p.as_json(),
             token_url=url_for('sign.confirm_new_account', token=token_serializer.dumps(p.username),
                               _external=True)
