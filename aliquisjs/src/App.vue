@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="hero">
+    <header class="hero is-fullheight">
       <div class="hero-body">
         <main class="section">
         <div class="container">
