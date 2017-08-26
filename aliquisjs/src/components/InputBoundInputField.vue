@@ -3,7 +3,8 @@
     <b-input :type="type ? type : 'text'"
       :id="id" :name="id" :placeholder="placeholder" :icon="icon" :autofocus="autofocus"
       :required="required" :value="value" @input="emitInputValue" @focus="resetState"
-      @blur="checkValue" v-validate="validators"></b-input>
+      @blur="checkValue" v-validate="validators"
+                         :data-vv-as="label ? label : placeholder"></b-input>
   </b-field>
 </template>
 
