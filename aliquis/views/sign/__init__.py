@@ -382,7 +382,7 @@ def sign_up():
         token_serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
         send_email_confirm_email.delay(
             person_dict=p.as_json(),
-            token_url=url_for('sign.confirm_new_account', token=token_serializer.dumps(p.username),
+            token_url=url_for('sign.confirm', token=token_serializer.dumps(p.username),
                               _external=True)
         )
         return jsonify({'id': p.username}), 201
@@ -428,7 +428,7 @@ def logout():
 
 
 @sign.route('/confirm/<token>', methods=['GET'])
-def confirm_new_account(token):
+def confirm(token):
     """View for confirming account creation token."""
     config = current_app.config
     token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
