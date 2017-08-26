@@ -2,7 +2,6 @@
   <div id="app">
     <header class="hero is-fullheight">
       <div class="hero-body">
-        <main class="section">
         <div class="container">
           <div class="columns is-centered">
             <div class="column">
@@ -17,7 +16,6 @@
             </div>
           </div>
         </div>
-        </main>
       </div>
     </header>
     <b-loading :active.sync="isLoading"></b-loading>
