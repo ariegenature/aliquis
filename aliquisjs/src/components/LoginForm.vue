@@ -1,41 +1,27 @@
 <template>
   <form id="login-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
-    <div class="field is-horizontal">
-      <div class="field-label">
-        <label class="label is-normal">«« form.username.label.text »»</label>
-      </div>
-      <div class="field-body">
-        <b-field :type="inputState">
-          <b-input id="username" icon="user" autofocus="true" required="true"
-                                                              v-model="username"></b-input>
-        </b-field>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label">
-        <label class="label">«« form.password.label.text »»</label>
-      </div>
-      <div class="field-body">
-        <b-field :type="inputState">
-          <b-input id="password" type="password" icon="user-secret" required="true"
-                                                                    v-model="password"></b-input>
-        </b-field>
-      </div>
-    </div>
+    <b-field :type="inputState" label="«« form.username.label.text »»">
+      <b-input id="username" icon="user" autofocus="true" required="true"
+                                                          v-model="username"></b-input>
+    </b-field>
+    <b-field :type="inputState" label="«« form.password.label.text »»">
+      <b-input id="password" type="password" icon="user-secret" required="true"
+                                                                v-model="password"></b-input>
+    </b-field>
     <div class="field is-horizontal">
       <div class="field-label"></div>
       <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input type="hidden" name="csrf_token" value="«« csrf_token() »»">
+          </div>
+        </div>
         <div class="field">
           <div class="control">
             <button class="button is-primary" type="submit" :disabled="!formReady"
                                               @submit.prevent="submitForm">
               «« _('Go!') »»
             </button>
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <input type="hidden" name="csrf_token" value="«« csrf_token() »»">
           </div>
         </div>
       </div>

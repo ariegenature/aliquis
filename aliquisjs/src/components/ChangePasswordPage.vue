@@ -1,6 +1,7 @@
 <template>
-  <section>
-    <h2 class="title">«« _('Change your password') »»</h2>
+  <main class="section">
+  <h1 class="title">«« _('Change your password') »»</h1>
+  <section class="section">
     <div class="columns is-centered">
       <div class="column">
         <change-password-form></change-password-form>
@@ -10,6 +11,7 @@
       </div>
     </div>
   </section>
+  </main>
 </template>
 
 <script>
