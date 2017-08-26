@@ -17,6 +17,7 @@ export default {
     state.displayName = displayName === `${firstName} ${surname}` ? '' : displayName
     state.email = data['email']
     state.username = data['username']
+    state.isActive = data['is_active']
   },
   [types.CLEAR_USER] (state) {
     state.firstName = ''

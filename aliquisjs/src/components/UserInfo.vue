@@ -7,6 +7,14 @@
       <div class="content">
         <dl>
           <dt>
+          <b-icon :icon="isActive ? 'check-square-o' : 'warning'"
+           :class="isActive ? '' : 'is-danger'"></b-icon>&thinsp;
+          <span>«« _('Account:') »»</span>
+          </dt>
+          <dd :class="isActive ? 'has-text-success' : 'has-text-danger'">
+          {{ isActive ? "«« _('active') »»" : "«« _('inactive') »»" }}
+          </dd>
+          <dt>
           <b-icon icon="user"></b-icon>&thinsp;<span>«« _('Your username:') »»</span>
           </dt>
           <b-tooltip label="«« _('Cannot be changed') »»" position="is-right" class="is-info">
@@ -41,6 +49,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'user-info',
   computed: mapGetters({
+    'isActive': 'getIsActive',
     'username': 'getUsername',
     'email': 'getEmail'
   })
