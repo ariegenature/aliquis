@@ -2,27 +2,24 @@
   <div id="app">
     <header class="hero">
       <div class="hero-body">
+        <main class="section">
         <div class="container">
-          <h1 class="title">«« _('Your ANA account') »»</h1>
-        </div>
-      </div>
-    </header>
-    <main class="section">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column">
-          <b-notification :type="statusMessageClass" :active.sync="statusMessage"
-             v-if="statusMessage">
-            {{statusMessage}}
-          </b-notification>
-          <div class="box">
-            <router-view name="tabbar"></router-view>
-            <router-view></router-view>
+          <div class="columns is-centered">
+            <div class="column">
+              <b-notification :type="statusMessageClass" :active.sync="statusMessage"
+                 v-if="statusMessage">
+                {{statusMessage}}
+              </b-notification>
+              <div class="box">
+                <router-view name="tabbar"></router-view>
+                <router-view></router-view>
+              </div>
+            </div>
           </div>
         </div>
+        </main>
       </div>
-    </div>
-    </main>
+    </header>
     <b-loading :active.sync="isLoading"></b-loading>
   </div>
 </template>
