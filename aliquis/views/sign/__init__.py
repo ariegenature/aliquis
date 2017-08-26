@@ -248,19 +248,6 @@ class LoginForm(LDAPLoginForm):
     username = StringField(_t('Username'), validators=[DataRequired()])
     password = PasswordField(_t('Password'), validators=[DataRequired()])
 
-    def validate(self):
-        valid = super(LoginForm, self).validate()
-        if not valid:
-            return False
-        p = _person_from_ldap_entry(
-            current_app.ldap3_login_manager.get_user_info_for_username(self.username.data)
-        )
-        if p.is_active:
-            return True
-        else:
-            self.username.errors.append(_t('You cannot log in until you activate your account.'))
-            return False
-
 
 class UserForm(FlaskForm):
     """Update user data form."""
@@ -456,7 +443,7 @@ def login():
         p = _person_from_ldap_entry(
             current_app.ldap3_login_manager.get_user_info_for_username(form.username.data)
         )
-        login_user(p)
+        login_user(p, force=True)
         return jsonify({'id': form.username}), 200
     if form.username.errors:
         msg = u'{0}. '.format(_('Login failed'))
