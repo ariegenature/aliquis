@@ -15,7 +15,7 @@ export default {
   confirmUser ({ commit }, value) {
     commit(types.SET_PAGE_LOADING)
     api.confirmUser(value).then(response => {
-      commit(types.UPDATE_STATE_MESSAGE, response.data)
+      commit(types.UPDATE_STATUS_MESSAGE, response.data)
       commit(types.SET_PAGE_NOT_LOADING)
     }, response => {
       commit(types.UPDATE_STATUS_MESSAGE, response.data)
