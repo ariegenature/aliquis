@@ -405,7 +405,7 @@ def api_user(user_id):
     """View showing and updating a person's data."""
     return jsonify(dict((k, v) for k, v in _person_from_ldap_entry(
         current_app.ldap3_login_manager.get_user_info_for_username(user_id)
-    ).as_json().items() if k in('first_name', 'surname', 'display_name', 'email', 'username')))
+    ).as_json().items()))
 
 
 @sign.route('/sign-up', methods=['GET', 'POST'])
