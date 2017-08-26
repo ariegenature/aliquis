@@ -2,6 +2,7 @@ import os
 
 from babel.messages.frontend import CommandLineInterface as BabelCLI
 from flask import redirect, url_for
+from flask_login import current_user
 import click
 
 from aliquis import create_app
@@ -27,7 +28,10 @@ def _write_message_files(lang, command='update'):
 @app.route('/')
 def home():
     """Homepage for aliquis."""
-    return redirect(url_for('sign.login'))
+    if current_user.is_authenticated:
+        return redirect(url_for('sign.user', user_id=current_user.username))
+    else:
+        return redirect(url_for('sign.login'))
 
 
 @app.cli.command()
