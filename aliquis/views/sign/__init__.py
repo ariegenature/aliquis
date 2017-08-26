@@ -367,7 +367,7 @@ def change_email(user_id):
         send_email_confirm_email.delay(
             person_dict=current_user.as_json(),
             token_url=url_for('sign.confirm',
-                              token=token_serializer.dumps(p.username),
+                              token=token_serializer.dumps(user_id),
                               _external=True),
             when='email-change'
         )
