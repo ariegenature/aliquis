@@ -192,7 +192,7 @@ def _activate_ldap_person(person, ldap_conn):
             raise LDAPNoSuchObjectResult('No active role')
         with _update_cursor(cur) as wcur:
             active_dns = wcur[0][config['LDAP_PERMISSION_ATTRIBUTE']]
-            if user_dn in active_dns:
+            if user_dn not in active_dns:
                 active_dns += user_dn
 
 
