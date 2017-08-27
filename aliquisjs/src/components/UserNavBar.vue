@@ -67,8 +67,7 @@ export default {
 #app a.navbar-item:hover {
   background-color: #b4b0cb;
 }
-a.navbar-item.is-active {
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
+#app a.navbar-item.is-active {
+  color: #714dd2;
 }
 </style>
