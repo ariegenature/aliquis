@@ -4,7 +4,6 @@ import ChangeEmailPage from '@/components/ChangeEmailPage'
 import ChangePasswordPage from '@/components/ChangePasswordPage'
 import ConfirmPage from '@/components/ConfirmPage'
 import LoginPage from '@/components/LoginPage'
-import SignNavBar from '@/components/SignNavBar'
 import SignUpPage from '@/components/SignUpPage'
 import UserPage from '@/components/UserPage'
 import UserNavBar from '@/components/UserNavBar'
@@ -19,7 +18,6 @@ export default new Router({
       path: '/sign-up',
       name: 'sign-up',
       components: {
-        navbar: SignNavBar,
         default: SignUpPage
       }
     },
@@ -27,7 +25,6 @@ export default new Router({
       path: '/login',
       name: 'login',
       components: {
-        navbar: SignNavBar,
         default: LoginPage
       }
     },
