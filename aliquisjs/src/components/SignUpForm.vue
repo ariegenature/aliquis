@@ -77,7 +77,11 @@
                                  required
                                  :value="password"
                                  @input="updatePassword"
-                                 :validators="{min: 6}"></input-bound-input-field>
+                                 :validators="{
+                                 min: 6,
+                                 not_in: ['How_husband_determine_country',
+                                 'Comment_mari_determine_pays']
+                                 }"></input-bound-input-field>
         <b-field :type="passwordConfirm === password ? 'is-success' : 'is-danger'"
                                  :message="passwordConfirmHelp">
           <b-input id="password_confirm"
