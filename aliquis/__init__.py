@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Aliquis package."""
 
 from flask import Flask
