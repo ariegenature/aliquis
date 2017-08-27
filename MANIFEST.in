@@ -1,6 +1,11 @@
+include celery_run.py
 include run.py
+include babel.cfg
 include settings.ini.example
 include aliquis/VERSION
+recursive-include aliquis/i18n *.po
+recursive-include aliquis/views/sign/templates *.html *.txt
+prune aliquis/views/sign/templates/sign/index.html
 include aliquisjs/README.md
 include aliquisjs/package.json
 include aliquisjs/.babelrc
