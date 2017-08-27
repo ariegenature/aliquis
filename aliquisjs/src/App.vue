@@ -6,8 +6,8 @@
          v-if="statusMessage">
         {{statusMessage}}
       </b-notification>
-      <router-view></router-view>
     </div>
+    <router-view></router-view>
     <b-loading :active.sync="isLoading"></b-loading>
   </div>
 </template>

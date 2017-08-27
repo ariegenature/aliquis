@@ -1,5 +1,5 @@
 <template>
- <div class="hero is-fullheight">
+ <div class="hero is-fullheight" id="sign-hero">
    <div class="hero-body">
      <div class="container">
        <div class="columns is-centered">
@@ -44,3 +44,13 @@ export default {
   }
 }
 </script>
+
+<style>
+#sign-hero {
+  background-image: url("http://ariegenature.fr/wp-content/uploads/2017/08/automne_bethmal.jpg");
+}
+#app .card {
+  border-radius: 10px;
+  background-color: #ffffffee;
+}
+</style>

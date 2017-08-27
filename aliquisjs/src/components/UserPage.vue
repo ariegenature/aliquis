@@ -1,16 +1,20 @@
 <template>
   <main class="section">
-  <h1 class="title">«« _('Welcome') »» {{ firstName }}</h1>
-  <section class="section">
-    <div class="columns is-centered">
-      <div class="column">
-        <user-form></user-form>
+  <div class="container">
+    <h1 class="title">«« _('Welcome') »» {{ firstName }}</h1>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column">
+            <user-form></user-form>
+          </div>
+          <div class="column">
+            <user-info></user-info>
+          </div>
+        </div>
       </div>
-      <div class="column">
-        <user-info></user-info>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
   </main>
 </template>
 

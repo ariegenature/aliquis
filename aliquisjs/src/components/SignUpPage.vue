@@ -1,5 +1,5 @@
 <template>
- <div class="hero is-fullheight">
+ <div class="hero is-fullheight" id="sign-hero">
    <div class="hero-body">
      <div class="container">
        <div class="columns is-centered">
