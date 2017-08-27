@@ -412,6 +412,8 @@ def api_user(user_id):
 
 @sign.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
+    if current_user.is_authenticated:
+        return redirect(url_for('.user', user_id=current_user.username))
     form = SignUpForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         p = new_person(**dict((k, v) for k, v in form.data.items() if k in LDAP_ATTR_MAPPING))
@@ -440,6 +442,8 @@ def sign_up():
 
 @sign.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('.user', user_id=current_user.username))
     form = LoginForm(meta={'locales': [get_locale()]})
     if form.validate_on_submit():
         p = _person_from_ldap_entry(
