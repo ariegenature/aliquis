@@ -38,8 +38,8 @@ def _person_from_ldap_entry(entry):
             ldap_value = getattr(entry, ldap_attr)
         except LDAPCursorError:
             continue
-        if attr == 'paswword':
-            person_dict[attr] = ldap_value.value.replace('{CRYPT}', '')
+        if attr == 'password':
+            person_dict[attr] = ldap_value.value.decode('utf-8').replace('{CRYPT}', '')
         else:
             person_dict[attr] = ldap_value.value
     return new_person(**person_dict)

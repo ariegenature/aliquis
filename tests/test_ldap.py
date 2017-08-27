@@ -19,14 +19,14 @@ def setup_add_ldap_person(ldap_backend, person_dict):
     ldap_dict = dict((LDAP_ATTR_MAPPING[attr], v) for attr, v in person_dict.items())
     ldap_dict['cn'] = '{0} {1}'.format(person_dict['first_name'], person_dict['surname'])
     ldap_dict['objectClass'] = ldap_backend._person_class
-    with ldap_backend.connection() as ldap_conn:
+    with ldap_backend.admin_connection() as ldap_conn:
         ldap_conn.strategy.add_entry('uid={username},{base_dn}'.format(
             username=person_dict['username'], base_dn=ldap_backend._people_basedn
         ), ldap_dict)
 
 
 def clean_people_tree(ldap_backend):
-    with ldap_backend.connection() as ldap_conn:
+    with ldap_backend.admin_connection() as ldap_conn:
         for entry in ldap_backend.entries(ldap_conn, ldap_backend._person_class,
                                           ldap_backend._people_basedn):
             ldap_conn.strategy.remove_entry(entry.entry_dn)
@@ -57,7 +57,7 @@ class TestSearchPersonByUsername(unittest.TestCase):
 
     def test_username_exists(self):
         """Check that ``username_exists`` function returns correct boolean value."""
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             self.assertTrue(self.ldap_backend.username_exists('jdoe', ldap_conn))
             self.assertFalse(self.ldap_backend.username_exists('john', ldap_conn))
             self.assertFalse(self.ldap_backend.username_exists('', ldap_conn))
@@ -65,27 +65,29 @@ class TestSearchPersonByUsername(unittest.TestCase):
 
     def test_person_by_username(self):
         """Check that a person can be found by its username."""
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             p = self.ldap_backend.person_by_username('jdoe', ldap_conn)
         self.assertEqual(p, new_person(**self.jdoe))
 
     def test_not_found_by_username(self):
         """Check that an error is raised when searching with an inexistent username."""
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_username('john', ldap_conn)
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_username('', ldap_conn)
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_username(None, ldap_conn)
 
     def test_duplicate_username(self):
         """Check that an error is raised when searching for a duplicated username."""
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             ldap_conn.strategy.add_entry(
-                'uid=jane,{base_dn}'.format(base_dn=self.app.config['LDAP_PEOPLE_BASEDN']),
+                'uid=jane,{base_dn}'.format(base_dn=u'{0},{1}'.format(
+                    self.app.config['LDAP_USER_DN'], self.app.config['LDAP_BASE_DN']
+                )),
                 {
                     'objectClass': 'inetOrgPerson',
                     'givenName': 'Jane',
@@ -99,7 +101,7 @@ class TestSearchPersonByUsername(unittest.TestCase):
                 }
             )
         with self.assertRaises(AssertionError):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_username('jdoe', ldap_conn)
 
 
@@ -127,7 +129,7 @@ class TestSearchPersonByEmail(unittest.TestCase):
 
     def test_email_exists(self):
         """Check that ``email_exists`` function returns correct boolean value."""
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             self.assertTrue(self.ldap_backend.email_exists('jdoe@example.org', ldap_conn))
             self.assertFalse(self.ldap_backend.email_exists('john.doe@example.org', ldap_conn))
             self.assertFalse(self.ldap_backend.email_exists('', ldap_conn))
@@ -135,20 +137,20 @@ class TestSearchPersonByEmail(unittest.TestCase):
 
     def test_person_by_email(self):
         """Check that a person can be found by its username."""
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             p = self.ldap_backend.person_by_email('jdoe@example.org', ldap_conn)
         self.assertEqual(p, new_person(**self.jdoe))
 
     def test_not_found_by_mail(self):
         """Check that an error is raised when searching with an inexistent username."""
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_email('john@example.org', ldap_conn)
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_email('', ldap_conn)
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_email(None, ldap_conn)
 
     def test_duplicate_email(self):
@@ -162,7 +164,7 @@ class TestSearchPersonByEmail(unittest.TestCase):
                          's88nHB.SQWY8sNYoRCAEEeK4JR7iwEyJ1'),
         })
         with self.assertRaises(AssertionError):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.person_by_email('jdoe@example.org', ldap_conn)
 
 
@@ -198,12 +200,12 @@ class TestAddPerson(unittest.TestCase):
             'password': 'jdoe1234',
         })
         # Check first that there is no jane in the directory
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             self.assertFalse(self.ldap_backend.username_exists(jane.username, ldap_conn))
         # Add jane and check that there is now one jane
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             self.ldap_backend.add_person(jane, ldap_conn)
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             self.assertTrue(self.ldap_backend.username_exists(jane.username, ldap_conn))
             p = self.ldap_backend.person_by_username(jane.username, ldap_conn)
         self.assertEqual(p, jane)
@@ -219,7 +221,7 @@ class TestAddPerson(unittest.TestCase):
             'password': 'jdoe1234',
         })
         with self.assertRaises(LDAPEntryAlreadyExistsResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.add_person(john, ldap_conn)
 
     def test_cannot_add_same_email(self):
@@ -232,7 +234,7 @@ class TestAddPerson(unittest.TestCase):
             'password': 'jdoe1234',
         })
         with self.assertRaises(LDAPEntryAlreadyExistsResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.add_person(john, ldap_conn)
 
 
@@ -266,9 +268,9 @@ class TestUpdatePerson(unittest.TestCase):
         ):
             john = self.jdoe.copy()
             john[attr] = new_value
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.update_person(new_person(**john), ldap_conn)
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 p = self.ldap_backend.person_by_username(self.jdoe['username'], ldap_conn)
             self.assertEqual(getattr(p, attr), new_value)
 
@@ -276,9 +278,9 @@ class TestUpdatePerson(unittest.TestCase):
         """Check that password is updated correctly."""
         john = self.jdoe.copy()
         john['password'] = 'foobar1234'
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             self.ldap_backend.update_person(new_person(**john), ldap_conn)
-        with self.ldap_backend.connection() as ldap_conn:
+        with self.ldap_backend.admin_connection() as ldap_conn:
             p = self.ldap_backend.person_by_username(self.jdoe['username'], ldap_conn)
         self.assertTrue(p.check_password('foobar1234'))
 
@@ -287,7 +289,7 @@ class TestUpdatePerson(unittest.TestCase):
         john = self.jdoe.copy()
         john['username'] = 'john'
         with self.assertRaises(LDAPNoSuchObjectResult):
-            with self.ldap_backend.connection() as ldap_conn:
+            with self.ldap_backend.admin_connection() as ldap_conn:
                 self.ldap_backend.update_person(new_person(**john), ldap_conn)
 
 
