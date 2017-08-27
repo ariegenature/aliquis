@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar has-shadow">
     <navbar-brand :menu-active="menuActive" @burger-click="toggleMenu"></navbar-brand>
     <div class="navbar-menu"  :class="{ 'is-active': menuActive }">
       <div class="navbar-start">
@@ -61,6 +61,12 @@ export default {
 </script>
 
 <style>
+#app .navbar {
+  background-color: #e9e5ff;
+}
+#app a.navbar-item:hover {
+  background-color: #b4b0cb;
+}
 a.navbar-item.is-active {
   border-bottom-style: solid;
   border-bottom-width: 3px;
