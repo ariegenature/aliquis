@@ -28,6 +28,9 @@
              </footer>
            </div>
          </div>
+         <div class="column is-one-third">
+           <sign-up-info v-if="!passwordHelp"></sign-up-info>
+         </div>
        </div>
      </div>
    </div>
@@ -36,11 +39,13 @@
 
 <script>
 import SignUpForm from './SignUpForm'
+import SignUpInfo from './SignUpInfo'
 
 export default {
   name: 'sign-up-page',
   components: {
-    SignUpForm
+    SignUpForm,
+    SignUpInfo
   }
 }
 </script>
