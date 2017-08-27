@@ -4,7 +4,7 @@ from contextlib import contextmanager
 from functools import wraps
 import mimetypes
 
-from flask import (Blueprint, current_app, jsonify, make_response, render_template, redirect,
+from flask import (Blueprint, abort, current_app, jsonify, make_response, render_template, redirect,
                    request, url_for)
 from flask_babel import _, lazy_gettext as _t, ngettext, get_locale
 from flask_ldap3_login import AuthenticationResponseStatus
@@ -309,7 +309,7 @@ def same_user_id_required(func):
             return func(user_id, *args, **kwargs)
         if current_user.is_anonymous:
             return redirect(url_for('sign.login'))
-        return current_app.login_manager.unauthorized()
+        return abort(403)
     return decorated_view
 
 
