@@ -307,6 +307,8 @@ def same_user_id_required(func):
             return func(user_id, *args, **kwargs)
         if current_user.is_authenticated and current_user.get_id() == user_id:
             return func(user_id, *args, **kwargs)
+        if current_user.is_anonymous:
+            return redirect(url_for('sign.login'))
         return current_app.login_manager.unauthorized()
     return decorated_view
 
