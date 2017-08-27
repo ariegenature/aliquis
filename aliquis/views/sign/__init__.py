@@ -508,3 +508,23 @@ def sign_static(fpath):
     resp = make_response(render_template('static/{0}'.format(fpath), form=SignUpForm()))
     resp.headers['Content-Type'], resp.headers['Content-Encoding'] = mimetypes.guess_type(fpath)
     return resp
+
+
+@sign.route('/error/<int:code>')
+def error(code):
+    return render_template('sign/index.html'), code
+
+
+@sign.errorhandler(403)
+def forbidden(e):
+    return redirect(url_for('sign.error', code=403))
+
+
+@sign.errorhandler(404)
+def page_not_found(e):
+    return redirect(url_for('sign.error', code=404))
+
+
+@sign.errorhandler(500)
+def internal_error(e):
+    return redirect(url_for('sign.error', code=500))

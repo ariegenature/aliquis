@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import ChangeEmailPage from '@/components/ChangeEmailPage'
 import ChangePasswordPage from '@/components/ChangePasswordPage'
 import ConfirmPage from '@/components/ConfirmPage'
+import ErrorPage from '@/components/ErrorPage'
 import LoginPage from '@/components/LoginPage'
 import SignUpPage from '@/components/SignUpPage'
 import UserPage from '@/components/UserPage'
@@ -50,6 +51,12 @@ export default new Router({
       components: {
         navbar: UserNavBar,
         default: ChangePasswordPage
+      }
+    },
+    {
+      path: '/error/:code(\\d+)',
+      components: {
+        default: ErrorPage
       }
     },
     {

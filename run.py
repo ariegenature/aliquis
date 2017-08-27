@@ -71,3 +71,18 @@ def i18ncompile():
     BabelCLI().run(['', 'compile', '-d', 'aliquis/i18n/'])
     click.echo('-> Translations compiled.\n')
     click.echo('You should now restart Flask server to take new translations into account.')
+
+
+@app.errorhandler(403)
+def forbidden(e):
+    return redirect(url_for('sign.error', code=403))
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return redirect(url_for('sign.error', code=404))
+
+
+@app.errorhandler(500)
+def internal_error(e):
+    return redirect(url_for('sign.error', code=500))
