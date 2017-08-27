@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-27 05:00+0200\n"
+"POT-Creation-Date: 2017-08-27 06:55+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -88,6 +88,9 @@ msgid "Email"
 msgstr ""
 
 msgid "Email address already exists"
+msgstr ""
+
+msgid "Error"
 msgstr ""
 
 msgid "First name"
@@ -179,6 +182,9 @@ msgstr ""
 msgid "Sign up!"
 msgstr ""
 
+msgid "Sorry"
+msgstr ""
+
 msgid "Surname"
 msgstr ""
 
@@ -201,6 +207,9 @@ msgid ""
 msgstr ""
 
 msgid "This account is already activated. You can log in."
+msgstr ""
+
+msgid "Unable to find what you asked for."
 msgstr ""
 
 msgid "Update"
@@ -229,6 +238,9 @@ msgid "Why sign up?"
 msgstr ""
 
 msgid "Wrong password"
+msgstr ""
+
+msgid "You are not allowed to access this resource."
 msgstr ""
 
 msgid "You will soon receive an email to confirm your new address."

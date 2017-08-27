@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-27 05:00+0200\n"
+"POT-Creation-Date: 2017-08-27 06:55+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -100,6 +100,9 @@ msgstr "Courriel"
 msgid "Email address already exists"
 msgstr "L'adresse électronique existe déjà"
 
+msgid "Error"
+msgstr "Erreur"
+
 msgid "First name"
 msgstr "Prénom"
 
@@ -162,8 +165,8 @@ msgid ""
 "One final note about username. Once chosen, you cannot change your "
 "username."
 msgstr ""
-"Une dernière remarque à propos du nom d'utilisateur : une fois choisi, "
-"il ne pourra plus ếtre modifié,"
+"Une dernière remarque à propos du nom d'utilisateur : une fois choisi, il"
+" ne pourra plus ếtre modifié,"
 
 msgid "Only lowercase unaccented letters and digits"
 msgstr "Uniquement des lettres minuscules, sans accent, et des chiffres"
@@ -195,6 +198,9 @@ msgstr "Sécurité"
 msgid "Sign up!"
 msgstr "Inscrivez-vous !"
 
+msgid "Sorry"
+msgstr "Désolé"
+
 msgid "Surname"
 msgstr "Nom de famille"
 
@@ -225,6 +231,9 @@ msgstr ""
 msgid "This account is already activated. You can log in."
 msgstr "Ce compte est déjà activé. Vous pouvez vous connecter."
 
+msgid "Unable to find what you asked for."
+msgstr "La ressource demandée est introuvable"
+
 msgid "Update"
 msgstr "Mettre à jour"
 
@@ -248,14 +257,17 @@ msgid ""
 "When you choose a new password, remember that the longer the password is,"
 " the better security it does provide."
 msgstr ""
-"En choisissant un nouveau mot de passe, rappelez-vous que plus il "
-"est long, meilleure est la sécurité."
+"En choisissant un nouveau mot de passe, rappelez-vous que plus il est "
+"long, meilleure est la sécurité."
 
 msgid "Why sign up?"
 msgstr "Pourquoi s'inscrire ?"
 
 msgid "Wrong password"
 msgstr "Mot de passe incorrect"
+
+msgid "You are not allowed to access this resource."
+msgstr "Vous n'êtes pas autorisé à accéder à cette ressource"
 
 msgid "You will soon receive an email to confirm your new address."
 msgstr "Vous allez recevoir un courriel pour confirmer votre nouvelle adresse."
