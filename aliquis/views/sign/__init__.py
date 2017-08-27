@@ -401,7 +401,7 @@ def change_password(user_id):
     return render_template('sign/index.html')
 
 
-@sign.route('/api/user/<user_id>', methods=['GET'])
+@sign.route('/api/user/<user_id>')
 @same_user_id_required
 def api_user(user_id):
     """View showing and updating a person's data."""
