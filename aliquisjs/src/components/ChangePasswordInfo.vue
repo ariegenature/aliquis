@@ -6,7 +6,7 @@
     <div class="card-content">
       <div class="content">
         <p>«« _('For security reasons, we ask your current password again.') »»</p>
-        <p>«« _('Also, please remember that the longer the password is, the better security it does provide.') »»</p>
+        <p>«« _('Then, when you choose a new password, remember that the longer the password is, the better security it does provide.') »»</p>
         <p>«« _('A simple way to have a secure and easy to remember password is to choose four words.') »»</p>
         <p>«« _('For example:') »»&nbsp;<kbd>«« _('How_husband_determine_country') »»</kbd></p>
       </div>

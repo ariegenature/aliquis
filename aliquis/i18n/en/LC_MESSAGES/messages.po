@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-27 02:11+0200\n"
+"POT-Creation-Date: 2017-08-27 03:49+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -42,11 +42,6 @@ msgid ""
 msgstr ""
 
 msgid "Already have an account?"
-msgstr ""
-
-msgid ""
-"Also, please remember that the longer the password is, the better "
-"security it does provide."
 msgstr ""
 
 msgid "At least 6 characters"
@@ -177,6 +172,11 @@ msgid ""
 msgstr ""
 
 msgid "The confirmation link is invalid."
+msgstr ""
+
+msgid ""
+"Then, when you choose a new password, remember that the longer the "
+"password is, the better security it does provide."
 msgstr ""
 
 msgid "This account is already activated. You can log in."
