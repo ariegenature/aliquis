@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-27 03:49+0200\n"
+"POT-Creation-Date: 2017-08-27 05:00+0200\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -28,6 +28,9 @@ msgid ""
 "assistance."
 msgstr ""
 
+msgid "About your credentials"
+msgstr ""
+
 msgid "Account:"
 msgstr ""
 
@@ -45,6 +48,19 @@ msgid "Already have an account?"
 msgstr ""
 
 msgid "At least 6 characters"
+msgstr ""
+
+msgid ""
+"At the very least, you will be able to share your nature observations and"
+" thus contribute to common knowledge."
+msgstr ""
+
+msgid ""
+"But depending on your needs, we might allow you to use other services, if"
+" it makes sense."
+msgstr ""
+
+msgid "By creating an account, you will be granted access to some services."
 msgstr ""
 
 msgid "Cannot be changed"
@@ -128,6 +144,11 @@ msgstr ""
 msgid "No account yet?"
 msgstr ""
 
+msgid ""
+"One final note about username. Once chosen, you cannot change your "
+"username."
+msgstr ""
+
 msgid "Only lowercase unaccented letters and digits"
 msgstr ""
 
@@ -197,6 +218,14 @@ msgid "Username already exists"
 msgstr ""
 
 msgid "Welcome"
+msgstr ""
+
+msgid ""
+"When you choose a new password, remember that the longer the password is,"
+" the better security it does provide."
+msgstr ""
+
+msgid "Why sign up?"
 msgstr ""
 
 msgid "Wrong password"
