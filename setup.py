@@ -49,6 +49,7 @@ setup(
         'Flask-Celery-Helper',
         'Flask-Login',
         'Flask-WTF',
+        'chaussette',
         'celery',
         'flask',
         'flask-ldap3-login',
@@ -70,5 +71,7 @@ setup(
         project_name: ['VERSION'],
     },
     data_files=[],
-    entry_points={},
+    entry_points={
+        'console_scripts': ['aliquis=aliquis.__main__:main'],
+    },
 )
