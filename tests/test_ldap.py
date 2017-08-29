@@ -7,7 +7,7 @@ import unittest
 
 from ldap3.core.exceptions import LDAPEntryAlreadyExistsResult, LDAPNoSuchObjectResult
 
-from aliquis import create_app
+from aliquis import create_app, read_config
 from aliquis.person import person as new_person
 from aliquis.ldap import LDAP_ATTR_MAPPING, LDAPBackend
 
@@ -37,7 +37,7 @@ class TestSearchPersonByUsername(unittest.TestCase):
 
     def setUp(self):
         super(TestSearchPersonByUsername, self).setUp()
-        self.app = create_app(TEST_CONFIG)
+        self.app = create_app(read_config(TEST_CONFIG))
         self.ldap_backend = LDAPBackend(self.app, fake=True)
         # Create a sample person in fake LDAP server
         self.jdoe = {
@@ -110,7 +110,7 @@ class TestSearchPersonByEmail(unittest.TestCase):
 
     def setUp(self):
         super(TestSearchPersonByEmail, self).setUp()
-        self.app = create_app(TEST_CONFIG)
+        self.app = create_app(read_config(TEST_CONFIG))
         self.ldap_backend = LDAPBackend(self.app, fake=True)
         # Create a sample person in fake LDAP server
         self.jdoe = {
@@ -173,7 +173,7 @@ class TestAddPerson(unittest.TestCase):
 
     def setUp(self):
         super(TestAddPerson, self).setUp()
-        self.app = create_app(TEST_CONFIG)
+        self.app = create_app(read_config(TEST_CONFIG))
         self.ldap_backend = LDAPBackend(self.app, fake=True)
         # Create a sample person in fake LDAP server
         setup_add_ldap_person(self.ldap_backend, {
@@ -243,7 +243,7 @@ class TestUpdatePerson(unittest.TestCase):
 
     def setUp(self):
         super(TestUpdatePerson, self).setUp()
-        self.app = create_app(TEST_CONFIG)
+        self.app = create_app(read_config(TEST_CONFIG))
         self.ldap_backend = LDAPBackend(self.app, fake=True)
         # Create a sample person in fake LDAP server
         self.jdoe = {
