@@ -1,5 +1,4 @@
 include celery_run.py
-include run.py
 include babel.cfg
 include settings.ini.example
 include aliquis/VERSION
