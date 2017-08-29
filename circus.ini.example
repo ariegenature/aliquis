@@ -1,0 +1,20 @@
+[watcher:aliquis]
+cmd = aliquis --fd $(circus.sockets.aliquis)
+use_sockets = True
+numprocesses = 3
+copy_env = True
+virtualenv = /opt/aliquis/aliquis
+
+[watcher:celery]
+cmd = celery worker -A aliquis.celery_worker -E
+use_sockets = False
+numprocesses = 1
+copy_env = True
+virtualenv = /opt/aliquis/aliquis
+
+[socket:aliquis]
+host = 0.0.0.0
+port = 8000
+
+[env:aliquis]
+ALIQUIS_CONF = /opt/aliquis/aliquis/etc/aliquis/aliquis.ini
