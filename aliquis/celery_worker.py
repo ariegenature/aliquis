@@ -1,9 +1,8 @@
 from collections.abc import Callable
-import os
 
 from celery import Celery
 
-from aliquis import create_app
+from aliquis import create_app, read_config
 
 
 def _call_cls_in_app_context(base_cls, instance, app, *args, **kwargs):
@@ -36,7 +35,6 @@ def make_celery(app):
 
 
 # Do not call this app instance 'app' as it will conflict with Celery
-flask_app = create_app(os.environ.get('ALIQUIS_CONF',
-                                      os.path.join(os.path.abspath(os.path.dirname(__file__)),
-                                                   'settings.ini')))
+config = read_config()
+flask_app = create_app(config)
 celery = make_celery(flask_app)

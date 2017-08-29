@@ -59,6 +59,7 @@ setup(
         'redis',  # XXX: make this configurable in optional 'redis' target
         'requests',  # XXX: make this configurable in optional 'sendgrid' target
         'six',
+        'xdg',
     ],
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],

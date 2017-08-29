@@ -2,11 +2,28 @@
 
 """Aliquis package."""
 
+
 from flask import Flask
 from konfig import Config
+import os
+import sys
+
+from six import PY2
+from xdg import XDG_CONFIG_HOME
 
 from aliquis.extensions import babel, celery, csrf, ldap_manager, login_manager
-from aliquis.views import blueprints
+from aliquis.views import (
+    blueprints,
+    home as home_view,
+    forbidden as forbidden_handler,
+    page_not_found as page_not_found_handler,
+    internal_error as internal_error_handler,
+)
+from aliquis.cli import (
+    i18ninit as i18ninit_cmd,
+    i18nupdate as i18nupdate_cmd,
+    i18ncompile as i18ncompile_cmd,
+)
 
 
 class VueFlask(Flask):
@@ -21,14 +38,13 @@ class VueFlask(Flask):
     })
 
 
-def create_app(config_fname):
+def create_app(config):
     local_configs = []
-    local_config = Config(config_fname)
-    local_configs.append(local_config.get_map('aliquis'))
-    local_configs.append(local_config.get_map('ldap'))
-    local_configs.append(local_config.get_map('celery'))
-    local_configs.append(local_config.get_map('mail-sendgrid'))
-    local_configs.append(local_config.get_map('babel'))
+    local_configs.append(config.get_map('aliquis'))
+    local_configs.append(config.get_map('ldap'))
+    local_configs.append(config.get_map('celery'))
+    local_configs.append(config.get_map('mail-sendgrid'))
+    local_configs.append(config.get_map('babel'))
     app = VueFlask(__name__)
     for config in local_configs:
         app.config.update(config)
@@ -56,4 +72,41 @@ def create_app(config_fname):
     ldap_manager.init_app(app)
     login_manager.init_app(app)
     celery.init_app(app)
+    # Register views, handlers and cli commands
+    app.route('/')(home_view)
+    app.errorhandler(403)(forbidden_handler)
+    app.errorhandler(404)(page_not_found_handler)
+    app.errorhandler(500)(internal_error_handler)
+    app.cli.command(i18ninit_cmd)
+    app.cli.command(i18nupdate_cmd)
+    app.cli.command(i18ncompile_cmd)
     return app
+
+
+def read_config(cli_fname=None):
+    """Return a config (``dict``) object reading configuration from the first existing file among
+    all known folders."""
+    # If given on command line, use this file
+    if cli_fname:
+        return Config(cli_fname)
+    # If given with env variable, use this file
+    env_fname = os.environ.get('ALIQUIS_CONF')
+    if env_fname:
+        return Config(env_fname)
+    # Else use the first file found
+    config_folders = []
+    if PY2:
+        venv = getattr(sys, 'real_prefix', None)
+    else:
+        venv = sys.base_prefix if sys.base_prefix != sys.prefix else None
+    if venv:
+        config_folders.append(os.path.join(venv, 'etc', 'aliquis'))
+    config_folders.extend([
+        os.path.join(XDG_CONFIG_HOME, 'aliquis'),
+        os.path.join('/', 'usr', 'local', 'etc', 'aliquis'),
+        os.path.join('/', 'etc', 'aliquis'),
+    ])
+    config_fnames = (os.path.join(config_folder, 'aliquis.ini') for config_folder in config_folders)
+    for fname in config_fnames:
+        if os.path.exists(fname):
+            return Config(fname)

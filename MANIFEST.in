@@ -1,5 +1,5 @@
 include babel.cfg
-include settings.ini.example
+include aliquis.ini.example
 include aliquis/VERSION
 recursive-include aliquis/i18n *.po
 recursive-include aliquis/views/sign/templates *.html *.txt

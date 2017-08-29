@@ -7,7 +7,7 @@ import sys
 
 from chaussette.server import make_server as make_chaussette_server
 
-from aliquis.server import app
+from aliquis import create_app, read_config
 
 
 def command_line_options():
@@ -27,6 +27,8 @@ def start_aliquis():
     socket file descriptor is passed on command line.
     """
     args = command_line_options()
+    config = read_config(args.config)
+    app = create_app(config)
     signal.signal(signal.SIGINT, stop_aliquis)
     signal.signal(signal.SIGTERM, stop_aliquis)
     if args.fd is not None:
