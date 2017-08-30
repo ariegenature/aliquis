@@ -32,7 +32,7 @@ for root, _, fnames in os.walk(os.path.join(project_name, 'i18n')):
 for root, _, fnames in os.walk(os.path.join(project_name, 'views', 'sign', 'templates')):
     for fname in fnames:
         package_data.append(os.path.join(root.replace('{0}/'.format(project_name), '', 1), fname))
-print(package_data)
+
 
 setup(
     name=project_name,
