@@ -28,7 +28,9 @@ export default {
     'fetchAndInitUser': 'fetchAndInitUser'
   }),
   mounted () {
-    this.fetchAndInitUser(this.$route.params.username)
+    if (this.$route.params.username) {
+      this.fetchAndInitUser(this.$route.params.username)
+    }
   }
 }
 </script>
