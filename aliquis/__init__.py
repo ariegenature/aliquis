@@ -77,9 +77,9 @@ def create_app(config):
     app.errorhandler(403)(forbidden_handler)
     app.errorhandler(404)(page_not_found_handler)
     app.errorhandler(500)(internal_error_handler)
-    app.cli.command(i18ninit_cmd)
-    app.cli.command(i18nupdate_cmd)
-    app.cli.command(i18ncompile_cmd)
+    app.cli.command()(i18ninit_cmd)
+    app.cli.command()(i18nupdate_cmd)
+    app.cli.command()(i18ncompile_cmd)
     return app
 
 
