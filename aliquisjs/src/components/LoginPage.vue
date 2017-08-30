@@ -45,7 +45,7 @@ export default {
 
 <style>
 #sign-hero {
-  background-image: url("http://ariegenature.fr/wp-content/uploads/2017/08/automne_bethmal.jpg");
+  background-image: url("/static/automne_bethmal.jpg");
 }
 #app .card {
   border-radius: 10px;
