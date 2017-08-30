@@ -8,9 +8,7 @@
              <div class="card-content">
                <div class="media">
                  <figure class="media-left">
-                   <img src="http://ariegenature.fr/wp-content/uploads/2017/06/logoana_moy.png"
-                        width="100"
-                        alt="Logo ANA">
+                   <img src="/static/logo_ana.png" width="100" alt="Logo ANA">
                  </figure>
                  <div class="media-content">
                    <h1 class="title is-size-4">«« _('Log in') »»</h1>
