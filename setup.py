@@ -16,6 +16,24 @@ with open(os.path.join(root_path, project_name, 'VERSION'),
 with open(os.path.join(root_path, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+# Collect package data to be installed (and in particular i18n messages and Vue.js build result)
+package_data = [
+    'VERSION',
+    'static/*',
+]
+for root, _, fnames in os.walk(os.path.join(project_name, 'i18n')):
+    for fname in fnames:
+        _, ext = os.path.splitext(fname)
+        if ext == '.mo':
+            package_data.append(os.path.join(
+                root.replace('{0}/'.format(project_name), '', 1),
+                fname
+            ))
+for root, _, fnames in os.walk(os.path.join(project_name, 'views', 'sign', 'templates')):
+    for fname in fnames:
+        package_data.append(os.path.join(root.replace('{0}/'.format(project_name), '', 1), fname))
+print(package_data)
+
 setup(
     name=project_name,
     version=version,
@@ -69,7 +87,7 @@ setup(
         'test': ['pytest'],
     },
     package_data={
-        project_name: ['VERSION'],
+        project_name: package_data,
     },
     data_files=[],
     entry_points={
