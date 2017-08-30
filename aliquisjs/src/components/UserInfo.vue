@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <header class="card-header">
-      <h3 class="card-header-title">«« _('Other information') »»</h3>
+      <h3 class="card-header-title">«« _('Login information') »»</h3>
     </header>
     <div class="card-content">
       <div class="content">
