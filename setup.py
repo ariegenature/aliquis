@@ -89,7 +89,9 @@ setup(
     package_data={
         project_name: package_data,
     },
-    data_files=[],
+    data_files=[
+        ('examples', ['aliquis.ini.example', 'circus.ini.example'])
+    ],
     entry_points={
         'console_scripts': ['aliquis=aliquis.__main__:main'],
     },
