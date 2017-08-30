@@ -2,6 +2,7 @@ include babel.cfg
 include aliquis.ini.example
 include circus.ini.example
 include aliquis/VERSION
+recursive-include aliquis/static *.png
 recursive-include aliquis/i18n *.po
 recursive-include aliquis/views/sign/templates *.html *.txt
 prune aliquis/views/sign/templates/sign/index.html
