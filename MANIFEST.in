@@ -14,3 +14,4 @@ include aliquisjs/.eslintignore
 include aliquisjs/test/unit/.eslintrc
 include aliquisjs/static/.gitkeep
 recursive-include aliquisjs *.js *.html *.vue *.png
+recursive-exclude aliquisjs/node_modules *
