@@ -1,12 +1,6 @@
 <template>
   <div id="app">
     <router-view name="navbar"></router-view>
-    <div class="container">
-      <b-notification :type="statusMessageClass" :active.sync="statusMessage"
-         v-if="statusMessage">
-        {{statusMessage}}
-      </b-notification>
-    </div>
     <router-view></router-view>
     <b-loading :active.sync="isLoading"></b-loading>
   </div>
@@ -27,6 +21,17 @@ export default {
   methods: mapActions({
     'fetchAndInitUser': 'fetchAndInitUser'
   }),
+  watch: {
+    statusMessage (val) {
+      if (val) {
+        this.$toast.open({
+          message: val,
+          type: this.statusMessageClass,
+          duration: 8000
+        })
+      }
+    }
+  },
   mounted () {
     if (this.$route.params.username) {
       this.fetchAndInitUser(this.$route.params.username)
