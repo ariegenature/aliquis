@@ -10,6 +10,7 @@ import sys
 
 from six import PY2
 from xdg import XDG_CONFIG_HOME
+from werkzeug.contrib.fixers import ProxyFix
 
 from aliquis.extensions import babel, celery, csrf, ldap_manager, login_manager
 from aliquis.views import (
@@ -46,6 +47,7 @@ def create_app(config):
     local_configs.append(config.get_map('mail-sendgrid'))
     local_configs.append(config.get_map('babel'))
     app = VueFlask(__name__)
+    app.wsgi_app = ProxyFix(app.wsgi_app)
     for config in local_configs:
         app.config.update(config)
     app.config['CELERY_IMPORTS'] = ('aliquis.background_tasks',)
