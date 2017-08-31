@@ -16,9 +16,9 @@ def send_email_confirm_email(person_dict, token_url, when='sign-up'):
         for ftype in ('html', 'txt')
     )
     if when == 'sign-up':
-        subject = _("Please confirm your ANA account creation"),
+        subject = _("Please confirm your ANA account creation")
     elif when == 'email-change':
-        subject = _("Please confirm your email address"),
+        subject = _("Please confirm your email address")
     send_sendgrid_email(
         recipient=Contact(person_dict['display_name'], person_dict['email']),
         subject=subject,
