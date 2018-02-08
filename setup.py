@@ -103,4 +103,5 @@ setup(
     entry_points={
         'console_scripts': ['aliquis=aliquis.__main__:main'],
     },
+    scripts=[os.path.join(project_name, '{0}_cli.py'.format(project_name))],
 )

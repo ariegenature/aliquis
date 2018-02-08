@@ -20,11 +20,6 @@ from aliquis.views import (
     page_not_found as page_not_found_handler,
     internal_error as internal_error_handler,
 )
-from aliquis.cli import (
-    i18ninit as i18ninit_cmd,
-    i18nupdate as i18nupdate_cmd,
-    i18ncompile as i18ncompile_cmd,
-)
 
 
 class VueFlask(Flask):
@@ -79,9 +74,6 @@ def create_app(config):
     app.errorhandler(403)(forbidden_handler)
     app.errorhandler(404)(page_not_found_handler)
     app.errorhandler(500)(internal_error_handler)
-    app.cli.command()(i18ninit_cmd)
-    app.cli.command()(i18nupdate_cmd)
-    app.cli.command()(i18ncompile_cmd)
     return app
 
 

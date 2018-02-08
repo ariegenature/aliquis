@@ -4,6 +4,11 @@ from flask import current_app
 from babel.messages.frontend import CommandLineInterface as BabelCLI
 import click
 
+from aliquis import create_app, read_config
+
+
+app = create_app(read_config())
+
 
 def _extract_18n_messages():
     """Extract messages to translate from application files."""
@@ -17,6 +22,7 @@ def _write_message_files(lang, command='update'):
                     '-l', lang])
 
 
+@app.cli.command
 def i18ninit():
     """Extract messages to translate from application files and init messages files for
     configured languages."""
@@ -31,6 +37,7 @@ def i18ninit():
         click.echo('aliquis/i18n/{0}/LC_MESSAGES/messages.po'.format(lang))
 
 
+@app.cli.command
 def i18nupdate():
     """Extract messages to translate from application files and update messages files for
     configured languages."""
@@ -45,6 +52,7 @@ def i18nupdate():
         click.echo('  * aliquis/i18n/{0}/LC_MESSAGES/messages.po'.format(lang))
 
 
+@app.cli.command
 def i18ncompile():
     """Compile translations for configured languages."""
     click.echo('-> Compiling translations...')
