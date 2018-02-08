@@ -5,14 +5,16 @@
        <div class="columns is-centered">
          <div class="column is-one-third">
            <div class="card">
+             <div class="card-header">
+               <div class="media-content">
+                 <h1 class="card-header-title">«« _('Log in') »»</h1>
+               </div>
+               <div class="card-header-icon">
+                 <img src="/static/logo_ana.png" width="64" alt="Logo ANA">
+               </div>
+             </div>
              <div class="card-content">
                <div class="media">
-                 <figure class="media-left">
-                   <img src="/static/logo_ana.png" width="100" alt="Logo ANA">
-                 </figure>
-                 <div class="media-content">
-                   <h1 class="title is-size-4">«« _('Log in') »»</h1>
-                 </div>
                </div>
                <login-form></login-form>
              </div>
