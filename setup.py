@@ -83,7 +83,10 @@ setup(
     tests_require=['pytest'],
     extras_require={
         'codestyle': ['check-manifest', 'readme_renderer', 'flake8'],
-        'dev': ['Sphinx'],
+        'dev': [
+            'Sphinx',
+            'bumpversion',
+        ],
         'test': ['pytest'],
     },
     package_data={
