@@ -4,8 +4,8 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../../aliquis/views/sign/templates/sign/index.html'),
-    assetsRoot: path.resolve(__dirname, '../../aliquis/views/sign/templates/static'),
+    index: path.resolve(__dirname, '../../views/sign/templates/sign/index.html'),
+    assetsRoot: path.resolve(__dirname, '../../views/sign/templates/static'),
     assetsSubDirectory: 'vue',
     assetsPublicPath: '/sign/static',
     productionSourceMap: true,

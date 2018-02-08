@@ -23,6 +23,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+aliquis/views/sign/templates/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

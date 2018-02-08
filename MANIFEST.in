@@ -2,16 +2,41 @@ include babel.cfg
 include aliquis.ini.example
 include circus.ini.example
 include aliquis/VERSION
-recursive-include aliquis/static *.png
+recursive-include aliquis/static *.png *.jpg
 recursive-include aliquis/i18n *.po
-recursive-include aliquis/views/sign/templates *.html *.txt
-prune aliquis/views/sign/templates/sign/index.html
-include aliquisjs/README.md
-include aliquisjs/package.json
-include aliquisjs/.babelrc
-include aliquisjs/.editorconfig
-include aliquisjs/.eslintignore
-include aliquisjs/test/unit/.eslintrc
-include aliquisjs/static/.gitkeep
-recursive-include aliquisjs *.js *.html *.vue *.png
-recursive-exclude aliquisjs/node_modules *
+include aliquis/views/sign/templates/sign/email-change-confirm-email.en.html
+include aliquis/views/sign/templates/sign/email-change-confirm-email.en.txt
+include aliquis/views/sign/templates/sign/email-change-confirm-email.fr.html
+include aliquis/views/sign/templates/sign/email-change-confirm-email.fr.txt
+include aliquis/views/sign/templates/sign/sign-up-confirm-email.en.html
+include aliquis/views/sign/templates/sign/sign-up-confirm-email.en.txt
+include aliquis/views/sign/templates/sign/sign-up-confirm-email.fr.html
+include aliquis/views/sign/templates/sign/sign-up-confirm-email.fr.txt
+include aliquis/aliquisjs/README.md
+include aliquis/aliquisjs/package.json
+include aliquis/aliquisjs/.babelrc
+include aliquis/aliquisjs/.editorconfig
+include aliquis/aliquisjs/.eslintignore
+include aliquis/aliquisjs/.eslintrc.js
+include aliquis/aliquisjs/.gitignore
+include aliquis/aliquisjs/.postcssrc.js
+include aliquis/aliquisjs/index.html
+include aliquis/aliquisjs/test/unit/.eslintrc
+include aliquis/aliquisjs/static/.gitkeep
+include aliquis/aliquisjs/package.json
+include aliquis/aliquisjs/package-lock.json
+include aliquis/aliquisjs/build/build.js
+include aliquis/aliquisjs/build/check-versions.js
+include aliquis/aliquisjs/build/utils.js
+include aliquis/aliquisjs/build/vue-loader.conf.js
+include aliquis/aliquisjs/build/webpack.base.conf.js
+include aliquis/aliquisjs/build/webpack.dev.conf.js
+include aliquis/aliquisjs/build/webpack.prod.conf.js
+include aliquis/aliquisjs/config/dev.env.js
+include aliquis/aliquisjs/config/index.js
+include aliquis/aliquisjs/config/prod.env.js
+include aliquis/aliquisjs/config/test.env.js
+recursive-include aliquis/aliquisjs/src *.js *.html *.vue *.png
+recursive-include aliquis/aliquisjs/test *.js
+recursive-exclude aliquis/aliquisjs/node_modules *
+prune aliquis/aliquisjs/test/unit/coverage
