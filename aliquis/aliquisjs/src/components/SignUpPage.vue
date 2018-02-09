@@ -2,7 +2,7 @@
  <div class="hero is-fullheight" id="sign-hero">
    <div class="hero-body">
      <div class="container">
-       <div class="columns is-centered">
+       <div class="columns is-centered is-1">
          <div class="column is-two-thirds">
            <div class="card">
              <div class="card-header">
