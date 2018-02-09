@@ -3,7 +3,7 @@
    <div class="hero-body">
      <div class="container">
        <div class="columns is-centered">
-         <div class="column is-one-third">
+         <div class="column is-half">
            <div class="card">
              <div class="card-header">
                <div class="media-content">
@@ -14,16 +14,23 @@
                </div>
              </div>
              <div class="card-content">
-               <login-form></login-form>
+               <div class="columns is-8">
+                 <div id="main-column" class="column">
+                   <login-form></login-form>
+                 </div>
+                 <div id="switch-column" class="column is-narrow">
+                   <div class="content has-text-centered is-size-7">
+                     <p>«« _('No account yet?') »»</p>
+                     <p>
+                     <router-link :to="{ name: 'sign-up' }">
+                       <b-icon icon="arrow-circle-right" size="is-small"></b-icon>
+                       <span>«« _('Sign up!') »»</span>
+                     </router-link>
+                     </p>
+                   </div>
+                 </div>
+               </div>
              </div>
-             <footer class="card-footer">
-               <p class="card-footer-item">
-                 <span class="is-size-7">
-                   «« _('No account yet?') »»&thinsp;
-                   <router-link :to="{ name: 'sign-up' }">«« _('Sign up!') »»</router-link>
-                 </span>
-               </p>
-             </footer>
            </div>
          </div>
        </div>
@@ -50,5 +57,12 @@ export default {
 #app .card {
   border-radius: 10px;
   background-color: #ffffffee;
+}
+#main-column {
+  border-right: thin solid #ddd;
+}
+#switch-column {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 </style>
