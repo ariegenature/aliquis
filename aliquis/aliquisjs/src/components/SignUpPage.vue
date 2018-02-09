@@ -5,25 +5,32 @@
        <div class="columns is-centered">
          <div class="column is-two-third">
            <div class="card">
+             <div class="card-header">
+               <div class="media-content">
+                 <h1 class="card-header-title">«« _('Create Your ANA Account') »»</h1>
+               </div>
+               <div class="card-header-icon">
+                 <img src="/static/logo_ana.png" width="64" alt="Logo ANA">
+               </div>
+             </div>
              <div class="card-content">
-               <div class="media">
-                 <figure class="media-left">
-                   <img src="/static/logo_ana.png" width="100" alt="Logo ANA">
-                 </figure>
-                 <div class="media-content">
-                   <h1 class="title is-size-4">«« _('Create Your ANA Account') »»</h1>
+               <div class="columns is-8">
+                 <div id="main-column" class="column">
+                   <sign-up-form></sign-up-form>
+                 </div>
+                 <div id="switch-column" class="column is-narrow">
+                   <div class="content has-text-centered is-size-7">
+                     <p>«« _('Already have an account?') »»</p>
+                     <p>
+                     <router-link :to="{ name: 'login' }">
+                       <b-icon icon="arrow-circle-right" size="is-small"></b-icon>
+                       <span>«« _('Log in!') »»</span>
+                     </router-link>
+                     </p>
+                   </div>
                  </div>
                </div>
-               <sign-up-form></sign-up-form>
              </div>
-             <footer class="card-footer">
-               <p class="card-footer-item">
-                 <span class="is-size-7">
-                   «« _('Already have an account?') »»&thinsp;
-                   <router-link :to="{ name: 'login' }">«« _('Log in!') »»</router-link>
-                 </span>
-               </p>
-             </footer>
            </div>
          </div>
          <div class="column is-one-third">
