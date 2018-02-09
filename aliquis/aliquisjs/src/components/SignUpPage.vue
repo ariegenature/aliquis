@@ -3,7 +3,7 @@
    <div class="hero-body">
      <div class="container">
        <div class="columns is-centered">
-         <div class="column is-two-third">
+         <div class="column is-two-thirds">
            <div class="card">
              <div class="card-header">
                <div class="media-content">
@@ -33,7 +33,7 @@
              </div>
            </div>
          </div>
-         <div class="column is-one-third">
+         <div class="column">
            <sign-up-info v-if="!passwordHelp"></sign-up-info>
          </div>
        </div>
