@@ -31,6 +31,14 @@
                  </div>
                </div>
              </div>
+             <footer class="card-footer">
+               <p class="card-footer-item is-size-7">
+               <router-link :to="{ name: 'forget' }">
+                 <b-icon icon="question-circle" size="is-small"></b-icon>
+                 <span>«« _('Password forgotten?') »»</span>
+               </router-link>
+               </p>
+             </footer>
            </div>
          </div>
        </div>

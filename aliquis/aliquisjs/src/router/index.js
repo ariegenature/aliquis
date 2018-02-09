@@ -4,7 +4,9 @@ import ChangeEmailPage from '@/components/ChangeEmailPage'
 import ChangePasswordPage from '@/components/ChangePasswordPage'
 import ConfirmPage from '@/components/ConfirmPage'
 import ErrorPage from '@/components/ErrorPage'
+import ForgetPage from '@/components/ForgetPage'
 import LoginPage from '@/components/LoginPage'
+import ResetPage from '@/components/ResetPage'
 import SignUpPage from '@/components/SignUpPage'
 import UserPage from '@/components/UserPage'
 import UserNavBar from '@/components/UserNavBar'
@@ -27,6 +29,13 @@ export default new Router({
       name: 'login',
       components: {
         default: LoginPage
+      }
+    },
+    {
+      path: '/forget',
+      name: 'forget',
+      components: {
+        default: ForgetPage
       }
     },
     {
@@ -68,6 +77,13 @@ export default new Router({
       name: 'confirm',
       components: {
         default: ConfirmPage
+      }
+    },
+    {
+      path: '/reset-password/:token',
+      name: 'reset-password',
+      components: {
+        default: ResetPage
       }
     }
   ]

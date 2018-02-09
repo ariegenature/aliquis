@@ -76,6 +76,23 @@ def _email_exists(email):
     ))
 
 
+def _person_from_email(email):
+    """Return a ``Person`` instance from the given email address."""
+    ldap_manager = current_app.ldap3_login_manager
+    ldap_filter = '(&(mail={0}){1})'.format(email,
+                                            current_app.config['LDAP_USER_OBJECT_FILTER'])
+    entry = ldap_manager.get_object(
+        dn=ldap_manager.full_user_search_dn,
+        filter=ldap_filter,
+        attributes=current_app.config.get('LDAP_GET_USER_ATTRIBUTES')
+    )
+    if entry is None:
+        raise LDAPNoSuchObjectResult("No person with email '{0}' in "
+                                     'database'.format(email))
+    else:
+        return _person_from_ldap_entry(ldap_manager.get_user_info(entry['dn']))
+
+
 @contextmanager
 def _add_cursor(ldap_conn, search_class, base_dn, ldap_filter=None):
     """Return a new ``ldap3.Writer`` cursor for adding a new entry in the LDAP directory.
@@ -296,6 +313,27 @@ class ChangePasswordForm(FlaskForm):
         return True
 
 
+class ResetPasswordForm(FlaskForm):
+    """Reset user password form."""
+
+    new_password = PasswordField(_t('New password'), validators=[DataRequired(), Length(min=6)])
+
+
+class ForgetForm(FlaskForm):
+    """Reset user password form."""
+
+    email = StringField(_t('Email'), validators=[DataRequired(), Email()])
+
+    def validate(self):
+        valid = super(ForgetForm, self).validate()
+        if not valid:
+            return False
+        if not _email_exists(self.email.data):
+            self.email.errors.append(_t('No user found with this email address'))
+            return False
+        return True
+
+
 def same_user_id_required(func):
     """Decorator toward view functions. The decorated view function must take a ``user_id`` as its
     first parameter. Then this decorator will ensure that the currently logged in user has the same
@@ -401,6 +439,35 @@ def change_password(user_id):
     return render_template('sign/index.html')
 
 
+@sign.route('/forget', methods=['GET', 'POST'])
+def forget_password():
+    """View allowing to change the person's password."""
+    form = ForgetForm(meta={'locales': [get_locale()]})
+    if form.validate_on_submit():
+        p = _person_from_email(form.email.data)
+        token_serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        send_email_confirm_email.delay(
+            person_dict=p.as_json(),
+            token_url=url_for('sign.reset_password', token=token_serializer.dumps(p.username),
+                              _external=True),
+            when='reset-password'
+        )
+        return jsonify({'id': p.username}), 201
+    errors = [{
+        'field': field.name,
+        'message': ', '.join(map(lambda err: text_type(err), field.errors))
+    } for field in form if field.errors]
+    if errors:
+        msg = u'{0} {1}.'.format(
+            ngettext('After checking, we found the following problem:',
+                     'After checking, we found the following problems:',
+                     len(errors)),
+            u'; '.join('({i}) {m}'.format(i=i, m=err['message']) for i, err in enumerate(errors, 1))
+        )
+        return jsonify({'message': msg, 'errors': errors}), 401
+    return render_template('sign/index.html')
+
+
 @sign.route('/api/user/<user_id>')
 @same_user_id_required
 def api_user(user_id):
@@ -482,6 +549,85 @@ def api_confirm(token):
     token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
     try:
         username = token_serializer.loads(token, max_age=3600)
+    except SignatureExpired:
+        msg = _('The confirmation link has expired. Please generate a new confirmation link.')
+        msg_cls = 'is-danger'
+        http_code = 409
+    except BadSignature:
+        msg = _('The confirmation link is invalid.')
+        msg_cls = 'is-danger'
+        http_code = 403
+    else:
+        p = _person_from_ldap_entry(
+            ldap_manager.get_user_info_for_username(username)
+        )
+        if p.is_active:
+            msg = _('This account is already activated. You can log in.')
+            msg_cls = 'is-info'
+            http_code = 200
+        else:
+            _activate_ldap_person(p, ldap_manager.connection)
+            msg = _('Thank you for confirming. Your account is now activated and you may now log '
+                    'in.')
+            msg_cls = 'is-success'
+            http_code = 201
+    return jsonify({'msg': msg, 'cls': msg_cls}), http_code
+
+
+@sign.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    """View for resetting user password."""
+    form = ResetPasswordForm(meta={'locales': [get_locale()]})
+    errors = []
+    http_code = 0
+    if form.validate_on_submit():
+        config = current_app.config
+        ldap_manager = current_app.ldap3_login_manager
+        token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
+        try:
+            username = token_serializer.loads(token, max_age=900)
+        except SignatureExpired:
+            errors.append({
+                'message': _('The confirmation link has expired. Please generate a new '
+                             'confirmation link.')
+            })
+            http_code = 409
+        except BadSignature:
+            errors.append({
+                'message': _('The confirmation link is invalid.')
+            })
+            http_code = 403
+        else:
+            p = _person_from_ldap_entry(
+                ldap_manager.get_user_info_for_username(username)
+            )
+            p.password = form.new_password.data
+            _update_person_in_ldap(p, current_app.ldap3_login_manager.connection,
+                                   update_password=True)
+            return jsonify({'id': p.username}), 200
+    errors.extend([{
+        'field': field.name,
+        'message': ', '.join(map(lambda err: text_type(err), field.errors))
+    } for field in form if field.errors])
+    if errors:
+        msg = u'{0} {1}.'.format(
+            ngettext('After checking, we found the following problem:',
+                     'After checking, we found the following problems:',
+                     len(errors)),
+            u'; '.join('({i}) {m}'.format(i=i, m=err['message']) for i, err in enumerate(errors, 1))
+        )
+        return jsonify({'message': msg, 'errors': errors}), http_code or 401
+    return render_template('sign/index.html')
+
+
+@sign.route('/api/confirm/<token>')
+def api_reset_password(token):
+    """API view for resetting user password."""
+    config = current_app.config
+    ldap_manager = current_app.ldap3_login_manager
+    token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
+    try:
+        username = token_serializer.loads(token, max_age=900)
     except SignatureExpired:
         msg = _('The confirmation link has expired. Please generate a new confirmation link.')
         msg_cls = 'is-danger'
