@@ -1,12 +1,10 @@
 <template>
   <form id="login-form" method="POST" accept-charset="UTF-8" @submit.prevent="submitForm">
     <b-field :type="inputState" label="«« form.username.label.text »»">
-      <b-input id="username" icon="user" autofocus="true" required="true"
-                                                          v-model="username"></b-input>
+      <b-input id="username" icon="user" autofocus="true" v-model="username"></b-input>
     </b-field>
     <b-field :type="inputState" label="«« form.password.label.text »»">
-      <b-input id="password" type="password" icon="user-secret" required="true"
-                                                                v-model="password"></b-input>
+      <b-input id="password" type="password" icon="user-secret" v-model="password"></b-input>
     </b-field>
     <div class="field is-horizontal">
       <div class="field-label"></div>
