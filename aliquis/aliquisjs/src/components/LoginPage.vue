@@ -14,8 +14,6 @@
                </div>
              </div>
              <div class="card-content">
-               <div class="media">
-               </div>
                <login-form></login-form>
              </div>
              <footer class="card-footer">
