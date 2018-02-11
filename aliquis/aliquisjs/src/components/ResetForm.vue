@@ -44,7 +44,7 @@ import InputBoundInputField from './InputBoundInputField'
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'reset-password-form',
+  name: 'reset-form',
   components: {
     InputBoundInputField
   },
