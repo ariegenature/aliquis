@@ -18,7 +18,7 @@ Vue.use(Buefy, {
   defaultIconPack: 'fa'
 })
 
-Validator.addLocale(fr)
+Validator.localize('fr', fr)
 Vue.use(VeeValidate, {
   events: '',
   locale: locale
