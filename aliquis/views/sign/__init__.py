@@ -620,39 +620,6 @@ def reset_password(token):
     return render_template('sign/index.html')
 
 
-@sign.route('/api/confirm/<token>')
-def api_reset_password(token):
-    """API view for resetting user password."""
-    config = current_app.config
-    ldap_manager = current_app.ldap3_login_manager
-    token_serializer = URLSafeTimedSerializer(config['SECRET_KEY'])
-    try:
-        username = token_serializer.loads(token, max_age=900)
-    except SignatureExpired:
-        msg = _('The confirmation link has expired. Please generate a new confirmation link.')
-        msg_cls = 'is-danger'
-        http_code = 409
-    except BadSignature:
-        msg = _('The confirmation link is invalid.')
-        msg_cls = 'is-danger'
-        http_code = 403
-    else:
-        p = _person_from_ldap_entry(
-            ldap_manager.get_user_info_for_username(username)
-        )
-        if p.is_active:
-            msg = _('This account is already activated. You can log in.')
-            msg_cls = 'is-info'
-            http_code = 200
-        else:
-            _activate_ldap_person(p, ldap_manager.connection)
-            msg = _('Thank you for confirming. Your account is now activated and you may now log '
-                    'in.')
-            msg_cls = 'is-success'
-            http_code = 201
-    return jsonify({'msg': msg, 'cls': msg_cls}), http_code
-
-
 @sign.route('/sign/static/<path:fpath>', methods=['GET'])
 def sign_static(fpath):
     resp = make_response(render_template('static/{0}'.format(fpath), form=SignUpForm()))
