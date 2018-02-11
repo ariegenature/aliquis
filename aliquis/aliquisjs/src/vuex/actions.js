@@ -22,6 +22,16 @@ export default {
       commit(types.SET_PAGE_NOT_LOADING)
     })
   },
+  reactivateUser ({ commit }, value) {
+    commit(types.SET_PAGE_LOADING)
+    api.reactivateUser(value).then(response => {
+      commit(types.UPDATE_STATUS_MESSAGE, response.data)
+      commit(types.SET_PAGE_NOT_LOADING)
+    }, response => {
+      commit(types.UPDATE_STATUS_MESSAGE, response.data)
+      commit(types.SET_PAGE_NOT_LOADING)
+    })
+  },
   [types.UPDATE_FIRST_NAME] ({ commit }, value) {
     commit(types.UPDATE_FIRST_NAME, value)
   },

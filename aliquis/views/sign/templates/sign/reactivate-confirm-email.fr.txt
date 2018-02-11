@@ -1,0 +1,26 @@
+Cher(e) «« first_name »»,
+
+Vous avez demandé un lien d'activation pour votre compte ANA. Pour activer votre compte, veuillez
+cliquer sur le lien suivant.
+
+«« token_url »»
+
+Si vous ne pouvez pas cliquer sur le lien, il suffit de le copier et de le coller dans votre
+navigateur web.
+
+Si vous n'avez pas demandé ce lien, vous pouvez simplement ignorer ce courriel. Le lien ci-dessus
+n'est valide qu'une heure.
+
+Cordialement.
+
+---
+Ce courriel a été généré et envoyé automatiquement. Merci de ne pas y répondre.
+
+Association des Naturalistes de l'Ariège
+
+(Agréée Conservatoire d'Espaces Naturels d'Ariège, labellisée CPIE de l'Ariège, membre du réseau
+Éducation Pyrénées Vivantes)
+
+Vidallac - 09240 Alzen
+Tél : 05 61 65 80 54
+Site web : http://www.ariegenature.fr

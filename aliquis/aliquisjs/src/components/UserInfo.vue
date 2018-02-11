@@ -12,7 +12,11 @@
           <span>«« _('Account:') »»</span>
           </dt>
           <dd :class="isActive ? 'has-text-success' : 'has-text-danger'">
-          {{ isActive ? "«« _('active') »»" : "«« _('inactive') »»" }}
+          {{ isActive ? "«« _('active') »»" : "«« _('inactive') »»" }}&emsp;
+          <a class="button is-small is-info is-outlined" href="#" v-if="!isActive"
+            @click="reactivateUser(username)">
+            «« _('Resend activation link') »»
+          </a>
           </dd>
           <dt>
           <b-icon icon="user"></b-icon>&thinsp;<span>«« _('Your username:') »»</span>
@@ -44,7 +48,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'user-info',
@@ -52,6 +56,9 @@ export default {
     'isActive': 'getIsActive',
     'username': 'getUsername',
     'email': 'getEmail'
-  })
+  }),
+  methods: mapActions([
+    'reactivateUser'
+  ])
 }
 </script>

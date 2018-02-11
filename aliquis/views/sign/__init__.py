@@ -574,6 +574,23 @@ def api_confirm(token):
     return jsonify({'msg': msg, 'cls': msg_cls}), http_code
 
 
+@sign.route('/api/reactivate/<user_id>')
+@same_user_id_required
+def api_reactivate(user_id):
+    """API View for reactivating a user account."""
+    if current_user.is_active:
+        return jsonify({'msg': _('Account is already active'), 'cls': 'is-info'}), 200
+    else:
+        token_serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+        send_email_confirm_email.delay(
+            person_dict=current_user.as_json(),
+            token_url=url_for('sign.confirm', token=token_serializer.dumps(user_id),
+                              _external=True),
+            when='reactivate'
+        )
+        return jsonify({'msg': _('Reactivation email sent'), 'cls': 'is_success'}), 200
+
+
 @sign.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     """View for resetting user password."""
