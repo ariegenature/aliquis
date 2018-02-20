@@ -84,6 +84,12 @@ export default {
     state.statusMessage = ''
     state.statusMessageClass = ''
   },
+  [types.UPDATE_GRANTS] (state, value) {
+    state.grants = value
+  },
+  [types.CLEAR_GRANTS] (state, value) {
+    state.grants = []
+  },
   [types.SET_PAGE_LOADING] (state) {
     state.isLoading = true
   },

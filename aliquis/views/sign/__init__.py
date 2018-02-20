@@ -233,6 +233,23 @@ def _deactivate_ldap_person(person, ldap_conn):
                 active_dns -= user_dn
 
 
+def _person_grants(username, ldap_conn):
+    """Return a tuple of strings, each string describing an access granted to the given username."""
+    config = current_app.config
+    ldap_manager = current_app.ldap3_login_manager
+    user_dn = ldap_manager.get_user_info_for_username(username)['dn']
+    # Find the roles
+    with _read_cursor(ldap_conn, config['LDAP_PERMISSION_CLASS'],
+                      ldap_manager.compiled_sub_dn(config['LDAP_PERMISSION_DN']),
+                      '(&({perm_attribute}:={user_dn})(!(cn:={active_perm_name})))'.format(
+                          perm_attribute=config['LDAP_PERMISSION_ATTRIBUTE'],
+                          user_dn=user_dn,
+                          active_perm_name=config['LDAP_ACTIVE_PERM_NAME']
+                      )) as cur:
+        cur.search()
+        return tuple(entry['description'].value for entry in cur)
+
+
 class SignUpForm(FlaskForm):
     """Sign up form for ANA."""
 
@@ -480,6 +497,13 @@ def api_user(user_id):
     return jsonify(dict((k, v) for k, v in _person_from_ldap_entry(
         current_app.ldap3_login_manager.get_user_info_for_username(user_id)
     ).as_json().items()))
+
+
+@sign.route('/api/grants/<user_id>')
+@same_user_id_required
+def api_grants(user_id):
+    """API view returning a person's grant."""
+    return jsonify(list(_person_grants(user_id, current_app.ldap3_login_manager.connection)))
 
 
 @sign.route('/sign-up', methods=['GET', 'POST'])

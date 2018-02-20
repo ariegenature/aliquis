@@ -66,5 +66,6 @@ export default {
     state.signUpEmail.match(state.emailRegExp) &&
     getters.getSignUpUsername.match(state.usernameRegExp) &&
     state.signUpPassword.length >= 6
-  ))
+  )),
+  getGrants: state => state.grants
 }

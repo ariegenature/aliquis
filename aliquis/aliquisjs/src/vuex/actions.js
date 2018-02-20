@@ -6,11 +6,15 @@ export default {
     commit(types.SET_PAGE_LOADING)
     api.fetchUser(value).then(response => {
       commit(types.INIT_USER, response.data)
-      commit(types.SET_PAGE_NOT_LOADING)
     }, response => {
       commit(types.CLEAR_USER)
-      commit(types.SET_PAGE_NOT_LOADING)
     })
+    api.fetchGrants(value).then(response => {
+      commit(types.UPDATE_GRANTS, response.data)
+    }, response => {
+      commit(types.CLEAR_GRANTS)
+    })
+    commit(types.SET_PAGE_NOT_LOADING)
   },
   confirmUser ({ commit }, value) {
     commit(types.SET_PAGE_LOADING)
