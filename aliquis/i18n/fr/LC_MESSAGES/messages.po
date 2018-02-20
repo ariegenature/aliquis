@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-30 15:26+0200\n"
+"POT-Creation-Date: 2018-02-20 14:54+0100\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.5.3\n"
 
 msgid ""
 "A simple way to have a secure and easy to remember password is to choose "
@@ -34,6 +34,9 @@ msgstr ""
 
 msgid "About your credentials"
 msgstr "À propos de vos identifiants"
+
+msgid "Account is already active"
+msgstr "Le compte est déjà actif"
 
 msgid "Account:"
 msgstr "Compte :"
@@ -63,6 +66,9 @@ msgstr ""
 "Au minimum, vous serez en mesure de partager vos observations naturalites"
 " afin de contribuer à la connaissance de tous,"
 
+msgid "Back to"
+msgstr "Retourner à"
+
 msgid ""
 "But depending on your needs, we might allow you to use other services, if"
 " it makes sense."
@@ -90,6 +96,9 @@ msgstr "Mot de passe actuel"
 
 msgid "Delay expired, please refresh the page."
 msgstr "Le délai a expiré, veuillez rafraichir la page."
+
+msgid "Describe your request"
+msgstr "Décrivez votre demande"
 
 msgid "Display name"
 msgstr "Nom affiché"
@@ -123,6 +132,9 @@ msgstr "C'est parti !"
 msgid "How to change your email address ?"
 msgstr "Comment modifier votre adresse électronique ?"
 
+msgid "How to reset your ANA password"
+msgstr "Comment réinitialiser votre mot de passe ANA"
+
 msgid "How your name will be displayed in applications"
 msgstr "Le nom qui sera affiché dans les applications"
 
@@ -152,6 +164,9 @@ msgstr "L'identification a échoué"
 msgid "Login information"
 msgstr "Informations de connexion"
 
+msgid "Login page"
+msgstr "Page de connexion"
+
 msgid "New email address"
 msgstr "Nouvelle adresse électronique"
 
@@ -163,6 +178,9 @@ msgstr "Confirmation du nouveau mot de passe"
 
 msgid "No account yet?"
 msgstr "Vous n'avez pas de compte ?"
+
+msgid "No user found with this email address"
+msgstr "Aucun utilisateur avec cette adresse électronique"
 
 msgid ""
 "One final note about username. Once chosen, you cannot change your "
@@ -180,6 +198,9 @@ msgstr "Mot de passe"
 msgid "Password confirm"
 msgstr "Confirmation du mot de passe"
 
+msgid "Password forgotten?"
+msgstr "Mot de passe oublié ?"
+
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
@@ -192,8 +213,20 @@ msgstr "Merci de confirmer la création de votre compte ANA"
 msgid "Please confirm your email address"
 msgstr "Merci de confirmer votre addresse électronique"
 
+msgid "Reactivation email sent"
+msgstr "Courriel de réactivation envoyé"
+
+msgid "Resend activation link"
+msgstr "Renvoyer le lien d'activation"
+
+msgid "Reset your password"
+msgstr "Réinitialiser votre mot de passe"
+
 msgid "Security"
 msgstr "Sécurité"
+
+msgid "Send"
+msgstr "Envoyer"
 
 msgid "Sign up!"
 msgstr "Inscrivez-vous !"
@@ -253,6 +286,9 @@ msgstr "Le nom d'utilisateur existe déjà"
 msgid "Welcome"
 msgstr "Bienvenue"
 
+msgid "What services are you interested in ?"
+msgstr "Quels services vous intéressent ?"
+
 msgid ""
 "When you choose a new password, remember that the longer the password is,"
 " the better security it does provide."
@@ -269,11 +305,20 @@ msgstr "Mot de passe incorrect"
 msgid "You are not allowed to access this resource."
 msgstr "Vous n'êtes pas autorisé à accéder à cette ressource"
 
+msgid "You have not been granted any service"
+msgstr "Aucun service ne vous a été attribué"
+
 msgid "You will soon receive an email to confirm your new address."
 msgstr "Vous allez recevoir un courriel pour confirmer votre nouvelle adresse."
 
+msgid "You will soon receive an email with instructions to change your password."
+msgstr "Vous allez recevoir un courriel pour réinitialiser votre mot de passe."
+
 msgid "Your ANA account"
 msgstr "Votre compte ANA"
+
+msgid "Your activation link"
+msgstr "Votre lien d'activation"
 
 msgid "Your credentials"
 msgstr "Vos identifiants"
@@ -299,6 +344,9 @@ msgstr "Votre nom"
 
 msgid "Your password has been changed successfully."
 msgstr "Votre mot de passe a été modifié avec succès."
+
+msgid "Your services"
+msgstr "Vos services"
 
 msgid "Your username:"
 msgstr "Votre nom d'utilisateur :"

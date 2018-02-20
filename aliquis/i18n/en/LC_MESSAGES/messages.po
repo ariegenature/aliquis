@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-30 15:26+0200\n"
+"POT-Creation-Date: 2018-02-20 14:54+0100\n"
 "PO-Revision-Date: 2017-08-21 11:04+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.5.3\n"
 
 msgid ""
 "A simple way to have a secure and easy to remember password is to choose "
@@ -29,6 +29,9 @@ msgid ""
 msgstr ""
 
 msgid "About your credentials"
+msgstr ""
+
+msgid "Account is already active"
 msgstr ""
 
 msgid "Account:"
@@ -55,6 +58,9 @@ msgid ""
 " thus contribute to common knowledge."
 msgstr ""
 
+msgid "Back to"
+msgstr ""
+
 msgid ""
 "But depending on your needs, we might allow you to use other services, if"
 " it makes sense."
@@ -79,6 +85,9 @@ msgid "Current password"
 msgstr ""
 
 msgid "Delay expired, please refresh the page."
+msgstr ""
+
+msgid "Describe your request"
 msgstr ""
 
 msgid "Display name"
@@ -111,6 +120,9 @@ msgstr ""
 msgid "How to change your email address ?"
 msgstr ""
 
+msgid "How to reset your ANA password"
+msgstr ""
+
 msgid "How your name will be displayed in applications"
 msgstr ""
 
@@ -138,6 +150,9 @@ msgstr ""
 msgid "Login information"
 msgstr ""
 
+msgid "Login page"
+msgstr ""
+
 msgid "New email address"
 msgstr ""
 
@@ -148,6 +163,9 @@ msgid "New password confirm"
 msgstr ""
 
 msgid "No account yet?"
+msgstr ""
+
+msgid "No user found with this email address"
 msgstr ""
 
 msgid ""
@@ -164,6 +182,9 @@ msgstr ""
 msgid "Password confirm"
 msgstr ""
 
+msgid "Password forgotten?"
+msgstr ""
+
 msgid "Passwords do not match"
 msgstr ""
 
@@ -176,7 +197,19 @@ msgstr ""
 msgid "Please confirm your email address"
 msgstr ""
 
+msgid "Reactivation email sent"
+msgstr ""
+
+msgid "Resend activation link"
+msgstr ""
+
+msgid "Reset your password"
+msgstr ""
+
 msgid "Security"
+msgstr ""
+
+msgid "Send"
 msgstr ""
 
 msgid "Sign up!"
@@ -229,6 +262,9 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
+msgid "What services are you interested in ?"
+msgstr ""
+
 msgid ""
 "When you choose a new password, remember that the longer the password is,"
 " the better security it does provide."
@@ -243,10 +279,19 @@ msgstr ""
 msgid "You are not allowed to access this resource."
 msgstr ""
 
+msgid "You have not been granted any service"
+msgstr ""
+
 msgid "You will soon receive an email to confirm your new address."
 msgstr ""
 
+msgid "You will soon receive an email with instructions to change your password."
+msgstr ""
+
 msgid "Your ANA account"
+msgstr ""
+
+msgid "Your activation link"
 msgstr ""
 
 msgid "Your credentials"
@@ -270,6 +315,9 @@ msgid "Your name"
 msgstr ""
 
 msgid "Your password has been changed successfully."
+msgstr ""
+
+msgid "Your services"
 msgstr ""
 
 msgid "Your username:"
