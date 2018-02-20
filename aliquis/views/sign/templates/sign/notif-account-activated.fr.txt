@@ -1,0 +1,23 @@
+Ce compte a été créé ou réactivé :
+
+- prénom : «« first_name »»
+
+- nom de famille : «« surname »»
+
+- courriel : «« email »»
+
+- demande :
+
+«« description »»
+
+---
+Ce courriel a été généré et envoyé automatiquement. Merci de ne pas y répondre.
+
+Association des Naturalistes de l'Ariège
+
+(Agréée Conservatoire d'Espaces Naturels d'Ariège, labellisée CPIE de l'Ariège, membre du réseau
+Éducation Pyrénées Vivantes)
+
+Vidallac - 09240 Alzen
+Tél : 05 61 65 80 54
+Site web : http://www.ariegenature.fr

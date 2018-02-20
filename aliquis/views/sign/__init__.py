@@ -21,7 +21,7 @@ from wtforms.validators import DataRequired, Email, Length, Regexp
 
 from aliquis.extensions import ldap_manager, login_manager
 from aliquis.person import person as new_person, USERNAME_REGEXP
-from aliquis.background_tasks import send_email_confirm_email
+from aliquis.background_tasks import send_email_confirm_email, send_activation_notification
 
 
 LDAP_ATTR_MAPPING = {
@@ -600,6 +600,7 @@ def api_confirm(token):
                     'in.')
             msg_cls = 'is-success'
             http_code = 201
+            send_activation_notification(p.as_json())
     return jsonify({'msg': msg, 'cls': msg_cls}), http_code
 
 

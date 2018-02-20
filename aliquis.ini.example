@@ -1,6 +1,8 @@
 [aliquis]
 DEBUG = false
 SECRET_KEY = <RANDOM STRING FOR CSRF PROTECTION>
+NOTIFICATION_TO_NAME = Account Manager
+NOTIFICATION_TO_EMAIL = <manager@yourcompany.org>
 
 #[ldap]
 #LDAP_HOST = ldap.example.org
