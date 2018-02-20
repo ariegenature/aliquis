@@ -34,7 +34,8 @@ def start_aliquis():
     if args.fd is not None:
         srv = make_chaussette_server(app, host='fd://{0}'.format(args.fd))
     else:
-        host, port = app.config.get('SERVER_NAME', 'localhost:5000').split(':')
+        strs = app.config['SERVER_NAME'].split(':')
+        host, port = strs if len(strs) == 2 else (strs.pop(), '')
         port = int(port) if port.isdigit() else 5000
         srv = make_chaussette_server(app, host=host, port=port)
     srv.serve_forever()
