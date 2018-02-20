@@ -70,7 +70,7 @@ def install_js_deps():
     click.echo('-> Installing JavaScript dependencies for the Vue.js client...')
     subprocess.check_call(['npm',
                            '--prefix={0}'.format(os.path.join(os.path.dirname(aliquis.__file__),
-                                                              'contributejs')),
+                                                              'aliquisjs')),
                            'install'])
     click.echo('-> JavaScript dependencies succesfully installed.')
 
@@ -81,7 +81,7 @@ def build_js_client():
     click.echo('-> Building the Vue.js client...')
     subprocess.check_call(['npm',
                            '--prefix={0}'.format(os.path.join(os.path.dirname(aliquis.__file__),
-                                                              'contributejs')),
+                                                              'aliquisjs')),
                            'run',
                            'build'])
     click.echo('-> Vue.js client succesfully built.')
