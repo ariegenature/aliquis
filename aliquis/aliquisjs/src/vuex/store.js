@@ -12,6 +12,7 @@ const state = {
   displayName: '',
   email: '',
   username: '',
+  description: '',
   isActive: false,
   newEmail: '',
   signUpFirstName: '',

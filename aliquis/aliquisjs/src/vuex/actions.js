@@ -44,6 +44,9 @@ export default {
   [types.UPDATE_EMAIL] ({ commit }, value) {
     commit(types.UPDATE_EMAIL, value)
   },
+  [types.UPDATE_DESCRIPTION] ({ commit }, value) {
+    commit(types.UPDATE_DESCRIPTION, value)
+  },
   [types.UPDATE_NEW_EMAIL] ({ commit }, value) {
     commit(types.UPDATE_NEW_EMAIL, value)
   },

@@ -17,6 +17,7 @@ export default {
     state.displayName = displayName === `${firstName} ${surname}` ? '' : displayName
     state.email = data['email']
     state.username = data['username']
+    state.description = data['description']
     state.isActive = data['is_active']
   },
   [types.CLEAR_USER] (state) {
@@ -37,6 +38,9 @@ export default {
   },
   [types.UPDATE_EMAIL] (state, value) {
     state.email = value.trim()
+  },
+  [types.UPDATE_DESCRIPTION] (state, value) {
+    state.description = value.trim()
   },
   [types.UPDATE_NEW_EMAIL] (state, value) {
     state.newEmail = value.trim()

@@ -38,6 +38,19 @@
       </div>
     </div>
     <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">«« form.description.label.text »»</label>
+      </div>
+      <div class="field-body">
+        <input-bound-input-field type="textarea"
+                                 id="description"
+                                 :state="inputState"
+                                 help-message="«« form.description.description »»"
+                                 :value="description"
+                                 @input="updateDescription"></input-bound-input-field>
+      </div>
+    </div>
+    <div class="field is-horizontal">
       <div class="field-label"></div>
       <div class="field-body">
         <div class="field">
@@ -72,7 +85,8 @@ export default {
       inputState: {
         'first_name': '',
         'surname': '',
-        'display_name': ''
+        'display_name': '',
+        'description': ''
       }
     }
   },
@@ -81,6 +95,7 @@ export default {
     'surname': 'getSurname',
     'displayName': 'getDisplayName',
     'username': 'getUsername',
+    'description': 'getDescription',
     'isLoading': 'getIsLoading',
     'formReady': 'validateUserData'
   }),
@@ -92,6 +107,7 @@ export default {
       signUpData.append('first_name', this.firstName)
       signUpData.append('surname', this.surname)
       signUpData.append('display_name', this.displayName)
+      signUpData.append('description', this.description)
       this.$http.post('', signUpData,
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
           this.setPageNotLoading()
@@ -132,6 +148,7 @@ export default {
       'updateFirstName': 'updateFirstName',
       'updateSurname': 'updateSurname',
       'updateDisplayName': 'updateDisplayName',
+      'updateDescription': 'updateDescription',
       'updateStatusMessage': 'updateStatusMessage',
       'setPageLoading': 'setPageLoading',
       'setPageNotLoading': 'setPageNotLoading'

@@ -25,6 +25,7 @@ LDAP_ATTR_MAPPING = {
     'display_name': 'displayName',
     'username': 'uid',
     'password': 'userPassword',
+    'description': 'description',
 }
 
 LDAP_ATTR_REV_MAPPING = dict((v, k) for k, v in LDAP_ATTR_MAPPING.items())

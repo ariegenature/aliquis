@@ -16,7 +16,7 @@ from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from ldap3 import ObjectDef, Reader, Writer
 from ldap3.core.exceptions import LDAPCursorError, LDAPNoSuchObjectResult
 from six import text_type
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, TextField
 from wtforms.validators import DataRequired, Email, Length, Regexp
 
 from aliquis.extensions import ldap_manager, login_manager
@@ -31,6 +31,7 @@ LDAP_ATTR_MAPPING = {
     'display_name': 'displayName',
     'username': 'uid',
     'password': 'userPassword',
+    'description': 'description',
 }
 
 LDAP_ATTR_REV_MAPPING = dict((v, k) for k, v in LDAP_ATTR_MAPPING.items())
@@ -247,6 +248,8 @@ class SignUpForm(FlaskForm):
     password = PasswordField(_t('Password'),
                              description=_t('At least 6 characters'),
                              validators=[DataRequired()])
+    description = TextField(_t('Describe your request'),
+                            description=_t('What services are you interested in ?'))
 
     def validate(self):
         result = super(SignUpForm, self).validate()
@@ -272,6 +275,8 @@ class UserForm(FlaskForm):
     first_name = StringField(_t('First name'), validators=[DataRequired()])
     surname = StringField(_t('Surname'), validators=[DataRequired()])
     display_name = StringField(_t('Display name'), validators=[DataRequired()])
+    description = TextField(_t('Describe your request'),
+                            description=_t('What services are you interested in ?'))
 
 
 class ChangeEmailForm(FlaskForm):

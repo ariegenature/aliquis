@@ -22,6 +22,7 @@ export default {
   },
   getEmail: state => state.email,
   getUsername: state => state.username,
+  getDescription: state => state.description,
   getIsActive: state => state.isActive,
   getNewEmail: state => state.newEmail,
   getSignUpFirstName: state => state.signUpFirstName,

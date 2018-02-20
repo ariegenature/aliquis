@@ -94,6 +94,19 @@
       </div>
     </div>
     <div class="field is-horizontal">
+      <div class="field-label">
+        <label class="label">«« form.description.label.text »»</label>
+      </div>
+      <div class="field-body">
+        <input-bound-input-field type="textarea"
+                                 id="description"
+                                 :state="inputState"
+                                 placeholder="«« form.description.description »»"
+                                 :value="description"
+                                 @input="updateDescription"></input-bound-input-field>
+      </div>
+    </div>
+    <div class="field is-horizontal">
       <div class="field-label"></div>
       <div class="field-body">
         <div class="field">
@@ -138,7 +151,8 @@ export default {
         'display_name': '',
         'email': '',
         'username': '',
-        'password': ''
+        'password': '',
+        'description': ''
       }
     }
   },
@@ -156,6 +170,7 @@ export default {
       'email': 'getSignUpEmail',
       'username': 'getSignUpUsername',
       'password': 'getSignUpPassword',
+      'description': 'getDescription',
       'emailRegExp': 'getEmailRegExp',
       'usernameRegExp': 'getUsernameRegExp',
       'validateSignUpData': 'validateSignUpData'
@@ -172,6 +187,7 @@ export default {
       signUpData.append('email', this.email)
       signUpData.append('username', this.username)
       signUpData.append('password', this.password)
+      signUpData.append('description', this.description)
       this.$http.post('', signUpData,
         {headers: {'X-CSRFToken': '«« csrf_token() »»'}}).then(response => {
           this.setPageNotLoading()
@@ -226,6 +242,7 @@ export default {
       'updateEmail': 'updateSignUpEmail',
       'updateUsername': 'updateSignUpUsername',
       'updatePassword': 'updateSignUpPassword',
+      'updateDescription': 'updateDescription',
       'clearSignUpData': 'clearSignUpData',
       'updateStatusMessage': 'updateStatusMessage',
       'setPageLoading': 'setPageLoading',

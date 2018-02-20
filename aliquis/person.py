@@ -22,7 +22,8 @@ CRYPT_REGEXP = re.compile(r'(\$\d\$[^$]+\$)')  # XXX: Doesn't work with bcrypt
 USERNAME_REGEXP = re.compile(r'^[a-zA-Z][a-zA-Z0-9_.]+$')
 
 
-def person(first_name, surname, username, display_name=None, email=None, password=None):
+def person(first_name, surname, username, display_name=None, email=None, password=None,
+           description=None):
     """Return a new instance of the Person class, built with given values."""
     first_name = _text_value(first_name)
     if not first_name:
@@ -38,7 +39,7 @@ def person(first_name, surname, username, display_name=None, email=None, passwor
             re.match(r'([a-zA-Z0-9.+-]+@[a-zA-Z\d-]+(\.[a-zA-Z\d-]+)+$)', email) is None):
         raise ValueError(u'Invalid email address: {0}'.format(email))
     display_name = _text_value(display_name, allow_empty=False)
-    p = Person(first_name, surname, username, display_name, email)
+    p = Person(first_name, surname, username, display_name, email, description or None)
     if password is not None:
         p.password = password
     return p
@@ -51,10 +52,12 @@ class Person(object):
     addresses are equals: the goal is to avoid creating two persons with the same email address.
     """
 
-    def __init__(self, first_name, surname, username, display_name=None, email=None):
+    def __init__(self, first_name, surname, username, display_name=None, email=None,
+                 description=None):
         self.first_name = first_name
         self.surname = surname
         self.email = email
+        self.description = description
         self._display_name = display_name
         self._username = username
         self._password = None
@@ -133,7 +136,8 @@ class Person(object):
 
     def as_json(self):
         res = dict((k, getattr(self, k, None)) for k in ('first_name', 'surname', 'display_name',
-                                                         'email', 'username', 'password'))
+                                                         'email', 'username', 'password',
+                                                         'description'))
         res['is_active'] = self.is_active
         return res
 
