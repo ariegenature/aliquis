@@ -74,6 +74,7 @@ setup(
         'Flask-WTF',
         'chaussette',
         'celery',
+        'circus',
         'flask',
         'flask-ldap3-login',
         'itsdangerous',
