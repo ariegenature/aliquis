@@ -105,3 +105,6 @@ ENV/
 
 # editors
 .lvimrc
+
+# config files
+*.ini
