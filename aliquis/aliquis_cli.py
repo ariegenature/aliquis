@@ -1,6 +1,5 @@
 """Aliquis command line commands."""
 
-from flask import current_app
 from babel.messages.frontend import CommandLineInterface as BabelCLI
 import click
 
@@ -22,13 +21,13 @@ def _write_message_files(lang, command='update'):
                     '-l', lang])
 
 
-@app.cli.command
+@app.cli.command()
 def i18ninit():
     """Extract messages to translate from application files and init messages files for
     configured languages."""
     click.echo('-> Initializing i18n message files...')
     _extract_18n_messages()
-    langs = current_app.config['BABEL_LANGUAGES']
+    langs = app.config['BABEL_LANGUAGES']
     for lang in langs:
         _write_message_files(lang, command='init')
     click.echo('-> i18n message files initialized.')
@@ -37,13 +36,13 @@ def i18ninit():
         click.echo('aliquis/i18n/{0}/LC_MESSAGES/messages.po'.format(lang))
 
 
-@app.cli.command
+@app.cli.command()
 def i18nupdate():
     """Extract messages to translate from application files and update messages files for
     configured languages."""
     click.echo('-> Updating i18n message files...')
     _extract_18n_messages()
-    langs = current_app.config['BABEL_LANGUAGES']
+    langs = app.config['BABEL_LANGUAGES']
     for lang in langs:
         _write_message_files(lang)
     click.echo('-> i18n message files updated.\n')
@@ -52,7 +51,7 @@ def i18nupdate():
         click.echo('  * aliquis/i18n/{0}/LC_MESSAGES/messages.po'.format(lang))
 
 
-@app.cli.command
+@app.cli.command()
 def i18ncompile():
     """Compile translations for configured languages."""
     click.echo('-> Compiling translations...')
