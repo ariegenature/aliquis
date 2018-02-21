@@ -36,7 +36,6 @@ for root, dirs, fnames in os.walk(os.path.join(project_name, 'aliquisjs')):
         dirs.remove('node_modules')
     if 'coverage' in dirs:
         dirs.remove('coverage')
-print(package_data)
 
 
 setup(
