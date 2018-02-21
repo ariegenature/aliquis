@@ -24,7 +24,7 @@ package_data = [
 for root, _, fnames in os.walk(os.path.join(project_name, 'i18n')):
     for fname in fnames:
         _, ext = os.path.splitext(fname)
-        if ext == '.mo':
+        if ext == '.po':
             package_data.append(os.path.join(
                 root.replace('{0}/'.format(project_name), '', 1),
                 fname
