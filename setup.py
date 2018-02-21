@@ -29,6 +29,14 @@ for root, _, fnames in os.walk(os.path.join(project_name, 'i18n')):
                 root.replace('{0}/'.format(project_name), '', 1),
                 fname
             ))
+for root, _, fnames in os.walk(os.path.join(project_name, 'views', 'sign', 'templates', 'sign')):
+    for fname in fnames:
+        _, ext = os.path.splitext(fname)
+        if ext in ('.html', '.txt') and os.path.basename(fname) != 'index.html':
+            package_data.append(os.path.join(
+                root.replace('{0}/'.format(project_name), '', 1),
+                fname
+            ))
 for root, dirs, fnames in os.walk(os.path.join(project_name, 'aliquisjs')):
     for fname in fnames:
         package_data.append(os.path.join(root.replace('{0}/'.format(project_name), '', 1), fname))
