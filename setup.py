@@ -32,7 +32,7 @@ for root, _, fnames in os.walk(os.path.join(project_name, 'i18n')):
 for root, _, fnames in os.walk(os.path.join(project_name, 'views', 'sign', 'templates', 'sign')):
     for fname in fnames:
         _, ext = os.path.splitext(fname)
-        if ext in ('.html', '.txt') and os.path.basename(fname) != 'index.html':
+        if ext in ('.html', '.txt'):
             package_data.append(os.path.join(
                 root.replace('{0}/'.format(project_name), '', 1),
                 fname
