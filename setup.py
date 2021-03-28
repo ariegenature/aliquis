@@ -82,6 +82,7 @@ setup(
         'chaussette',
         'celery',
         'circus',
+        'email_validator',
         'flask',
         'flask-ldap3-login',
         'itsdangerous',
