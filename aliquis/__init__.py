@@ -10,7 +10,7 @@ import sys
 
 from six import PY2
 from xdg import XDG_CONFIG_HOME
-from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 from aliquis.extensions import babel, celery, csrf, ldap_manager, login_manager
 from aliquis.views import (
